@@ -1,6 +1,9 @@
 
- var app = angular.module('loginApp', ['ngCookies']);
+var app = angular.module('loginApp', ['ngCookies']);
 app.controller('login', function($scope, $http, $cookies) {
+
+  $cookies.get("username") ? window.location.href = "main.html" : ''
+
 
   $scope.login = () => {
       if(!$scope.username || !$scope.password){
@@ -17,6 +20,7 @@ app.controller('login', function($scope, $http, $cookies) {
         }).then((res) => {
             if(res.data.records.length){
               $cookies.put("username", res.data.records[0].username);
+              window.location.href = "main.html"
             }else{
               alert('Username or Password Error');
               $scope.username = '';

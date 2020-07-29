@@ -3895,7 +3895,9 @@ input[type=button].btn-block {
     transition: none;
   }
 }
-
+.poiner {
+  cursor: pointer !important
+}
 .nav {
   display: flex;
   flex-wrap: wrap;
