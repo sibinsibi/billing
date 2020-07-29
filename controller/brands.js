@@ -119,5 +119,4 @@ app.controller('brandCtrl', function($scope, $http, $cookies, $route) {
         } 
     }
 
-
 })
