@@ -1,0 +1,80 @@
+
+<div class="container-fluid">
+    <h1 class="mt-4">Units</h1>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                    <input type="text" class="form-control" ng-model="newUnit" placeholder="Unit Name">
+                  </div>
+                </div>
+                <div class="col-6">
+                    <button type="button" class="btn btn-primary" ng-click="addUnit()">Add</button>
+
+                </div>
+              </div>
+        </div>
+      </div>
+   <br>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+            All Units
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered bordered table-striped table-condensed datatable"  datatable="ng" dt-options="vm.dtOptions">
+                    <thead>
+                        <tr>
+                            <th>Unit Code</th>
+                            <th>Unit Name</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                  
+                    <tbody>
+                        <tr ng-repeat="unit in allUnits track by $index">
+                            <td>{{unit.unit_id}}</td>
+                            <td>{{unit.unit_name}}</td>       
+                            <td  style="text-align: center;" class="poiner" ng-click="openModalUpdateUnit(unit)"><i class="fa fa-edit" aria-hidden="true"></i></td>                  
+                            <td style="text-align: center;" class="poiner" ng-click="deleteUnit(unit.unit_id)"><i class="fa fa-trash" aria-hidden="true"></i></td>                  
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="updateUnit">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Update unit name</h4>
+          <button type="button" class="close" data-dismiss="modal">×</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                    <input type="text" class="form-control" ng-model="updatedUnit.unit_name" placeholder="Brand Name">
+                  </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" ng-click="updateUnit()">Save</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
