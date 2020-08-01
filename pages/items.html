@@ -3,7 +3,10 @@
     <h1 class="mt-4">Items</h1>
     <div class="card">
         <div class="card-body">
+          <form ng-submit="addItem()">
+
             <div class="row">
+
                 <div class="col-4">
                     <div class="form-group">
                     <input type="text" class="form-control" ng-model="newItem" placeholder="Item Name">
@@ -11,36 +14,21 @@
                 </div>
                 <div class="col-4">
                     <div class="form-group">
-                    <input type="text" class="form-control" ng-keyup="getBrands()" ng-model="brand" id="brands" placeholder="Brand"/>
+                    <input type="text" class="form-control" ng-keyup="getBrands('brands')" ng-model="brand" id="brands" placeholder="Brand"/>
 
                   </div>
                 </div>
                 <div class="col-4">
                     <div class="form-group">
-                    <input type="text" class="form-control" ng-model="unit" ng-keyup="getUnits()" ng-model="unit" id="units" placeholder="Unit">
+                    <input type="text" class="form-control" ng-model="unit" ng-keyup="getUnits('units')" ng-model="unit" id="units" placeholder="Unit">
                   </div>
-                </div>
-                <div class="col-4">
-                    <div class="form-group">
-                    <input type="number" class="form-control" ng-model="unitCost" placeholder="Unit Cost">
-                  </div>
-                </div>
-                <div class="col-4">
-                    <div class="form-group">
-                    <input type="number" class="form-control" ng-model="mrp" placeholder="MRP">
-                  </div>
-                </div>
-                <div class="col-4">
-                    <div class="form-group">
-                    <input type="number" class="form-control" ng-model="sellingPrice" placeholder="Selling Price">
-                  </div>
-                </div>
-                
+                </div>                
                 <div class="col-12 align-items-center text-center">
-                    <button type="button" class="btn btn-primary" ng-click="addItem()">Add</button>
-
+                    <button type="submit" class="btn btn-primary">Add</button>
                 </div>
               </div>
+            </form>
+
         </div>
       </div>
    <br>
@@ -54,19 +42,23 @@
                 <table class="table table-bordered bordered table-striped table-condensed datatable"  datatable="ng" dt-options="vm.dtOptions">
                     <thead>
                         <tr>
-                            <th>Unit Code</th>
-                            <th>Unit Name</th>
+                            <th>Itemm Code</th>
+                            <th>Item Name</th>
+                            <th>Brand</th>
+                            <th>Unit</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
                   
                     <tbody>
-                        <tr ng-repeat="unit in allUnits track by $index">
-                            <td>{{unit.unit_id}}</td>
-                            <td>{{unit.unit_name}}</td>       
-                            <td  style="text-align: center;" class="poiner" ng-click="openModalUpdateUnit(unit)"><i class="fa fa-edit" aria-hidden="true"></i></td>                  
-                            <td style="text-align: center;" class="poiner" ng-click="deleteUnit(unit.unit_id)"><i class="fa fa-trash" aria-hidden="true"></i></td>                  
+                        <tr ng-repeat="item in allItems track by $index">
+                            <td>{{item.item_id}}</td>
+                            <td>{{item.item_name}}</td>
+                            <td>{{item.brand}}</td>
+                            <td>{{item.unit}}</td>
+                            <td  style="text-align: center;" class="poiner" ng-click="openModalUpdateItem(item)"><i class="fa fa-edit" aria-hidden="true"></i></td>                  
+                            <td style="text-align: center;" class="poiner" ng-click="deleteItem(item.item_id)"><i class="fa fa-trash" aria-hidden="true"></i></td>                  
                         </tr>
                     </tbody>
                 </table>
@@ -75,13 +67,13 @@
     </div>
 </div>
 
-<div class="modal fade" id="updateUnit">
+<div class="modal fade" id="updateItem">
     <div class="modal-dialog">
       <div class="modal-content">
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Update unit name</h4>
+          <h4 class="modal-title">Update Item</h4>
           <button type="button" class="close" data-dismiss="modal">×</button>
         </div>
         
@@ -90,7 +82,13 @@
             <div class="row">
                 <div class="col-12">
                     <div class="form-group">
-                    <input type="text" class="form-control" ng-model="updatedUnit.unit_name" placeholder="Brand Name">
+                    <input type="text" class="form-control" ng-model="updatedItem.item_name" placeholder="Item Name">
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="update-brand" ng-model="updatedItem.brand" ng-keyup="getBrands('update-brand')" placeholder="Brand Name">
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="update-unit" ng-model="updatedItem.unit" ng-keyup="getUnits('update-unit')" placeholder="Unit">
                   </div>
                 </div>
             </div>
@@ -98,7 +96,7 @@
         <!-- Modal footer -->
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" ng-click="updateUnit()">Save</button>
+          <button type="button" class="btn btn-primary" ng-click="updateItem()">Save</button>
         </div>
         
       </div>

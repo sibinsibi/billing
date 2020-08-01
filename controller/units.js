@@ -79,6 +79,7 @@ app.controller('unitCtrl', function($scope, $http, $cookies, $route) {
                 }
             }).catch((error) => {
                 alert('Something went wrong')
+                $route.reload();
             });
             
         } 
@@ -114,9 +115,14 @@ app.controller('unitCtrl', function($scope, $http, $cookies, $route) {
                 }
             }).catch((error) => {
                 alert('Something went wrong' + error)
+                $route.reload();
             });
             
         } 
     }
+
+    $("#updateUnit").on('hidden.bs.modal', function(){
+        $route.reload();
+    });
 
 })

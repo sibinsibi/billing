@@ -79,6 +79,7 @@ app.controller('brandCtrl', function($scope, $http, $cookies, $route) {
                 }
             }).catch((error) => {
                 alert('Something went wrong')
+                $route.reload();
             });
             
         } 
@@ -91,6 +92,10 @@ app.controller('brandCtrl', function($scope, $http, $cookies, $route) {
     }
 
     $scope.updateBrand = () => {
+        if(!$scope.updatedBrand.brand_name){
+            alert('Enter brand name')
+            return
+        }
         $("#updateBrand").modal('hide')
         if (confirm("Are you sure!")) {
             $scope.updatedBrand.brand_name.trim();
@@ -114,9 +119,14 @@ app.controller('brandCtrl', function($scope, $http, $cookies, $route) {
                 }
             }).catch((error) => {
                 alert('Something went wrong' + error)
+                $route.reload();
             });
             
         } 
     }
+
+    $("#updateBrand").on('hidden.bs.modal', function(){
+        $route.reload();
+    });
 
 })
