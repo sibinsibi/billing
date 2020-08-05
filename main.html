@@ -13,6 +13,7 @@
         
         <!-- <script src="js/jquery-3.5.1.min.js" crossorigin="anonymous"></script> -->
         <script src="js/jquery-1.10.2.js"></script>
+        <script src="js/moment.min.js"></script>
         <link rel="stylesheet" href="css/jquery-ui.css" />
         <script src="js/jquery-ui.js"></script>
         
@@ -35,8 +36,8 @@
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    sibin
+                <div class="input-group date-time">
+                    {{d}} {{t}}
                 </div>
             </form>
             <!-- Navbar-->
@@ -61,13 +62,24 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
-                            <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#purchase" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fa fa-cube" aria-hidden="true"></i>
+                                </div>
+                               Purchase
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="purchase" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="#!newPurchase">Items</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#item" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fa fa-life-ring" aria-hidden="true"></i>
                                 </div>
                                 Items & Brands
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                            <div class="collapse" id="item" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="#!items">Items</a>
                                     <a class="nav-link" href="#!brands">Brands</a>
@@ -80,7 +92,7 @@
             </div>
             <div id="layoutSidenav_content">
                 <main ng-view>
-                    ssssssssssssssssssss
+                    
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
@@ -102,5 +114,6 @@
         <script src="controller/brands.js"></script>
         <script src="controller/units.js"></script>
         <script src="controller/items.js"></script>
+        <script src="controller/newPurchase.js"></script>
     </body>
 </html>

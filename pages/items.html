@@ -7,22 +7,30 @@
 
             <div class="row">
 
-                <div class="col-4">
+                <div class="col-3">
                     <div class="form-group">
                     <input type="text" class="form-control" ng-model="newItem" placeholder="Item Name">
                   </div>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <div class="form-group">
                     <input type="text" class="form-control" ng-keyup="getBrands('brands')" ng-model="brand" id="brands" placeholder="Brand"/>
 
                   </div>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <div class="form-group">
                     <input type="text" class="form-control" ng-model="unit" ng-keyup="getUnits('units')" ng-model="unit" id="units" placeholder="Unit">
                   </div>
-                </div>                
+                </div>  
+                <div class="col-3">
+                  <div class="form-group">
+                    <select class="form-control" id="sel1" ng-model="gst">
+                      <option ng-selected="true" ng-disabled="true" value="">Select GST</option>
+                      <option ng-repeat="gst in allGst track by $index" value="{{gst.percentage}}">{{gst.percentage}} %</option>
+                    </select>
+                </div>
+              </div>              
                 <div class="col-12 align-items-center text-center">
                     <button type="submit" class="btn btn-primary">Add</button>
                 </div>
@@ -46,6 +54,7 @@
                             <th>Item Name</th>
                             <th>Brand</th>
                             <th>Unit</th>
+                            <th>GST</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -57,6 +66,7 @@
                             <td>{{item.item_name}}</td>
                             <td>{{item.brand}}</td>
                             <td>{{item.unit}}</td>
+                            <td>{{item.gst}}%</td>
                             <td  style="text-align: center;" class="poiner" ng-click="openModalUpdateItem(item)"><i class="fa fa-edit" aria-hidden="true"></i></td>                  
                             <td style="text-align: center;" class="poiner" ng-click="deleteItem(item.item_id)"><i class="fa fa-trash" aria-hidden="true"></i></td>                  
                         </tr>
@@ -89,6 +99,12 @@
                   </div>
                   <div class="form-group">
                     <input type="text" class="form-control" id="update-unit" ng-model="updatedItem.unit" ng-keyup="getUnits('update-unit')" placeholder="Unit">
+                  </div>
+                  <div class="form-group">
+                    <select class="form-control" id="sel1" ng-model="updatedItem.gst">
+                      <option ng-selected="true" ng-disabled="true" value="">Select GST</option>
+                      <option ng-repeat="gst in allGst track by $index" value="{{gst.percentage}}">{{gst.percentage}} %</option>
+                    </select>
                   </div>
                 </div>
             </div>

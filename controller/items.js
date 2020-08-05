@@ -16,6 +16,15 @@ app.controller('itemCtrl', function($scope, $http, $cookies, $route) {
         console.log(error)
     });
 
+    $scope.allGst = []
+    $http.get('./server/tax/getAllGst.php').then((res) => {
+        if(res.data.records.length){
+            $scope.allGst = res.data.records
+        }
+    }).catch((error) => {
+        console.log(error)
+    });
+
     $scope.allBrands = [];
     $http.get('./server/brand/getAllBrand.php').then((res) => {
         if(res.data.records.length){
@@ -61,6 +70,11 @@ app.controller('itemCtrl', function($scope, $http, $cookies, $route) {
             alert('Enter all data')
             return
         }
+        if(!$scope.gst || isNaN(parseInt($scope.gst))){
+            alert('Select GST')
+            return
+        }
+        
         
         $scope.newItem.trim();
         $scope.newItem = $scope.newItem.charAt(0).toUpperCase() + $scope.newItem.slice(1);
@@ -70,6 +84,7 @@ app.controller('itemCtrl', function($scope, $http, $cookies, $route) {
             newItem: $scope.newItem,
             brand: $scope.brand,
             unit: $scope.unit,
+            gst: parseInt($scope.gst)
         };
 
         if($scope.allItems.length){
@@ -145,6 +160,10 @@ app.controller('itemCtrl', function($scope, $http, $cookies, $route) {
             alert('Enter all data')
             return
         }
+        if(!$scope.updatedItem.gst || isNaN(parseInt($scope.updatedItem.gst))){
+            alert('Select GST')
+            return
+        }
         $("#updateItem").modal('hide')
         if (confirm("Are you sure!")) {
             $scope.updatedItem.item_name.trim();
@@ -153,7 +172,8 @@ app.controller('itemCtrl', function($scope, $http, $cookies, $route) {
                 itemId:  $scope.updatedItem.item_id,
                 itemName:  $scope.updatedItem.item_name,
                 brand:  $scope.updatedItem.brand,
-                unit:  $scope.updatedItem.unit
+                unit:  $scope.updatedItem.unit,
+                gst: $scope.updatedItem.gst
              };
             let postData = 'myData='+JSON.stringify(formData);
             $http({

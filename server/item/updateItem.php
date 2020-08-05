@@ -10,8 +10,9 @@ $itemId = $myData->itemId;
 $itemName  = $myData->itemName;
 $brand = $myData->brand;
 $unit = $myData->unit;
+$gst = $myData->gst;
 
-$sql = "UPDATE item_master SET item_name ='$itemName', brand= '$brand', unit='$unit'  WHERE item_id = '$itemId'";
+$sql = "UPDATE item_master SET item_name ='$itemName', brand= '$brand', unit='$unit', gst='$gst'  WHERE item_id = '$itemId'";
 
 $flag = FALSE;
 if ($conn->query($sql) === TRUE) {

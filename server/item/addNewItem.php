@@ -9,9 +9,10 @@ $itemId = $myData->itemId;
 $newItem  = $myData->newItem;
 $brand = $myData->brand;
 $unit = $myData->unit;
+$gst = $myData->gst;
 
 
-$sql = "INSERT INTO item_master VALUES ('$itemId', '$newItem', '$brand', '$unit')";
+$sql = "INSERT INTO item_master VALUES ('$itemId', '$newItem', '$brand', '$unit', '$gst')";
 
 $flag = FALSE;
 if ($conn->query($sql) === TRUE) {

@@ -3901,6 +3901,9 @@ input[type=button].btn-block {
 .ui-autocomplete{
   z-index: 99999999999999999 !important;
 }
+.date-time { 
+  color: white;
+}
 .nav {
   display: flex;
   flex-wrap: wrap;

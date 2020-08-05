@@ -1,4 +1,4 @@
-var app = angular.module("myApp", ["ngCookies", "ngRoute", "dashboard", "brands", "units", "items"])
+var app = angular.module("myApp", ["ngCookies", "ngRoute", "dashboard", "brands", "units", "items", "newPurchase"])
 .config(function($routeProvider) {
     $routeProvider
     .when("/", {
@@ -21,9 +21,22 @@ var app = angular.module("myApp", ["ngCookies", "ngRoute", "dashboard", "brands"
         templateUrl : "pages/items.html",
         controller : "itemCtrl"
       })
+      .when("/newPurchase", {
+        templateUrl : "pages/newPurchase.html",
+        controller : "newPurchaseCtrl"
+      })
 });
 app.run(function($rootScope, $cookies, $window) {
   $rootScope.loginUser = $cookies.get("username");
+
+  $rootScope.d = moment().format('DD/MM/YYYY');
+  $rootScope.t = moment().format('h:mm:ss a');
+
+  setInterval(() => {
+    $rootScope.$applyAsync(() => {
+      $rootScope.t = moment().format('h:mm:ss a')
+    })
+  }, 1000)
 
   $rootScope.logout = () => {
     $cookies.remove('username');
