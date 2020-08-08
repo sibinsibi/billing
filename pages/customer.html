@@ -1,0 +1,106 @@
+
+<div class="container-fluid">
+    <h1 class="mt-4">Customers</h1>
+    <div class="card">
+        <div class="card-body">
+            <form ng-submit="addCustomer()">
+
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                    <input type="text" class="form-control" ng-model="cName" placeholder="Customer Name">
+                  </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                    <input type="text" class="form-control" ng-model="mob" placeholder="Mob">
+                  </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                    <input type="text" class="form-control" ng-model="address" placeholder="Address">
+                  </div>
+                </div>
+                <div class="col-12 items-center text-center">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+              </div>
+              </form>
+        </div>
+      </div>
+   <br>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+            All Customers
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered bordered table-striped table-condensed datatable"  datatable="ng" dt-options="vm.dtOptions">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Mob</th>
+                            <th>Address</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                  
+                    <tbody>
+                        <tr ng-repeat="customer in allCustomers track by $index">
+                            <td>{{customer.c_id}}</td>
+                            <td>{{customer.c_name}}</td>       
+                            <td>{{customer.mob}}</td>       
+                            <td>{{customer.address}}</td>       
+                            <td  style="text-align: center;" class="poiner" ng-click="openModalUpdateCustomer(customer)"><i class="fa fa-edit" aria-hidden="true"></i></td>                  
+                            <td style="text-align: center;" class="poiner" ng-click="deleteCustomer(customer.c_id)"><i class="fa fa-trash" aria-hidden="true"></i></td>                  
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="updateCustomer">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Update Supplier</h4>
+          <button type="button" class="close" data-dismiss="modal">×</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                    <input type="text" class="form-control" ng-model="updatedCustomer.c_name" placeholder="Supplier Name">
+                  </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                    <input type="text" class="form-control" ng-model="updatedCustomer.mob" placeholder="Mob">
+                  </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                    <input type="text" class="form-control" ng-model="updatedCustomer.address" placeholder="Mob">
+                  </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" ng-click="updateCustomer()">Save</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  

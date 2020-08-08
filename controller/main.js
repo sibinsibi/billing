@@ -1,4 +1,5 @@
-var app = angular.module("myApp", ["ngCookies", "ngRoute", "dashboard", "brands", "units", "items", "newPurchase"])
+var app = angular.module("myApp", ["ngCookies", "ngRoute", "dashboard", "brands", "units", "items", "newPurchase", 
+"supplier", "customer"])
 .config(function($routeProvider) {
     $routeProvider
     .when("/", {
@@ -20,6 +21,14 @@ var app = angular.module("myApp", ["ngCookies", "ngRoute", "dashboard", "brands"
       .when("/items", {
         templateUrl : "pages/items.html",
         controller : "itemCtrl"
+      })
+      .when("/supplier", {
+        templateUrl : "pages/supplier.html",
+        controller : "supplierCtrl"
+      })
+      .when("/customer", {
+        templateUrl : "pages/customer.html",
+        controller : "customerCtrl"
       })
       .when("/newPurchase", {
         templateUrl : "pages/newPurchase.html",
