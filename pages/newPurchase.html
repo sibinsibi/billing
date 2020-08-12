@@ -1,0 +1,102 @@
+<div class="container-fluid">
+    <h5 class="mt-4">New Purchase</h5>
+    <div class="card">
+        <div class="card-body">
+            <form>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="voucherNo" class="form-label">Voucher No</label>
+                            <input type="text" class="form-control" placeholder="Voucher No" id="voucherNo" ng-model="voucherNo">
+                          </div>
+                    </div> 
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="voucherDate" class="form-label">Voucher Date</label>
+                            <input type="date" class="form-control" placeholder="Voucher Date" id="voucherDate" ng-model="voucherDate">
+                          </div>
+                    </div>  
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="invoiceNo" class="form-label">Invoice Number</label>
+                            <input type="text" class="form-control" placeholder="Invoice Number" id="invoiceNo" ng-model="invoiceNo">
+                          </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="invoiceDate" class="form-label">Invoice Date</label>
+                            <input type="date" class="form-control" placeholder="Invoice Date" id="invoiceDate" ng-model="invoiceDate">
+                          </div>
+                    </div> 
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="sName" class="form-label">Supplier</label>
+                            <input type="text" class="form-control" placeholder="Supplier" id="sName" ng-model="sName">
+                          </div>
+                    </div> 
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="mob" class="form-label">Mobile No</label>
+                            <input type="text" class="form-control" placeholder="Mob" id="mob" ng-model="mob">
+                          </div>
+                    </div> 
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="gstNo" class="form-label">GST No</label>
+                            <input type="text" class="form-control" placeholder="GST No" id="gstNo" ng-model="gstNo">
+                          </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="" class="form-label">Cash / Credit</label>
+                            <div class="button-switch">
+                                <input type="checkbox" id="switch-blue" class="switch" ng-checked="true"  ng-model="cashCredit" />
+                                <label for="switch-blue" class="lbl-off">credit</label>
+                                <label for="switch-blue" class="lbl-on">cash</label>
+                            </div>
+                        </div>
+                    </div>     
+                </div>
+            </form>
+        </div>
+    </div>
+    <h6 class="mt-4">Add Items</h6>
+    <div class="card">
+        <div class="card-body">
+            <form>
+                <div class="row">
+                    <div class="col-2">
+                        <div class="form-group">
+                            <label for="item" class="form-label">Item Name</label>
+                            <input type="text" class="form-control" placeholder="Item" id="item" ng-model="item">
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group">
+                            <label for="brand" class="form-label">Brand</label>
+                            <input type="text" class="form-control" placeholder="Brand" id="brand" ng-model="brand">
+                          </div>
+                    </div>  
+                    <div class="col-2">
+                        <div class="form-group">
+                            <label for="unit" class="form-label">Unit</label>
+                            <input type="text" class="form-control" placeholder="Unit" id="unit" ng-model="unit">
+                          </div>
+                    </div> 
+                    <div class="col-2">
+                        <div class="form-group">
+                            <label for="unitPrice" class="form-label">Unit Price</label>
+                            <input type="number" class="form-control" placeholder="Unit Price" id="unitPrice" ng-model="unitPrice" min="0">
+                          </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group">
+                            <label for="qty" class="form-label">Qty</label>
+                            <input type="number" class="form-control" placeholder="Qty" id="qty" ng-model="qty" min="0">
+                          </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

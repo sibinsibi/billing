@@ -58,11 +58,6 @@ app.controller('itemCtrl', function($scope, $http, $cookies, $route) {
         source: $scope.allBrands
       });
     } 
-    $scope.getUnits = (id) => {
-        $( "#"+id ).autocomplete({
-          source: $scope.allUnits
-        });
-    } 
 
     $scope.addItem = () => {
 

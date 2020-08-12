@@ -20,7 +20,10 @@
                 </div>
                 <div class="col-3">
                     <div class="form-group">
-                    <input type="text" class="form-control" ng-model="unit" ng-keyup="getUnits('units')" ng-model="unit" id="units" placeholder="Unit">
+                      <select class="form-control" id="unit" ng-model="unit">
+                        <option ng-selected="true" ng-disabled="true" value="">Select Unit</option>
+                        <option ng-repeat="unit in allUnits track by $index" value="{{unit}}">{{unit}}</option>
+                      </select>
                   </div>
                 </div>  
                 <div class="col-3">
@@ -98,7 +101,11 @@
                     <input type="text" class="form-control" id="update-brand" ng-model="updatedItem.brand" ng-keyup="getBrands('update-brand')" placeholder="Brand Name">
                   </div>
                   <div class="form-group">
-                    <input type="text" class="form-control" id="update-unit" ng-model="updatedItem.unit" ng-keyup="getUnits('update-unit')" placeholder="Unit">
+                    <!-- <input type="text" class="form-control" id="update-unit" ng-model="updatedItem.unit" ng-keyup="getUnits('update-unit')" placeholder="Unit"> -->
+                    <select class="form-control" id="update-unit"  ng-model="updatedItem.unit">
+                      <!-- <option ng-selected="true" ng-disabled="true" value="">Select Unit</option> -->
+                      <option ng-repeat="unit in allUnits track by $index" value="{{unit}}" ng-selected="unit === updatedItem.unit">{{unit}}</option>
+                    </select>
                   </div>
                   <div class="form-group">
                     <select class="form-control" id="sel1" ng-model="updatedItem.gst">
