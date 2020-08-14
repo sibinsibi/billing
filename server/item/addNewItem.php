@@ -11,6 +11,10 @@ $brand = $myData->brand;
 $unit = $myData->unit;
 $gst = $myData->gst;
 
+$unitPrice = $myData->unitPrice;
+$purchaseRate = $myData->purchaseRate;
+$sellingPrice = $myData->sellingPrice;
+$discount = $myData->discount;
 
 $sql = "INSERT INTO item_master VALUES ('$itemId', '$newItem', '$brand', '$unit', '$gst')";
 
@@ -20,7 +24,16 @@ if ($conn->query($sql) === TRUE) {
 }else{
     $flag = false;
 }
-$res = array('flag' => $flag);
+
+$sql1 = "INSERT INTO item_price_details VALUES ('$itemId', '$newItem', '$brand', '$unitPrice', '$purchaseRate', '$sellingPrice', '$discount')";
+$flag1 = FALSE;
+if ($conn->query($sql1) === TRUE) {
+ $flag1 = TRUE;
+}else{
+    $flag1 = false;
+}
+
+$res = array('flag' => $flag && $flag1);
 $conn->close();
 echo json_encode($res);
 ?>

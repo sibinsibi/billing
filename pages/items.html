@@ -1,6 +1,13 @@
 
 <div class="container-fluid">
-    <h1 class="mt-4">Items</h1>
+  <div class="row">
+    <div class="col-6">
+      <h5 class="mt-4">Items</h5>
+    </div>
+    <div class="col-6 item-head">
+        <a class="mt-4" href="#!priceDetails"> GOTO Price Detalis</a>
+    </div>
+  </div>
     <div class="card">
         <div class="card-body">
           <form ng-submit="addItem()">
@@ -19,21 +26,45 @@
                   </div>
                 </div>
                 <div class="col-3">
-                    <div class="form-group">
-                      <select class="form-control" id="unit" ng-model="unit">
-                        <option ng-selected="true" ng-disabled="true" value="">Select Unit</option>
-                        <option ng-repeat="unit in allUnits track by $index" value="{{unit}}">{{unit}}</option>
-                      </select>
-                  </div>
-                </div>  
-                <div class="col-3">
                   <div class="form-group">
                     <select class="form-control" id="sel1" ng-model="gst">
                       <option ng-selected="true" ng-disabled="true" value="">Select GST</option>
                       <option ng-repeat="gst in allGst track by $index" value="{{gst.percentage}}">{{gst.percentage}} %</option>
                     </select>
                 </div>
-              </div>              
+              </div>
+                <div class="col-3">
+                    <div class="form-group">
+                      <select class="form-control" id="unit" ng-model="unit">
+                        <option ng-selected="true" value="">Nil</option>
+                        <option ng-repeat="unit in allUnits track by $index" value="{{unit}}">{{unit}}</option>
+                      </select>
+                  </div>
+                </div>
+                <div class="col-3" ng-if="unit">
+                  <div class="form-group">
+                      <label for="unitPrice" class="form-label">Unit Price</label>
+                      <input type="number" class="form-control" placeholder="Unit Price" id="unitPrice" ng-model="unitPrice" ngKeyup="unitPrice" min="0">
+                    </div>
+                </div> 
+                <div class="col-3">
+                  <div class="form-group">
+                      <label for="purchaseRate" class="form-label">Purchase Rate <span ng-if="unit">Per Unit</span></label>
+                      <input type="number" class="form-control" placeholder="Purchase Rate" id="purchaseRate" ng-model="purchaseRate" min="0">
+                    </div>
+                </div>  
+                <div class="col-3">
+                  <div class="form-group">
+                      <label for="sellingPrice" class="form-label">Selling Price <span ng-if="unit">Per Unit</span></label>
+                      <input type="number" class="form-control" placeholder="Selling Price" id="sellingPrice" ng-model="sellingPrice" min="0">
+                    </div>
+                </div>
+                <div class="col-3">
+                  <div class="form-group">
+                      <label for="discount" class="form-label">Discount</label>
+                      <input type="number" class="form-control" placeholder="Discount" id="discount" ng-model="discount" min="0">
+                    </div>
+                </div>           
                 <div class="col-12 align-items-center text-center">
                     <button type="submit" class="btn btn-primary">Add</button>
                 </div>
@@ -46,7 +77,7 @@
     <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table mr-1"></i>
-            All Units
+            All Items
         </div>
         <div class="card-body">
             <div class="table-responsive">

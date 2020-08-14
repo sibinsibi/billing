@@ -8,6 +8,7 @@ $myData = json_decode($_POST["myData"]);
 $itemId = $myData->itemId;
 
 $sql = "DELETE FROM item_master WHERE item_id = '$itemId'";
+$sql1 = "DELETE FROM item_price_details WHERE item_id = '$itemId'";
 
 $flag = FALSE;
 if ($conn->query($sql) === TRUE) {
@@ -15,7 +16,14 @@ if ($conn->query($sql) === TRUE) {
 }else{
     $flag = false;
 }
-$res = array('flag' => $flag);
+
+$flag1 = FALSE;
+if ($conn->query($sql1) === TRUE) {
+ $flag1 = TRUE;
+}else{
+    $flag1 = false;
+}
+$res = array('flag' => $flag && $flag1);
 $conn->close();
 echo json_encode($res);
 ?>

@@ -80,7 +80,10 @@
                     <div class="col-2">
                         <div class="form-group">
                             <label for="unit" class="form-label">Unit</label>
-                            <input type="text" class="form-control" placeholder="Unit" id="unit" ng-model="unit">
+                            <select class="form-control" id="unit" ng-model="unit">
+                                <option ng-selected="true" ng-disabled="true" value="">Select Unit</option>
+                                <option ng-repeat="unit in allUnits track by $index" value="{{unit}}">{{unit}}</option>
+                              </select>
                           </div>
                     </div> 
                     <div class="col-2">

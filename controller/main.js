@@ -1,5 +1,5 @@
 var app = angular.module("myApp", ["ngCookies", "ngRoute", "dashboard", "brands", "units", "items", "newPurchase", 
-"supplier", "customer"])
+"supplier", "customer", "priceDetails"])
 .config(function($routeProvider) {
     $routeProvider
     .when("/", {
@@ -33,6 +33,10 @@ var app = angular.module("myApp", ["ngCookies", "ngRoute", "dashboard", "brands"
       .when("/newPurchase", {
         templateUrl : "pages/newPurchase.html",
         controller : "newPurchaseCtrl"
+      })
+      .when("/priceDetails", {
+        templateUrl : "pages/priceDetails.html",
+        controller : "priceDetailsCtrl"
       })
 });
 app.run(function($rootScope, $cookies, $window) {

@@ -1,0 +1,92 @@
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-6">
+      <h5 class="mt-4">Items</h5>
+    </div>
+    <div class="col-6 item-head">
+        <a class="mt-4" href="#!items"> GOTO Items</a>
+    </div>
+  </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+            Items Price
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered bordered table-striped table-condensed datatable"  datatable="ng" dt-options="vm.dtOptions">
+                    <thead>
+                        <tr>
+                            <th>Itemm Code</th>
+                            <th>Item Name</th>
+                            <th>Brand</th>
+                            <th>Unit Price</th>
+                            <th>Purchase Rate</th>
+                            <th>Selling Price</th>
+                            <th>Discount</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                  
+                    <tbody>
+                        <tr ng-repeat="item in allItems track by $index">
+                            <td>{{item.item_id}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.brand}}</td>
+                            <td>{{item.unit_price}}</td>
+                            <td>{{item.purchase_rate}}</td>
+                            <td>{{item.selling_price}}</td>
+                            <td>{{item.discount}}</td>
+                            <td  style="text-align: center;" class="poiner" ng-click="openModalUpdateItem(item)"><i class="fa fa-edit" aria-hidden="true"></i></td>                  
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="updateItem">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Update Price : {{updatedItem.name}}</h4>
+          <button type="button" class="close" data-dismiss="modal">×</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="unitPrice" class="form-label">Unit</label>
+                    <input type="number" class="form-control" id="unitPrice" ng-model="updatedItem.unit_price" placeholder="" min="0">
+                  </div>     
+                  <div class="form-group">
+                    <label for="purchaseRate" class="form-label">Purchase Rate</label>
+                    <input type="number" class="form-control" id="purchaseRate" ng-model="updatedItem.purchase_rate" placeholder="Purchase Rate" min="0">
+                  </div>
+                  <div class="form-group">
+                    <label for="sellingPrice" class="form-label">Selling Price</label>
+                    <input type="number" class="form-control" id="sellingPrice" ng-model="updatedItem.selling_price" placeholder="Selling Price" min="0">
+                  </div>
+                  <div class="form-group">
+                    <label for="discount" class="form-label">Discount</label>
+                    <input type="number" class="form-control" id="discount" ng-model="updatedItem.discount" placeholder="Discount" min="0">
+                  </div>            
+            </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" ng-click="updateItem()">Save</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+  

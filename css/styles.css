@@ -10353,3 +10353,7 @@ body {
 .button-switch .switch#switch-blue:checked:before {
   background: #3498db;
 }
+.item-head {
+  text-align: right;
+  padding-top: 10px;
+}

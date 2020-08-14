@@ -60,7 +60,7 @@ app.controller('itemCtrl', function($scope, $http, $cookies, $route) {
     } 
 
     $scope.addItem = () => {
-
+        $scope.unitPrice = $("#unitPrice").val();
         if(!$scope.newItem || !$scope.brand){
             alert('Enter all data')
             return
@@ -69,17 +69,25 @@ app.controller('itemCtrl', function($scope, $http, $cookies, $route) {
             alert('Select GST')
             return
         }
-        
-        
+                
         $scope.newItem.trim();
         $scope.newItem = $scope.newItem.charAt(0).toUpperCase() + $scope.newItem.slice(1);
 
-        $scope.unit ? $scope.unit = $scope.unit : $scope.unit = null
+        $scope.unit ? $scope.unit = $scope.unit : $scope.unit = null;
+        $scope.unitPrice ? $scope.unitPrice = $scope.unitPrice : $scope.unitPrice = 0;
+        $scope.purchaseRate ? $scope.purchaseRate = $scope.purchaseRate : $scope.purchaseRate = 0;
+        $scope.sellingPrice ? $scope.sellingPrice = $scope.sellingPrice : $scope.sellingPrice = 0;
+        $scope.discount ? $scope.discount = $scope.discount : $scope.discount = 0;
+        
         let formData = { 
             newItem: $scope.newItem,
             brand: $scope.brand,
             unit: $scope.unit,
-            gst: parseInt($scope.gst)
+            gst: parseInt($scope.gst),
+            unitPrice: parseInt($scope.unitPrice),
+            purchaseRate: parseInt($scope.purchaseRate),
+            sellingPrice: parseInt($scope.sellingPrice),
+            discount: parseInt($scope.discount)
         };
 
         if($scope.allItems.length){
