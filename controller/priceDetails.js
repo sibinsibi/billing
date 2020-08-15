@@ -12,6 +12,14 @@ app.controller('priceDetailsCtrl', function($scope, $http, $cookies, $route) {
         console.log(error)
     });
 
+    $scope.allGst = []
+    $http.get('./server/tax/getAllGst.php').then((res) => {
+        if(res.data.records.length){
+            $scope.allGst = res.data.records
+        }
+    }).catch((error) => {
+        console.log(error)
+    });
 
     $scope.openModalUpdateItem = (item) => {
         $("#updateItem").modal();
@@ -19,10 +27,16 @@ app.controller('priceDetailsCtrl', function($scope, $http, $cookies, $route) {
         item.purchase_rate = parseInt(item.purchase_rate)
         item.selling_price = parseInt(item.selling_price)
         item.discount = parseInt(item.discount)
+        item.gst = parseInt(item.gst)
         $scope.updatedItem = item;
     }
 
     $scope.updateItem = () => {
+
+        if(!$scope.updatedItem.gst || isNaN(parseInt($scope.updatedItem.gst))){
+            alert('Select GST')
+            return
+        }
     
         $("#updateItem").modal('hide')
         if (confirm("Are you sure!")) {
@@ -31,7 +45,8 @@ app.controller('priceDetailsCtrl', function($scope, $http, $cookies, $route) {
                 unitPrice: parseInt($scope.updatedItem.unit_price),
                 purchaseRate: parseInt($scope.updatedItem.purchase_rate),
                 sellingPrice: parseInt($scope.updatedItem.selling_price),
-                discount: parseInt($scope.updatedItem.discount)
+                discount: parseInt($scope.updatedItem.discount),
+                gst:parseInt($scope.updatedItem.gst)
              };
             let postData = 'myData='+JSON.stringify(formData);
             $http({

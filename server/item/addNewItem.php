@@ -9,14 +9,14 @@ $itemId = $myData->itemId;
 $newItem  = $myData->newItem;
 $brand = $myData->brand;
 $unit = $myData->unit;
-$gst = $myData->gst;
 
+$gst = $myData->gst;
 $unitPrice = $myData->unitPrice;
 $purchaseRate = $myData->purchaseRate;
 $sellingPrice = $myData->sellingPrice;
 $discount = $myData->discount;
 
-$sql = "INSERT INTO item_master VALUES ('$itemId', '$newItem', '$brand', '$unit', '$gst')";
+$sql = "INSERT INTO item_master VALUES ('$itemId', '$newItem', '$brand', '$unit', '$unitPrice')";
 
 $flag = FALSE;
 if ($conn->query($sql) === TRUE) {
@@ -25,7 +25,7 @@ if ($conn->query($sql) === TRUE) {
     $flag = false;
 }
 
-$sql1 = "INSERT INTO item_price_details VALUES ('$itemId', '$newItem', '$brand', '$unitPrice', '$purchaseRate', '$sellingPrice', '$discount')";
+$sql1 = "INSERT INTO item_price_details VALUES ('$itemId', '$newItem', '$brand', '$unitPrice', '$purchaseRate', '$sellingPrice', '$discount', '$gst')";
 $flag1 = FALSE;
 if ($conn->query($sql1) === TRUE) {
  $flag1 = TRUE;

@@ -13,7 +13,7 @@ while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
   $outp .= '"item_name":"'  . $rs["item_name"] . '",';
   $outp .= '"brand":"'  . $rs["brand"] . '",';
   $outp .= '"unit":"'  . $rs["unit"] . '",';
-  $outp .= '"gst":"'  . $rs["gst"] . '"}';
+  $outp .= '"unit_price":"'  . $rs["unit_price"] . '"}';
 }
 $outp ='{"records":['.$outp.']}';
 $conn->close();

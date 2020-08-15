@@ -10,9 +10,21 @@ $itemId = $myData->itemId;
 $itemName  = $myData->itemName;
 $brand = $myData->brand;
 $unit = $myData->unit;
-$gst = $myData->gst;
 
-$sql = "UPDATE item_master SET item_name ='$itemName', brand= '$brand', unit='$unit', gst='$gst'  WHERE item_id = '$itemId'";
+$flag1 = FALSE;
+
+if($unit){
+    $unitPrice = $myData->unitPrice;
+    $sql = "UPDATE item_price_details SET unit_price ='$unitPrice' WHERE item_id = '$itemId'";
+    if ($conn->query($sql) === TRUE) {
+    $flag1 = TRUE;
+    }else{
+        $flag1 = FALSE;
+    }
+
+}
+
+$sql = "UPDATE item_master SET item_name ='$itemName', brand= '$brand', unit='$unit', unit_price ='$unitPrice'  WHERE item_id = '$itemId'";
 
 $flag = FALSE;
 if ($conn->query($sql) === TRUE) {
@@ -20,7 +32,7 @@ if ($conn->query($sql) === TRUE) {
 }else{
     $flag = FALSE;
 }
-$res = array('flag' => $flag);
+$res = array('flag' => $flag && $flag1);
 $conn->close();
 echo json_encode($res);
 ?>

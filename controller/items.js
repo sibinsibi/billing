@@ -2,6 +2,8 @@ var app = angular.module('items', ['ngCookies', 'datatables']);
 app.controller('itemCtrl', function($scope, $http, $cookies, $route) {
 
     !$cookies.get("username") ? window.location.href = "index.html" : '';
+    $("#newItem").focus()
+
 
     $scope.allItems = [];
     let lastItemId = ''
@@ -152,21 +154,27 @@ app.controller('itemCtrl', function($scope, $http, $cookies, $route) {
 
     $scope.openModalUpdateItem = (item) => {
         $("#updateItem").modal();
+        console.log(item)
         const items = item
+        item.unit_price = parseInt(item.unit_price)
         $scope.$applyAsync(() =>{
             $scope.updatedItem = items;
         })
     }
 
     $scope.updateItem = () => {
+        $scope.updatedUnitPrice = $("#updatedUnitPrice").val();
+
         if(!$scope.updatedItem.item_name || !$scope.updatedItem.brand){
             alert('Enter all data')
             return
         }
-        if(!$scope.updatedItem.gst || isNaN(parseInt($scope.updatedItem.gst))){
-            alert('Select GST')
+
+        if($scope.updatedItem.unit && !$scope.updatedUnitPrice){
+            alert('Enter unit price')
             return
         }
+      
         $("#updateItem").modal('hide')
         if (confirm("Are you sure!")) {
             $scope.updatedItem.item_name.trim();
@@ -176,8 +184,10 @@ app.controller('itemCtrl', function($scope, $http, $cookies, $route) {
                 itemName:  $scope.updatedItem.item_name,
                 brand:  $scope.updatedItem.brand,
                 unit:  $scope.updatedItem.unit,
-                gst: $scope.updatedItem.gst
              };
+             if($scope.updatedItem.unit){
+                formData.unitPrice = parseInt($scope.updatedUnitPrice)
+             }
             let postData = 'myData='+JSON.stringify(formData);
             $http({
                 method : 'POST',

@@ -39,7 +39,7 @@ var app = angular.module("myApp", ["ngCookies", "ngRoute", "dashboard", "brands"
         controller : "priceDetailsCtrl"
       })
 });
-app.run(function($rootScope, $cookies, $window) {
+app.run(function($rootScope, $cookies, $window, $route) {
   $rootScope.loginUser = $cookies.get("username");
 
   $rootScope.d = moment().format('DD/MM/YYYY');
@@ -55,4 +55,9 @@ app.run(function($rootScope, $cookies, $window) {
     $cookies.remove('username');
     $window.location.href = 'index.html';
   }
+
+  $rootScope.refresh = () => {
+    $route.reload();
+  }
+
 })

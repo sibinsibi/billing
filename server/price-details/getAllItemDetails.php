@@ -15,7 +15,8 @@ while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
   $outp .= '"unit_price":"'  . $rs["unit_price"] . '",';
   $outp .= '"purchase_rate":"'  . $rs["purchase_rate"] . '",';
   $outp .= '"selling_price":"'  . $rs["selling_price"] . '",';
-  $outp .= '"discount":"'  . $rs["discount"] . '"}';
+  $outp .= '"discount":"'  . $rs["discount"] . '",';
+  $outp .= '"gst":"'  . $rs["gst"] . '"}';
 }
 $outp ='{"records":['.$outp.']}';
 $conn->close();
