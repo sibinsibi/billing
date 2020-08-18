@@ -16,4 +16,12 @@ app.controller('newPurchaseCtrl', function($scope, $http, $cookies, $route) {
     }).catch((error) => {
         console.log(error)
     });
+
+    $( "#sName" ).autocomplete({
+        source: "./server/purchase/getAllSupplier.php",
+        select: function( event, ui ) {
+            $scope.selectedSupplier = ui.item;
+            console.log($scope.selectedSupplier)
+        }
+      }); 
 })

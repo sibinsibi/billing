@@ -1,3 +1,8 @@
+<style>
+    .ui-autocomplete {
+z-index: 100;
+}
+</style>
 <div class="container-fluid">
     <h5 class="mt-4">New Purchase</h5>
     <div class="card">
@@ -31,7 +36,7 @@
                     <div class="col-3">
                         <div class="form-group">
                             <label for="sName" class="form-label">Supplier</label>
-                            <input type="text" class="form-control" placeholder="Supplier" id="sName" ng-model="sName">
+                            <input type="text" class="form-control" placeholder="Supplier" id="sName" ng-keyup="getAllSupplier" ng-model="sName">
                           </div>
                     </div> 
                     <div class="col-3">
@@ -68,7 +73,7 @@
                     <div class="col-2">
                         <div class="form-group">
                             <label for="item" class="form-label">Item Name</label>
-                            <input type="text" class="form-control" placeholder="Item" id="item" ng-model="item">
+                            <input type="text" class="form-control" placeholder="Item" id="item" ng-keyup="getAllItem(item)" ng-model="item">
                         </div>
                     </div>
                     <div class="col-2">
