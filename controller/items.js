@@ -75,6 +75,9 @@ app.controller('itemCtrl', function($scope, $http, $cookies, $route) {
         $scope.newItem.trim();
         $scope.newItem = $scope.newItem.charAt(0).toUpperCase() + $scope.newItem.slice(1);
 
+        $scope.brand.trim();
+        $scope.brand = $scope.brand.charAt(0).toUpperCase() + $scope.brand.slice(1);
+
         $scope.unit ? $scope.unit = $scope.unit : $scope.unit = null;
         $scope.unitPrice ? $scope.unitPrice = $scope.unitPrice : $scope.unitPrice = 0;
         $scope.purchaseRate ? $scope.purchaseRate = $scope.purchaseRate : $scope.purchaseRate = 0;
