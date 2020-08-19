@@ -36,7 +36,7 @@ z-index: 100;
                     <div class="col-3">
                         <div class="form-group">
                             <label for="sName" class="form-label">Supplier</label>
-                            <input type="text" class="form-control" placeholder="Supplier" id="sName" ng-keyup="getAllSupplier" ng-model="sName">
+                            <input type="text" class="form-control" placeholder="Supplier" id="sName" ng-model="sName">
                           </div>
                     </div> 
                     <div class="col-3">
@@ -68,12 +68,12 @@ z-index: 100;
     <h6 class="mt-4">Add Items</h6>
     <div class="card">
         <div class="card-body">
-            <form>
+            <form ng-submit="addItem()" id="item-form">
                 <div class="row">
                     <div class="col-2">
                         <div class="form-group">
                             <label for="item" class="form-label">Item Name</label>
-                            <input type="text" class="form-control" placeholder="Item" id="item" ng-keyup="getAllItem(item)" ng-model="item">
+                            <input type="text" class="form-control" placeholder="Item" id="itemName" ng-model="item">
                         </div>
                     </div>
                     <div class="col-2">
@@ -86,25 +86,65 @@ z-index: 100;
                         <div class="form-group">
                             <label for="unit" class="form-label">Unit</label>
                             <select class="form-control" id="unit" ng-model="unit">
-                                <option ng-selected="true" ng-disabled="true" value="">Select Unit</option>
+                                <option ng-selected="true" value="">Nil</option>
                                 <option ng-repeat="unit in allUnits track by $index" value="{{unit}}">{{unit}}</option>
                               </select>
-                          </div>
+                        </div>
                     </div> 
                     <div class="col-2">
                         <div class="form-group">
-                            <label for="unitPrice" class="form-label">Unit Price</label>
-                            <input type="number" class="form-control" placeholder="Unit Price" id="unitPrice" ng-model="unitPrice" min="0">
-                          </div>
+                            <label for="unitPrice" class="form-label">Unit Price (Selling)</label>
+                            <input type="number" class="form-control" placeholder="Unit Price" id="unitPrice" ng-model="unitPrice" min="0" oninput="this.value = Math.abs(this.value)">
+                        </div>
                     </div>
                     <div class="col-2">
                         <div class="form-group">
-                            <label for="qty" class="form-label">Qty</label>
-                            <input type="number" class="form-control" placeholder="Qty" id="qty" ng-model="qty" min="0">
-                          </div>
+                            <label for="sellingPrice" class="form-label">Selling Price <span ng-if="unit">Per Unit</span></label>
+                            <input type="number" class="form-control" placeholder="Selling Price" id="sellingPrice" ng-model="sellingPrice" min="1" oninput="this.value = Math.abs(this.value)">
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group">
+                            <label for="purchaseRate" class="form-label">Purchase Rate  <span ng-if="unit">Per Unit</span></label>
+                            <input type="number" class="form-control" placeholder="Purchase Rate" id="purchaseRate" ng-model="purchaseRate" ng-change="calculateItem()"  min="1" oninput="this.value = Math.abs(this.value)">
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group">
+                            <label for="qty" class="form-label">Qty</span></label>
+                            <input type="number" class="form-control" placeholder="Qty" id="qty" ng-model="qty" min="1" oninput="this.value = Math.abs(this.value)">
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group">
+                            <label for="gst" class="form-label">GST</label>
+                            <select class="form-control" id="sel1" ng-model="gst">
+                                <option ng-selected="true" ng-disabled="true" value="">Select GST</option>
+                                <option ng-repeat="gst in allGst track by $index" value="{{gst.percentage}}">{{gst.percentage}} %</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group">
+                            <label for="taxAmount" class="form-label">Tax Amount</label>
+                            <input type="number" class="form-control" placeholder="Tax Amount" id="taxAmount" ng-model="taxAmount" min="0"  ng-disabled="true">
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group">
+                            <label for="itemTotalAmount" class="form-label">Total Amount</label>
+                            <input type="number" class="form-control" placeholder="Total Amount" id="itemTotalAmount" ng-model="itemTotalAmount" min="0" ng-disabled="true">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="purchase-add-item">
+                            <button class="btn btn-primary" type="submit">Add Item</button>
+                            <button type="button" class="btn btn-danger"  onClick="function test(){ document.getElementById('itemName').value = ''; $('#itemName').keyup();} test(); return false;">Clear</button>
+                        </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
+ 

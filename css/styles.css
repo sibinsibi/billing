@@ -10357,3 +10357,8 @@ body {
   text-align: right;
   padding-top: 10px;
 }
+.purchase-add-item{
+  margin: 0;
+  position: absolute;
+  top: 35%;
+}
