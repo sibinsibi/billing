@@ -43,26 +43,26 @@
                 </div>
                 <div class="col-3" ng-if="unit">
                   <div class="form-group">
-                      <label for="unitPrice" class="form-label">Unit Price</label>
-                      <input type="number" class="form-control" placeholder="Unit Price" id="unitPrice" ng-model="unitPrice" min="0">
-                    </div>
-                </div> 
-                <div class="col-3">
-                  <div class="form-group">
-                      <label for="purchaseRate" class="form-label">Purchase Rate <span ng-if="unit">Per Unit</span></label>
-                      <input type="number" class="form-control" placeholder="Purchase Rate" id="purchaseRate" ng-model="purchaseRate" min="0">
-                    </div>
-                </div>  
-                <div class="col-3">
-                  <div class="form-group">
-                      <label for="sellingPrice" class="form-label">Selling Price <span ng-if="unit">Per Unit</span></label>
-                      <input type="number" class="form-control" placeholder="Selling Price" id="sellingPrice" ng-model="sellingPrice" min="0">
+                      <label for="unitPrice" class="form-label">Unit Price (for selling)</label>
+                      <input type="number" class="form-control" placeholder="Unit Price" step="any" id="unitPrice" ng-model="unitPrice" min="0">
                     </div>
                 </div>
                 <div class="col-3">
                   <div class="form-group">
+                      <label for="sellingPrice" class="form-label">Selling Price <span ng-if="unit">Per Unit</span></label>
+                      <input type="number" class="form-control" placeholder="Selling Price" step="any" id="sellingPrice" ng-model="sellingPrice" min="0">
+                    </div>
+                </div>
+                <div class="col-3">
+                  <div class="form-group">
+                      <label for="purchaseRate" class="form-label">Purchase Rate <span ng-if="unit">Per Unit</span></label>
+                      <input type="number" class="form-control" placeholder="Purchase Rate" step="any" id="purchaseRate" ng-model="purchaseRate" min="0">
+                    </div>
+                </div>  
+                <div class="col-3">
+                  <div class="form-group">
                       <label for="discount" class="form-label">Discount</label>
-                      <input type="number" class="form-control" placeholder="Discount" id="discount" ng-model="discount" min="0">
+                      <input type="number" class="form-control" placeholder="Discount" step="any" id="discount" ng-model="discount" min="0">
                     </div>
                 </div>           
                 <div class="col-12 align-items-center text-center">
@@ -137,7 +137,7 @@
                   </div>
                   <div class="form-group" ng-if="updatedItem.unit">
                     <label for="updatedUnitPrice" class="form-label">Unit Price</label>
-                    <input type="number" class="form-control" placeholder="Unit Price" id="updatedUnitPrice" ng-model="updatedItem.unit_price" min="0">
+                    <input type="number" class="form-control" placeholder="Unit Price" id="updatedUnitPrice" step="any" ng-model="updatedItem.unit_price" min="0">
                   </div>
                 </div>
             </div>

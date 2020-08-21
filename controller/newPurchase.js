@@ -48,21 +48,24 @@ app.controller('newPurchaseCtrl', function($scope, $http, $cookies, $route) {
     $( "#itemName" ).autocomplete({
         source: "./server/purchase/getAllItem.php",
         select: function(event, data) {
+
             $scope.selectedItem = data.item;
-            $scope.selectedItem.unit_price = parseInt($scope.selectedItem.unit_price);
-            $scope.selectedItem.discount = parseInt($scope.selectedItem.discount);
-            $scope.selectedItem.purchase_rate = parseInt($scope.selectedItem.purchase_rate);
-            $scope.selectedItem.selling_price = parseInt($scope.selectedItem.selling_price);
+
+            $scope.selectedItem.discount = parseFloat($scope.selectedItem.discount);
+            $scope.purchaseRate = parseFloat($scope.selectedItem.purchase_rate);
+            $scope.sellingPrice = parseFloat($scope.selectedItem.selling_price);
+            $scope.unitPrice = parseFloat($scope.selectedItem.unit_price);
+            $scope.gst = $scope.selectedItem.gst;
+            $scope.discount = parseFloat($scope.selectedItem.discount);
 
             $scope.brand = $scope.selectedItem.brand;
             $scope.unit = $scope.selectedItem.unit;
-            $scope.unitPrice = $scope.selectedItem.unit_price;
-            $scope.sellingPrice = $scope.selectedItem.selling_price;
-            $scope.purchaseRate = $scope.selectedItem.purchase_rate;
-            $scope.gst = $scope.selectedItem.gst;
+
             $scope.qty = 1;
-            $scope.taxAmount = ($scope.purchaseRate * (parseInt($scope.gst)/100)) * $scope.qty;
-            $scope.itemTotalAmount = $scope.purchaseRate + $scope.taxAmount;
+            $scope.taxAmount = ($scope.purchaseRate *  $scope.qty) * (parseFloat($scope.gst)/100);
+            $scope.taxAmount = parseFloat($scope.taxAmount.toFixed(2));
+            $scope.itemTotalAmount = (($scope.purchaseRate  * $scope.qty) + $scope.taxAmount) - $scope.discount ;
+            $scope.itemTotalAmount = parseFloat( $scope.itemTotalAmount.toFixed(2))
         }
     });
 
@@ -83,9 +86,12 @@ app.controller('newPurchaseCtrl', function($scope, $http, $cookies, $route) {
     });
 
     $scope.calculateItem = () => {
-        if($scope.qty && $scope.purchaseRate){
-            $scope.taxAmount = ($scope.purchaseRate * (parseInt($scope.gst)/100)) * $scope.qty;
-            $scope.itemTotalAmount = $scope.purchaseRate + $scope.taxAmount;
+        if($scope.qty && $scope.purchaseRate && $scope.gst){
+            $scope.taxAmount = ($scope.purchaseRate *  $scope.qty) * (parseFloat($scope.gst)/100);
+            $scope.taxAmount = parseFloat($scope.taxAmount.toFixed(2));
+            $scope.itemTotalAmount = (($scope.purchaseRate * $scope.qty) + $scope.taxAmount) - $scope.discount ;
+            $scope.itemTotalAmount = parseFloat( $scope.itemTotalAmount.toFixed(2))
+
         }
       }
 })

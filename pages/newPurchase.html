@@ -94,31 +94,31 @@ z-index: 100;
                     <div class="col-2">
                         <div class="form-group">
                             <label for="unitPrice" class="form-label">Unit Price (Selling)</label>
-                            <input type="number" class="form-control" placeholder="Unit Price" id="unitPrice" ng-model="unitPrice" min="0" oninput="this.value = Math.abs(this.value)">
+                            <input type="number" class="form-control" placeholder="Unit Price" id="unitPrice" step="any" ng-model="unitPrice" min="0">
                         </div>
                     </div>
                     <div class="col-2">
                         <div class="form-group">
                             <label for="sellingPrice" class="form-label">Selling Price <span ng-if="unit">Per Unit</span></label>
-                            <input type="number" class="form-control" placeholder="Selling Price" id="sellingPrice" ng-model="sellingPrice" min="1" oninput="this.value = Math.abs(this.value)">
-                        </div>
+                            <input type="number" class="form-control" placeholder="Selling Price" id="sellingPrice" step="any" ng-model="sellingPrice" min="0">
+                    </div>
                     </div>
                     <div class="col-2">
                         <div class="form-group">
                             <label for="purchaseRate" class="form-label">Purchase Rate  <span ng-if="unit">Per Unit</span></label>
-                            <input type="number" class="form-control" placeholder="Purchase Rate" id="purchaseRate" ng-model="purchaseRate" ng-change="calculateItem()"  min="1" oninput="this.value = Math.abs(this.value)">
+                            <input type="number" class="form-control" placeholder="Purchase Rate" id="purchaseRate" step="any" ng-model="purchaseRate" ng-change="calculateItem()"  min="0">
                         </div>
                     </div>
                     <div class="col-2">
                         <div class="form-group">
                             <label for="qty" class="form-label">Qty</span></label>
-                            <input type="number" class="form-control" placeholder="Qty" id="qty" ng-model="qty" min="1" oninput="this.value = Math.abs(this.value)">
+                            <input type="number" class="form-control" placeholder="Qty" id="qty" ng-model="qty" min="0" ng-change="calculateItem()">
                         </div>
                     </div>
                     <div class="col-2">
                         <div class="form-group">
                             <label for="gst" class="form-label">GST</label>
-                            <select class="form-control" id="sel1" ng-model="gst">
+                            <select class="form-control" id="sel1" ng-model="gst" ng-change="calculateItem()">
                                 <option ng-selected="true" ng-disabled="true" value="">Select GST</option>
                                 <option ng-repeat="gst in allGst track by $index" value="{{gst.percentage}}">{{gst.percentage}} %</option>
                               </select>
@@ -127,16 +127,22 @@ z-index: 100;
                     <div class="col-2">
                         <div class="form-group">
                             <label for="taxAmount" class="form-label">Tax Amount</label>
-                            <input type="number" class="form-control" placeholder="Tax Amount" id="taxAmount" ng-model="taxAmount" min="0"  ng-disabled="true">
+                            <input type="number" class="form-control" placeholder="Tax Amount" step="any" id="taxAmount" ng-model="taxAmount" min="0"  ng-disabled="true">
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group">
+                            <label for="discount" class="form-label">Discount</label>
+                            <input type="number" class="form-control" placeholder="discount" step="any" id="discount" ng-model="discount" ng-change="calculateItem()" min="0">
                         </div>
                     </div>
                     <div class="col-2">
                         <div class="form-group">
                             <label for="itemTotalAmount" class="form-label">Total Amount</label>
-                            <input type="number" class="form-control" placeholder="Total Amount" id="itemTotalAmount" ng-model="itemTotalAmount" min="0" ng-disabled="true">
+                            <input type="number" class="form-control" placeholder="Total Amount" step="any" id="itemTotalAmount" ng-model="itemTotalAmount" min="0" ng-disabled="true">
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-2">
                         <div class="purchase-add-item">
                             <button class="btn btn-primary" type="submit">Add Item</button>
                             <button type="button" class="btn btn-danger"  onClick="function test(){ document.getElementById('itemName').value = ''; $('#itemName').keyup();} test(); return false;">Clear</button>

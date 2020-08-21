@@ -84,15 +84,16 @@ app.controller('itemCtrl', function($scope, $http, $cookies, $route) {
         $scope.sellingPrice ? $scope.sellingPrice = $scope.sellingPrice : $scope.sellingPrice = 0;
         $scope.discount ? $scope.discount = $scope.discount : $scope.discount = 0;
         
+        console.log($scope.unitPrice)
         let formData = { 
             newItem: $scope.newItem,
             brand: $scope.brand,
             unit: $scope.unit,
-            gst: parseInt($scope.gst),
-            unitPrice: parseInt($scope.unitPrice),
-            purchaseRate: parseInt($scope.purchaseRate),
-            sellingPrice: parseInt($scope.sellingPrice),
-            discount: parseInt($scope.discount)
+            gst: parseFloat($scope.gst),
+            unitPrice: parseFloat($scope.unitPrice).toFixed(2),
+            purchaseRate: parseFloat($scope.purchaseRate).toFixed(2),
+            sellingPrice: parseFloat($scope.sellingPrice).toFixed(2),
+            discount: parseFloat($scope.discount).toFixed(2)
         };
 
         if($scope.allItems.length){
@@ -157,9 +158,8 @@ app.controller('itemCtrl', function($scope, $http, $cookies, $route) {
 
     $scope.openModalUpdateItem = (item) => {
         $("#updateItem").modal();
-        console.log(item)
-        const items = item
-        item.unit_price = parseInt(item.unit_price)
+        const items = item;
+        items.unit_price = parseFloat(parseFloat(items.unit_price).toFixed(2))
         $scope.$applyAsync(() =>{
             $scope.updatedItem = items;
         })
@@ -189,7 +189,7 @@ app.controller('itemCtrl', function($scope, $http, $cookies, $route) {
                 unit:  $scope.updatedItem.unit,
              };
              if($scope.updatedItem.unit){
-                formData.unitPrice = parseInt($scope.updatedUnitPrice)
+                formData.unitPrice = parseFloat($scope.updatedUnitPrice).toFixed(2)
              }
             let postData = 'myData='+JSON.stringify(formData);
             $http({
