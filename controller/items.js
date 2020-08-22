@@ -1,8 +1,9 @@
 var app = angular.module('items', ['ngCookies', 'datatables']);
-app.controller('itemCtrl', function($scope, $http, $cookies, $route) {
+app.controller('itemCtrl', function($scope, $http, $cookies, $route, $rootScope) {
 
     !$cookies.get("username") ? window.location.href = "index.html" : '';
-    $("#newItem").focus()
+    $("#newItem").focus();
+    $rootScope.loader = false;
 
 
     $scope.allItems = [];
@@ -71,6 +72,8 @@ app.controller('itemCtrl', function($scope, $http, $cookies, $route) {
             alert('Select GST')
             return
         }
+
+        $rootScope.loader = true;
                 
         $scope.newItem.trim();
         $scope.newItem = $scope.newItem.charAt(0).toUpperCase() + $scope.newItem.slice(1);
@@ -84,7 +87,6 @@ app.controller('itemCtrl', function($scope, $http, $cookies, $route) {
         $scope.sellingPrice ? $scope.sellingPrice = $scope.sellingPrice : $scope.sellingPrice = 0;
         $scope.discount ? $scope.discount = $scope.discount : $scope.discount = 0;
         
-        console.log($scope.unitPrice)
         let formData = { 
             newItem: $scope.newItem,
             brand: $scope.brand,
@@ -115,11 +117,11 @@ app.controller('itemCtrl', function($scope, $http, $cookies, $route) {
         }).then((res) => {
             if(res.data.flag){
                 alert('Added Successfully');
-                $route.reload();
+                 window.location.reload();
             }
             else{
                 alert('Failed, try again!!')
-                $route.reload();
+                 window.location.reload();
 
             }
         }).catch((error) => {
@@ -140,16 +142,16 @@ app.controller('itemCtrl', function($scope, $http, $cookies, $route) {
             }).then((res) => {
                 if(res.data.flag){
                     alert('Deleted Successfully');
-                    $route.reload();
+                     window.location.reload();
                 }
                 else{
                     alert('Failed, try again!!')
-                    $route.reload();
+                     window.location.reload();
     
                 }
             }).catch((error) => {
                 alert('Something went wrong')
-                $route.reload();
+                 window.location.reload();
             });
             
         } 
@@ -200,23 +202,23 @@ app.controller('itemCtrl', function($scope, $http, $cookies, $route) {
             }).then((res) => {
                 if(res.data.flag){
                     alert('Updated Successfully');
-                    $route.reload();
+                     window.location.reload();
                 }
                 else{
                     alert('Failed, try again!!')
-                    $route.reload();
+                     window.location.reload();
     
                 }
             }).catch((error) => {
                 alert('Something went wrong' + error)
-                $route.reload();
+                 window.location.reload();
             });
             
         } 
     }
 
     $("#updateItem").on('hidden.bs.modal', function(){
-        $route.reload();
+         window.location.reload();
     });
     
 

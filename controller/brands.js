@@ -2,6 +2,7 @@ var app = angular.module('brands', ['ngCookies', 'datatables']);
 app.controller('brandCtrl', function($scope, $http, $cookies, $route) {
 
     !$cookies.get("username") ? window.location.href = "index.html" : '';
+    $("#brand").focus()
 
     let lastBrandId = ''
     $scope.allBrands = [];
@@ -18,6 +19,7 @@ app.controller('brandCtrl', function($scope, $http, $cookies, $route) {
     
     $scope.addBrand = () => {
 
+        
         if(!$scope.newBrand){
             alert('Enter brand name')
             return

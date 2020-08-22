@@ -4,8 +4,14 @@ z-index: 100;
 }
 </style>
 <div class="container-fluid">
-    <h5 class="mt-4">New Purchase</h5>
+
+    <br>
+
     <div class="card">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+            New Purchase
+        </div>
         <div class="card-body">
             <form>
                 <div class="row">
@@ -13,13 +19,13 @@ z-index: 100;
                         <div class="form-group">
                             <label for="voucherNo" class="form-label">Voucher No</label>
                             <input type="text" class="form-control" placeholder="Voucher No" id="voucherNo" ng-model="voucherNo">
-                          </div>
+                        </div>
                     </div> 
                     <div class="col-3">
                         <div class="form-group">
                             <label for="voucherDate" class="form-label">Voucher Date</label>
                             <input type="date" class="form-control" placeholder="Voucher Date" id="voucherDate" ng-model="voucherDate">
-                          </div>
+                        </div>
                     </div>  
                     <div class="col-3">
                         <div class="form-group">
@@ -65,8 +71,14 @@ z-index: 100;
             </form>
         </div>
     </div>
-    <h6 class="mt-4">Add Items</h6>
+
+    <br>
+
     <div class="card">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+            Add Items
+        </div>
         <div class="card-body">
             <form ng-submit="addItem()" id="item-form">
                 <div class="row">
@@ -145,12 +157,114 @@ z-index: 100;
                     <div class="col-2">
                         <div class="purchase-add-item">
                             <button class="btn btn-primary" type="submit">Add Item</button>
-                            <button type="button" class="btn btn-danger"  onClick="function test(){ document.getElementById('itemName').value = ''; $('#itemName').keyup();} test(); return false;">Clear</button>
+                            <button type="submit" class="btn btn-danger"  onClick="function test(){ document.getElementById('itemName').value = ''; $('#itemName').keyup();} test(); return false;">Clear</button>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+
+    <br>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+            All Items
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered bordered table-striped table-condensed datatable"  datatable="ng" dt-options="vm.dtOptions">
+                    <thead>
+                        <tr>
+                            <th class="table-th-font">Item</th>
+                            <th class="table-th-font">Brand</th>
+                            <th class="table-th-font">Unit</th>
+                            <th class="table-th-font">Unit Price</th>
+                            <th class="table-th-font">Selling Price</th>
+                            <th class="table-th-font">Purchase Rate</th>
+                            <th class="table-th-font">GST</th>
+                            <th class="table-th-font">Qty</th>
+                            <th class="table-th-font">Tax Amount</th>
+                            <th class="table-th-font">Discount</th>
+                            <th class="table-th-font">Total</th>
+                            <th class="table-th-font">Edit</th>
+                            <th class="table-th-font">Delete</th>
+                        </tr>
+                    </thead>
+                  
+                    <tbody>
+                        <tr ng-repeat="item in addedItems track by $index">
+                            <td>{{item.item}}</td>
+                            <td>{{item.brand}}</td>
+                            <td>{{item.unit}}</td>
+                            <td>{{item.unitPrice}}</td>
+                            <td>{{item.sellingPrice}}</td>
+                            <td>{{item.purchaseRate}}</td>
+                            <td>{{item.gst}}</td>
+                            <td>{{item.qty}}</td>
+                            <td>{{item.taxAmount}}</td>
+                            <td>{{item.discount}}</td>
+                            <td>{{item.itemTotalAmount}}</td>
+                            <td  style="text-align: center;" class="poiner" ng-click="openModalUpdateItem(item)"><i class="fa fa-edit" aria-hidden="true"></i></td>                  
+                            <td style="text-align: center;" class="poiner" ng-click="deleteItem($index)"><i class="fa fa-trash" aria-hidden="true"></i></td>                  
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">Total Tax:</div>
+                        <div class="col-6"><input type="number" step="any" class="form-control" ng-model="totalTaxAmount" ng-disabled="true"></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-3">Paid:</div>
+                        <div class="col-6"><input type="number" step="any" class="form-control" placeholder="Paid Amount" ng-model="paid"></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-3">Balance:</div>
+                        <div class="col-6"><input type="number" step="any" class="form-control" placeholder="Balance" ng-model="balance"></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-3">Remarks:</div>
+                        <div class="col-6">  <textarea class="form-control" rows="1" ng-model="remarks"></textarea></div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-6 right-align-coloumn">Net Amount:</div>
+                        <div class="col-4"><input type="number" class="form-control" step="any"  ng-model="netAmount" min="0" ng-disabled="true"></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-6 right-align-coloumn">Discount:</div>
+                        <div class="col-4"><input type="number" class="form-control" step="any"  ng-model="totalDiscount" min="0"></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-6 right-align-coloumn">Grant Total:</div>
+                        <div class="col-4"><input type="number" class="form-control" placeholder="Discount" step="any"  ng-model="grandTotal" min="0" ng-disabled="true"></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-6 right-align-coloumn">Round off:</div>
+                        <div class="col-4"><input type="number" class="form-control" step="any"  ng-model="roundOf" min="0"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
  

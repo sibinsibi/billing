@@ -10362,3 +10362,27 @@ body {
   position: absolute;
   top: 35%;
 }
+
+.loading-overlay {
+  display: none;
+  background: rgba(255, 255, 255, 0.7);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 9998;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-overlay.is-active {
+  display: flex;
+}
+
+.table-th-font { 
+  font-size: 12px;
+}
+.right-align-coloumn {
+  text-align: right;
+}

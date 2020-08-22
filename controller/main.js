@@ -41,6 +41,7 @@ var app = angular.module("myApp", ["ngCookies", "ngRoute", "dashboard", "brands"
 });
 app.run(function($rootScope, $cookies, $window, $route) {
   $rootScope.loginUser = $cookies.get("username");
+  $rootScope.loader = false;
 
   $rootScope.d = moment().format('DD/MM/YYYY');
   $rootScope.t = moment().format('h:mm:ss a');
