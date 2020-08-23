@@ -188,7 +188,6 @@ z-index: 100;
                             <th class="table-th-font">Tax Amount</th>
                             <th class="table-th-font">Discount</th>
                             <th class="table-th-font">Total</th>
-                            <th class="table-th-font">Edit</th>
                             <th class="table-th-font">Delete</th>
                         </tr>
                     </thead>
@@ -206,7 +205,6 @@ z-index: 100;
                             <td>{{item.taxAmount}}</td>
                             <td>{{item.discount}}</td>
                             <td>{{item.itemTotalAmount}}</td>
-                            <td  style="text-align: center;" class="poiner" ng-click="openModalUpdateItem(item)"><i class="fa fa-edit" aria-hidden="true"></i></td>                  
                             <td style="text-align: center;" class="poiner" ng-click="deleteItem($index)"><i class="fa fa-trash" aria-hidden="true"></i></td>                  
                         </tr>
                     </tbody>
@@ -228,7 +226,7 @@ z-index: 100;
                     <br>
                     <div class="row">
                         <div class="col-3">Paid:</div>
-                        <div class="col-6"><input type="number" step="any" class="form-control" placeholder="Paid Amount" ng-model="paid"></div>
+                        <div class="col-6"><input type="number" step="any" class="form-control" placeholder="Paid Amount" ng-model="paid" ng-change="changeInPaid()"></div>
                     </div>
                     <br>
                     <div class="row">
@@ -249,12 +247,12 @@ z-index: 100;
                     <br>
                     <div class="row">
                         <div class="col-6 right-align-coloumn">Discount:</div>
-                        <div class="col-4"><input type="number" class="form-control" step="any"  ng-model="totalDiscount" min="0"></div>
+                        <div class="col-4"><input type="number" class="form-control" step="any"  ng-model="totalDiscount" min="0" ng-change="changeInDiscount()"></div>
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-6 right-align-coloumn">Grant Total:</div>
-                        <div class="col-4"><input type="number" class="form-control" placeholder="Discount" step="any"  ng-model="grandTotal" min="0" ng-disabled="true"></div>
+                        <div class="col-6 right-align-coloumn grand-total-label">Grant Total:</div>
+                        <div class="col-4"><input type="number" class="form-control grand-total-box" placeholder="Discount" step="any"  ng-model="grandTotal" min="0" ng-disabled="true"></div>
                     </div>
                     <br>
                     <div class="row">

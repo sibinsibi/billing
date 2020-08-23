@@ -10386,3 +10386,10 @@ body {
 .right-align-coloumn {
   text-align: right;
 }
+.grand-total-label{
+  font-weight: 800;
+}
+.grand-total-box{
+  border: 1px solid #111;
+  box-shadow: 1px 0px 3px 1px;
+}

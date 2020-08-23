@@ -185,4 +185,16 @@ app.controller('newPurchaseCtrl', function($scope, $http, $cookies, $route, $roo
         }
 
     }
+
+    $scope.changeInDiscount = () => {
+        $scope.grandTotal = parseFloat((($scope.totalTaxAmount + $scope.netAmount) - $scope.totalDiscount).toFixed(2));
+        $scope.roundOf =  parseFloat(($scope.grandTotal).toFixed(2));
+        $scope.paid = $scope.grandTotal;
+    }
+
+    $scope.changeInPaid = () => {
+        if($scope.grandTotal >= $scope.paid){
+            $scope.balance = parseFloat(($scope.grandTotal - $scope.paid).toFixed(2));
+        }
+    }
 })
