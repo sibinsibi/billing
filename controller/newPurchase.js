@@ -5,6 +5,21 @@ app.controller('newPurchaseCtrl', function($scope, $http, $cookies, $route, $roo
     $rootScope.loader = false;
     $("#voucherNo").focus();
 
+    $http.get('./server/purchase/getPid.php').then((res) => {
+        if(res.data.records.length){
+            const allItems = res.data.records
+             let lastItem =  allItems[allItems.length - 1].voucher_no;
+             let lastpId  = parseInt(lastItem.match(/\d+/g)[0]);
+             lastpId++
+             $scope.voucherNo = 'PCH1' + String(lastpId)
+
+        }else{
+            $scope.voucherNo = 'PCH1'
+        }
+    }).catch((error) => {
+        console.log(error)
+    });
+
     $scope.allUnits = [];
     $http.get('./server/unit/getAllUnit.php').then((res) => {
         if(res.data.records.length){
@@ -190,11 +205,90 @@ app.controller('newPurchaseCtrl', function($scope, $http, $cookies, $route, $roo
         $scope.grandTotal = parseFloat((($scope.totalTaxAmount + $scope.netAmount) - $scope.totalDiscount).toFixed(2));
         $scope.roundOf =  parseFloat(($scope.grandTotal).toFixed(2));
         $scope.paid = $scope.grandTotal;
+        $scope.balance = 0;
     }
 
     $scope.changeInPaid = () => {
         if($scope.grandTotal >= $scope.paid){
             $scope.balance = parseFloat(($scope.grandTotal - $scope.paid).toFixed(2));
         }
+    }
+
+    $scope.cashCredit = true;
+    $scope.submitPurchase = () => {
+
+        if(!$scope.voucherDate){
+            alert('Enter voucher date')
+            return
+        }
+        if(!$scope.invoiceNo){
+            alert('Enter invoice no')
+            return
+        }
+        if(!$scope.invoiceDate){
+            alert('Enter invoice date')
+            return
+        }
+        if(!$scope.sName){
+            alert('Enter supplier')
+            return
+        }
+        if(!$scope.gstNo){
+            alert('GST No')
+            return
+        }
+
+        if(!$scope.addedItems.length){
+            alert('Add atleast one item')
+            return
+        }
+
+        $scope.cashCredit ? $scope.cashCredit = 'cash' : $scope.cashCredit = 'credit';
+        $scope.voucherDate =  moment($scope.voucherDate).format('YYYY/MM/DD');
+        $scope.invoiceDate =  moment($scope.invoiceDate).format('YYYY/MM/DD');
+
+        let formData = {
+            voucherNo: $scope.voucherNo,
+            voucherDate: $scope.voucherDate,
+            invoiceNo: $scope.invoiceNo,
+            invoiceDate: $scope.invoiceDate,
+            sId: $scope.selectedSupplier ? $scope.selectedSupplier.id : '',
+            sName: $scope.sName,
+            gstNo: $scope.gstNo,
+            mob: $scope.mob ? $scope.mob = $scope.mob : $scope.mob = '',
+            cashCredit: $scope.cashCredit,
+            netAmount: $scope.netAmount,
+            totalTaxAmount: $scope.totalTaxAmount,
+            totalDiscount: $scope.totalDiscount,
+            grandTotal: $scope.grandTotal,
+            roundOf: $scope.roundOf,
+            paid: $scope.paid,
+            balance: $scope.balance,
+            remarks: $scope.remarks ?  $scope.remarks =  $scope.remarks :  $scope.remarks = '',
+            transactionCompleted: $scope.balance == 0 ? true : false,
+            items: $scope.addedItems
+        }
+
+        let postData = 'myData='+JSON.stringify(formData);
+        
+
+        $http({
+            method : 'POST',
+            url : './server/purchase/addNewPurchase.php',
+            data: postData,
+            headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then((res) => {
+            if(res.data.flag){
+                alert('Added Successfully');
+                // window.location.reload();
+            }
+            else{
+                alert('Failed, try again!!')
+                // window.location.reload();
+
+            }
+        }).catch((error) => {
+            //alert('Something went wrong')
+        });
     }
 })
