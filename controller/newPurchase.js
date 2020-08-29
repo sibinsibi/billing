@@ -11,7 +11,7 @@ app.controller('newPurchaseCtrl', function($scope, $http, $cookies, $route, $roo
              let lastItem =  allItems[allItems.length - 1].voucher_no;
              let lastpId  = parseInt(lastItem.match(/\d+/g)[0]);
              lastpId++
-             $scope.voucherNo = 'PCH1' + String(lastpId)
+             $scope.voucherNo = 'PCH' + String(lastpId)
 
         }else{
             $scope.voucherNo = 'PCH1'
@@ -244,8 +244,8 @@ app.controller('newPurchaseCtrl', function($scope, $http, $cookies, $route, $roo
         }
 
         $scope.cashCredit ? $scope.cashCredit = 'cash' : $scope.cashCredit = 'credit';
-        $scope.voucherDate =  moment($scope.voucherDate).format('YYYY/MM/DD');
-        $scope.invoiceDate =  moment($scope.invoiceDate).format('YYYY/MM/DD');
+        $scope.voucherDate =  moment($scope.voucherDate).format('YYYY-MM-DD');
+        $scope.invoiceDate =  moment($scope.invoiceDate).format('YYYY-MM-DD');
 
         let formData = {
             voucherNo: $scope.voucherNo,
@@ -270,6 +270,8 @@ app.controller('newPurchaseCtrl', function($scope, $http, $cookies, $route, $roo
         }
 
         let postData = 'myData='+JSON.stringify(formData);
+
+        console.log(formData)
         
 
         $http({
@@ -280,11 +282,11 @@ app.controller('newPurchaseCtrl', function($scope, $http, $cookies, $route, $roo
         }).then((res) => {
             if(res.data.flag){
                 alert('Added Successfully');
-                // window.location.reload();
+                window.location.reload();
             }
             else{
                 alert('Failed, try again!!')
-                // window.location.reload();
+                window.location.reload();
 
             }
         }).catch((error) => {

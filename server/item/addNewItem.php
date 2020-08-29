@@ -16,7 +16,7 @@ $purchaseRate = $myData->purchaseRate;
 $sellingPrice = $myData->sellingPrice;
 $discount = $myData->discount;
 
-$sql = "INSERT INTO item_master VALUES ('$itemId', '$newItem', '$brand', '$unit', '$unitPrice')";
+$sql = "INSERT INTO item_master (item_id, item_name, brand, unit, unit_price) VALUES ('$itemId', '$newItem', '$brand', '$unit', '$unitPrice')";
 
 $flag = FALSE;
 if ($conn->query($sql) === TRUE) {

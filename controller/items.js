@@ -117,11 +117,11 @@ app.controller('itemCtrl', function($scope, $http, $cookies, $route, $rootScope)
         }).then((res) => {
             if(res.data.flag){
                 alert('Added Successfully');
-                 window.location.reload();
+                 //window.location.reload();
             }
             else{
                 alert('Failed, try again!!')
-                 window.location.reload();
+                 //window.location.reload();
 
             }
         }).catch((error) => {
