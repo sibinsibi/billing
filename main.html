@@ -120,6 +120,34 @@
                   <a class="nav-link" href="#!allPurchase">All Purchase</a>
                 </nav>
               </div>
+
+              <a
+                class="nav-link collapsed"
+                href=""
+                data-toggle="collapse"
+                data-target="#stock"
+                aria-expanded="false"
+                aria-controls="collapseLayouts"
+              >
+                <div class="sb-nav-link-icon">
+                  <i class="fa fa-shopping-cart"></i>
+                </div>
+                Stock Master
+                <div class="sb-sidenav-collapse-arrow">
+                  <i class="fas fa-angle-down"></i>
+                </div>
+              </a>
+              <div
+                class="collapse"
+                id="stock"
+                aria-labelledby="headingOne"
+                data-parent="#sidenavAccordion"
+              >
+                <nav class="sb-sidenav-menu-nested nav">
+                  <a class="nav-link" href="#!allStock">All Stock</a>
+                </nav>
+              </div>
+
               <a
                 class="nav-link collapsed"
                 href=""
@@ -213,5 +241,6 @@
     <script src="controller/customer.js"></script>
     <script src="controller/priceDetails.js"></script>
     <script src="controller/allPurchase.js"></script>
+    <script src="controller/allStock.js"></script>
   </body>
 </html>

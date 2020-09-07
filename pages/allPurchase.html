@@ -1,13 +1,14 @@
 <div class="container-fluid">
   <h1 class="mt-4">All Purchase</h1>
   <div class="row">
-    <div class="col-4">
+    <div class="col-3">
       <div class="card">
         <div class="card-body">
           <form>
             <div class="row">
               <div class="col-12">
                 <div class="form-group">
+                  <label for="sName" class="form-label">Supplier Name</label>
                   <input
                     type="text"
                     class="form-control"
@@ -23,20 +24,48 @@
         </div>
       </div>
     </div>
-    <div class="col-8">
+    <div class="col-9">
       <div class="card">
         <div class="card-body">
           <form>
             <div class="row">
               <div class="col-12">
-                <div class="form-group">
-                  <input
-                    type="text"
-                    class="form-control"
-                    ng-model="newBrand"
-                    id="brand"
-                    placeholder="Brand Name"
-                  />
+                <div class="row">
+                  <div class="col-5">
+                    <div class="form-group">
+                      <label for="startDate" class="form-label"
+                        >Start Date</label
+                      >
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="startDate"
+                        ng-model="startDate"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-5">
+                    <div class="form-group">
+                      <label for="endDate" class="form-label">End Date</label>
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="endDate"
+                        ng-model="endDate"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-group">
+                      <button
+                        type="button"
+                        class="btn btn-primary button-margin-top-purchase"
+                        ng-click="getPurchaseByDate()"
+                      >
+                        Get
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -50,7 +79,7 @@
   <div class="card mb-4">
     <div class="card-header">
       <i class="fas fa-table mr-1"></i>
-      All Brands
+      Purchase Details
     </div>
     <div class="card-body">
       <div class="table-responsive">

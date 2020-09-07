@@ -89,6 +89,8 @@ foreach($items as $i){
     $sql2 = "SELECT * from item_price_details where name = '$item' AND brand = '$brand' AND selling_price = '$sellingPrice'";
     $result = $conn->query($sql2);
 
+    $id = '';
+
     if(mysqli_num_rows($result) == 0){
 
         $sql3 = "SELECT * from item_master ORDER BY id DESC LIMIT 1";
@@ -107,6 +109,31 @@ foreach($items as $i){
         $sql5 = "INSERT INTO item_price_details VALUES ('$id', '$item', '$brand', '$unitPrice', '$purchaseRate', '$sellingPrice', '$discount', '$gst')";
         $conn->query($sql5);
     }
+    else{
+         while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
+            $id = $rs['item_id'];
+        }
+    }
+
+    $sql6 = "SELECT * from stock_master where item_id = '$id' ORDER BY id DESC LIMIT 1";
+    $result = $conn->query($sql6);
+    
+    if(mysqli_num_rows($result) == 0){
+        
+        $sql7 = "INSERT INTO stock_master (item_id, item_name, brand, stock) VALUES ('$id', '$item', '$brand', $qty)";
+        $result = $conn->query($sql7);
+    }
+    else{
+            
+            $rs = $result->fetch_array(MYSQLI_ASSOC);
+            $stock = $rs['stock'][0];
+            $stock = $stock + $qty;
+
+            $sql8 = "UPDATE stock_master SET stock = '$stock' WHERE item_id = '$id'";
+            $result = $conn->query($sql8);
+    }
+
+
 
 }
 

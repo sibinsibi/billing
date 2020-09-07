@@ -18,9 +18,23 @@ app.controller("allPurchaseCtrl", function (
     },
   });
 
-  const getAllPurchase = (id, flag) => {
-    let formData = { sId: id, flag: flag };
-    let postData = "myData=" + JSON.stringify(formData);
+  $scope.getPurchaseByDate = () => {
+    let startDate = moment($scope.startDate).format("YYYY-MM-DD");
+    let endDate = moment($scope.endDate).format("YYYY-MM-DD");
+    getAllPurchase("", "Date", startDate, endDate);
+  };
+
+  const getAllPurchase = (id, flag, startDate, endDate) => {
+    let formData, postData;
+
+    if (flag == "supplier") {
+      formData = { sId: id, flag: flag };
+      postData = "myData=" + JSON.stringify(formData);
+    }
+    if (flag == "Date") {
+      formData = { startDate: startDate, endDate: endDate, flag: flag };
+      postData = "myData=" + JSON.stringify(formData);
+    }
 
     $rootScope.loader = true;
     $http({

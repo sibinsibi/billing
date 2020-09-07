@@ -5,12 +5,17 @@ include("../config.php");
 
 $myData = json_decode($_POST["myData"]);
 
-$sId = $myData->sId;
 $flag  = $myData->flag;
 
 $sql = '';
 if($flag == 'supplier'){
+    $sId = $myData->sId;
     $sql = "SELECT * FROM purchase_master WHERE s_id = '$sId'";
+}
+if($flag == 'Date'){
+    $startDate = $myData->startDate;
+    $endDate = $myData->endDate;
+    $sql = "SELECT * FROM purchase_master WHERE invoice_date BETWEEN '$startDate' AND '$endDate'";
 }
 
 $result = $conn->query($sql);
