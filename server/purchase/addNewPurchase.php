@@ -11,7 +11,7 @@ $invoiceNo = $myData->invoiceNo;
 $invoiceDate = $myData->invoiceDate;
 
 $sId = $myData->sId;
-$sName = $myData->sName;
+$sName = ucwords($myData->sName);
 $gstNo = $myData->gstNo;
 $mob = $myData->mob;
 
@@ -47,20 +47,14 @@ $remarks = $myData->remarks;
 $transactionCompleted = $myData->transactionCompleted;
 
 $sql = "INSERT INTO purchase_master (voucher_no, voucher_date, invoice_no, invoice_date, s_id, s_name, csah_credit, net_amount, total_tax, discount, grand_total, round_off, paid, balance, remarks, transaction_completed) VALUES ('$voucherNo', '$voucherDate', '$invoiceNo', '$invoiceDate', '$sId', '$sName', '$cashCredit', '$netAmount', '$totalTaxAmount', '$totalDiscount', '$grandTotal', '$roundOf', '$paid', '$balance', '$remarks', '$transactionCompleted')";
-
-$flag = FALSE;
-if ($conn->query($sql) === TRUE) {
- $flag = TRUE;
-}else{
-    $flag = false;
-}
+$conn->query($sql);
 
 $items = $myData->items;
 
 foreach($items as $i){
 
-    $item = $i->item;
-    $brand = $i->brand;
+    $item = ucwords($i->item);
+    $brand = ucwords($i->brand);
     $unit = $i->unit;
     $unitPrice = $i->unitPrice;
     $sellingPrice = $i->sellingPrice;
@@ -92,7 +86,6 @@ foreach($items as $i){
         $conn->query($sql4);
     }
 
-
     $sql2 = "SELECT * from item_price_details where name = '$item' AND brand = '$brand' AND selling_price = '$sellingPrice'";
     $result = $conn->query($sql2);
 
@@ -112,23 +105,12 @@ foreach($items as $i){
         $conn->query($sql4);
 
         $sql5 = "INSERT INTO item_price_details VALUES ('$id', '$item', '$brand', '$unitPrice', '$purchaseRate', '$sellingPrice', '$discount', '$gst')";
-        $conn->query($sql5)
+        $conn->query($sql5);
     }
-
-
-
-
-
-
-
-
-
 
 }
 
-
-
-$res = array('flag' => $items);
+$res = array('flag' => true);
 $conn->close();
-//echo json_encode($res);
+echo json_encode($res);
 ?>

@@ -1,0 +1,170 @@
+<div class="container-fluid">
+  <h1 class="mt-4">All Purchase</h1>
+  <div class="row">
+    <div class="col-4">
+      <div class="card">
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="sName"
+                    ng-model="sName"
+                    placeholder="Supplier Name"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="card">
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    ng-model="newBrand"
+                    id="brand"
+                    placeholder="Brand Name"
+                  />
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <div class="card mb-4">
+    <div class="card-header">
+      <i class="fas fa-table mr-1"></i>
+      All Brands
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table
+          class="table table-bordered bordered table-striped table-condensed datatable"
+          datatable="ng"
+          dt-options="vm.dtOptions"
+        >
+          <thead>
+            <tr>
+              <th>V.No</th>
+              <th>V.Date</th>
+              <th>I.No</th>
+              <th>I.Date</th>
+              <th>CH/CR</th>
+              <th>Net Amt</th>
+              <th>Tax</th>
+              <th>Dis</th>
+              <th>G.Total</th>
+              <th>R.Off</th>
+              <th>Paid</th>
+              <th>Balance</th>
+              <th>Remarks</th>
+              <th>Items</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr ng-repeat="purchase in allPurchases track by $index">
+              <td>{{purchase.voucher_no}}</td>
+              <td>{{purchase.voucher_date}}</td>
+              <td>{{purchase.invoice_no}}</td>
+              <td>{{purchase.invoice_date}}</td>
+              <td>{{purchase.csah_credit}}</td>
+              <td>{{purchase.net_amount}}</td>
+              <td>{{purchase.total_tax}}</td>
+              <td>{{purchase.discount}}</td>
+              <td>{{purchase.grand_total}}</td>
+              <td>{{purchase.round_off}}</td>
+              <td>{{purchase.paid}}</td>
+              <td>{{purchase.balance}}</td>
+              <td>{{purchase.remarks}}</td>
+              <td
+                style="text-align: center"
+                class="poiner"
+                ng-click="openModalShowItems(purchase.voucher_no)"
+              >
+                <i class="fa fa-eye" aria-hidden="true"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="items">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Items</h4>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <div class="table-responsive">
+              <table
+                class="table table-bordered bordered table-striped table-condensed datatable"
+                datatable="ng"
+                dt-options="vm.dtOptions"
+              >
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Brand</th>
+                    <th>Selling Price</th>
+                    <th>Purchase Rate</th>
+                    <th>Qty</th>
+                    <th>GST</th>
+                    <th>Tax</th>
+                    <th>Discount</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr ng-repeat="item in allPurchasesItems track by $index">
+                    <td>{{item.item}}</td>
+                    <td>{{item.brand}}</td>
+                    <td>{{item.selling_price}}</td>
+                    <td>{{item.purchase_rate}}</td>
+                    <td>{{item.qty}}</td>
+                    <td>{{item.gst}}</td>
+                    <td>{{item.tax_amount}}</td>
+                    <td>{{item.discount}}</td>
+                    <td>{{item.total}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

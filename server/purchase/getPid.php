@@ -3,7 +3,7 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 include("../config.php");
 
-$sql = "SELECT * from  purchase_master";
+$sql = "SELECT * from  purchase_master ORDER BY id DESC LIMIT 1";
 $result = $conn->query($sql);
 
 $outp = "";

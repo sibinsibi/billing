@@ -85,13 +85,13 @@ z-index: 100;
                     <div class="col-2">
                         <div class="form-group">
                             <label for="item" class="form-label">Item Name</label>
-                            <input type="text" class="form-control" placeholder="Item" id="itemName" ng-model="item">
+                            <input type="text" class="form-control" placeholder="Item" id="itemName" ng-model="item" autocomplete="off">
                         </div>
                     </div>
                     <div class="col-2">
                         <div class="form-group">
                             <label for="brand" class="form-label">Brand</label>
-                            <input type="text" class="form-control" placeholder="Brand" id="brand" ng-model="brand">
+                            <input type="text" class="form-control" placeholder="Brand" id="brand" ng-model="brand" autocomplete="off">
                           </div>
                     </div>  
                     <div class="col-2">
@@ -132,7 +132,7 @@ z-index: 100;
                             <label for="gst" class="form-label">GST</label>
                             <select class="form-control" id="sel1" ng-model="gst" ng-change="calculateItem()">
                                 <option ng-selected="true" ng-disabled="true" value="">Select GST</option>
-                                <option ng-repeat="gst in allGst track by $index" value="{{gst.percentage}}">{{gst.percentage}} %</option>
+                                <option ng-repeat="gst in allGst track by $index"  value="{{gst.percentage}}">{{gst.percentage}} %</option>
                               </select>
                         </div>
                     </div>
@@ -232,7 +232,7 @@ z-index: 100;
                     <br>
                     <div class="row">
                         <div class="col-3">Balance:</div>
-                        <div class="col-6"><input type="number" step="any" class="form-control" placeholder="Balance" ng-model="balance"></div>
+                        <div class="col-6"><input type="number" step="any" class="form-control" placeholder="Balance" ng-disabled="true" ng-model="balance"></div>
                     </div>
                     <br>
                     <div class="row">
