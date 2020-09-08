@@ -37,7 +37,6 @@ app.controller("allStockCtrl", function ($scope, $http, $cookies, $route) {
       stock: parseFloat($scope.qty),
     };
 
-    console.log(formData);
     let postData = "myData=" + JSON.stringify(formData);
 
     $http({
@@ -49,7 +48,7 @@ app.controller("allStockCtrl", function ($scope, $http, $cookies, $route) {
       .then((res) => {
         if (res.data.flag) {
           alert("Added Successfully");
-          //$route.reload();
+          $route.reload();
         } else {
           alert("Failed, try again!!");
           $route.reload();

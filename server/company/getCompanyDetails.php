@@ -9,7 +9,7 @@ $outp = '';
 if(mysqli_num_rows($result) !== 0){
   
   $rs = $result->fetch_array(MYSQLI_ASSOC);
-  $outp .= '{"name":"'  . $rs["name"] . '",';
+  $outp .= '{"name":"'  . $rs["company_name"] . '",';
   $outp .= '"mob":"'  . $rs["mob"] . '",';
   $outp .= '"land_phone":"'  . $rs["land_phone"] . '",';
   $outp .= '"email":"'  . $rs["email"] . '",';
