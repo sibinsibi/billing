@@ -126,14 +126,12 @@ foreach($items as $i){
     else{
             
             $rs = $result->fetch_array(MYSQLI_ASSOC);
-            $stock = $rs['stock'][0];
+            $stock = $rs['stock'];
             $stock = $stock + $qty;
 
             $sql8 = "UPDATE stock_master SET stock = '$stock' WHERE item_id = '$id'";
             $result = $conn->query($sql8);
     }
-
-
 
 }
 

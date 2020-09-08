@@ -11,7 +11,8 @@ var app = angular
     "customer",
     "priceDetails",
     "allPurchase",
-    "allStock"
+    "allStock",
+    "company",
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -58,6 +59,10 @@ var app = angular
       .when("/allStock", {
         templateUrl: "pages/allStock.html",
         controller: "allStockCtrl",
+      })
+      .when("/company", {
+        templateUrl: "pages/company.html",
+        controller: "companyCtrl",
       });
   });
 app.run(function ($rootScope, $cookies, $window, $route) {

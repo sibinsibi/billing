@@ -21,14 +21,14 @@ if(mysqli_num_rows($result) == 0){
 else{
         
     $rs = $result->fetch_array(MYSQLI_ASSOC);
-    $stock1 = $rs['stock'][0];
+    $stock1 = $rs['stock'];
     $stock2 = $stock1 + $stock;
 
     $sql8 = "UPDATE stock_master SET stock = '$stock2' WHERE item_id = '$itemId'";
     $result = $conn->query($sql8);
 }
 
-$res = array('flag' => $sql8);
+$res = array('flag' => true);
 $conn->close();
 echo json_encode($res);
 ?>

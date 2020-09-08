@@ -74,9 +74,17 @@
             class="dropdown-menu dropdown-menu-right"
             aria-labelledby="userDropdown"
           >
-            <a class="dropdown-item" href="">{{loginUser}}</a>
+            <a class="dropdown-item" href=""
+              ><i class="fa fa-user" aria-hidden="true"></i> {{loginUser}}</a
+            >
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item poiner" ng-click="logout()">Logout</a>
+            <a class="dropdown-item" href="#!company"
+              ><i class="fa fa-home" aria-hidden="true"></i> Company</a
+            >
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item poiner" ng-click="logout()"
+              ><i class="fa fa-anchor" aria-hidden="true"></i> Logout</a
+            >
           </div>
         </li>
       </ul>
@@ -242,5 +250,6 @@
     <script src="controller/priceDetails.js"></script>
     <script src="controller/allPurchase.js"></script>
     <script src="controller/allStock.js"></script>
+    <script src="controller/company.js"></script>
   </body>
 </html>
