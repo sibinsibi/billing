@@ -10,54 +10,36 @@ z-index: 100;
     <div class="card">
         <div class="card-header">
             <i class="fas fa-table mr-1"></i>
-            New Purchase
+            New Sale
         </div>
         <div class="card-body">
             <form>
                 <div class="row">
                     <div class="col-3">
                         <div class="form-group">
-                            <label for="voucherNo" class="form-label">Voucher No</label>
-                            <input type="text" class="form-control" placeholder="Voucher No" id="voucherNo" ng-model="voucherNo" ng-disabled="true">
+                            <label for="invoiceNo" class="form-label">Invoice No</label>
+                            <input type="text" class="form-control" placeholder="Invoice No" id="invoiceNo" ng-model="invoiceNo" ng-disabled="true">
+                        </div>
+                    </div> 
+                    <div class="col-2">
+                        <div class="form-group">
+                            <label for="invoiceDate" class="form-label">Date</label>
+                            <input type="date" class="form-control" placeholder="Date" id="invoiceDate" ng-model="invoiceDate">
                         </div>
                     </div> 
                     <div class="col-3">
                         <div class="form-group">
-                            <label for="voucherDate" class="form-label">Voucher Date</label>
-                            <input type="date" class="form-control" placeholder="Voucher Date" id="voucherDate" ng-model="voucherDate">
+                            <label for="cName" class="form-label">Customer Name</label>
+                            <input type="text" class="form-control" placeholder="Customer" id="cName" ng-model="cName">
                         </div>
-                    </div>  
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label for="invoiceNo" class="form-label">Invoice Number</label>
-                            <input type="text" class="form-control" placeholder="Invoice Number" id="invoiceNo" ng-model="invoiceNo">
-                          </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label for="invoiceDate" class="form-label">Invoice Date</label>
-                            <input type="date" class="form-control" placeholder="Invoice Date" id="invoiceDate" ng-model="invoiceDate">
-                          </div>
                     </div> 
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label for="sName" class="form-label">Supplier</label>
-                            <input type="text" class="form-control" placeholder="Supplier" id="sName" ng-model="sName">
-                          </div>
-                    </div> 
-                    <div class="col-3">
+                    <div class="col-2">
                         <div class="form-group">
                             <label for="mob" class="form-label">Mobile No</label>
                             <input type="text" class="form-control" placeholder="Mob" id="mob" ng-model="mob">
                           </div>
-                    </div> 
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label for="gstNo" class="form-label">GST No</label>
-                            <input type="text" class="form-control" placeholder="GST No" id="gstNo" ng-model="gstNo">
-                          </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-2">
                         <div class="form-group">
                             <label for="" class="form-label">Cash / Credit</label>
                             <div class="button-switch">
@@ -82,52 +64,31 @@ z-index: 100;
         <div class="card-body">
             <form ng-submit="addItem()" id="item-form">
                 <div class="row">
-                    <div class="col-2">
+                    <div class="col-3">
                         <div class="form-group">
                             <label for="item" class="form-label">Item Name</label>
                             <input type="text" class="form-control" placeholder="Item" id="itemName" ng-model="item" autocomplete="off">
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                         <div class="form-group">
                             <label for="brand" class="form-label">Brand</label>
-                            <input type="text" class="form-control" placeholder="Brand" id="brand" ng-model="brand" autocomplete="off">
+                            <input type="text" class="form-control" placeholder="Brand" id="brand" ng-model="brand" autocomplete="off" ng-disabled="true">
                           </div>
-                    </div>  
-                    <div class="col-2">
-                        <div class="form-group">
-                            <label for="unit" class="form-label">Unit</label>
-                            <select class="form-control" id="unit" ng-model="unit">
-                                <option ng-selected="true" value="">Nil</option>
-                                <option ng-repeat="unit in allUnits track by $index" value="{{unit}}">{{unit}}</option>
-                              </select>
-                        </div>
-                    </div> 
-                    <!-- <div class="col-2">
-                        <div class="form-group">
-                            <label for="unitPrice" class="form-label">Unit Price (Selling)</label>
-                            <input type="number" class="form-control" placeholder="Unit Price" id="unitPrice" step="any" ng-model="unitPrice" min="0">
-                        </div>
-                    </div> -->
-                    <div class="col-2">
+                    </div>
+                    <div class="col-3">
                         <div class="form-group">
                             <label for="sellingPrice" class="form-label">Selling Price <span ng-if="unit">Per Unit</span></label>
                             <input type="number" class="form-control" placeholder="Selling Price" id="sellingPrice" step="any" ng-model="sellingPrice" min="0">
                     </div>
                     </div>
-                    <div class="col-2">
-                        <div class="form-group">
-                            <label for="purchaseRate" class="form-label">Purchase Rate  <span ng-if="unit">Per Unit</span></label>
-                            <input type="number" class="form-control" placeholder="Purchase Rate" id="purchaseRate" step="any" ng-model="purchaseRate" ng-change="calculateItem()"  min="0">
-                        </div>
-                    </div>
-                    <div class="col-2">
+                    <div class="col-3">
                         <div class="form-group">
                             <label for="qty" class="form-label">Qty</span></label>
                             <input type="number" class="form-control" placeholder="Qty" id="qty" ng-model="qty" min="0" ng-change="calculateItem()">
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                         <div class="form-group">
                             <label for="gst" class="form-label">GST</label>
                             <select class="form-control" id="sel1" ng-model="gst" ng-change="calculateItem()">
@@ -136,29 +97,27 @@ z-index: 100;
                               </select>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                         <div class="form-group">
                             <label for="taxAmount" class="form-label">Tax Amount</label>
                             <input type="number" class="form-control" placeholder="Tax Amount" step="any" id="taxAmount" ng-model="taxAmount" min="0"  ng-disabled="true">
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                         <div class="form-group">
                             <label for="discount" class="form-label">Discount</label>
                             <input type="number" class="form-control" placeholder="discount" step="any" id="discount" ng-model="discount" ng-change="calculateItem()" min="0">
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                         <div class="form-group">
                             <label for="itemTotalAmount" class="form-label">Total Amount</label>
                             <input type="number" class="form-control" placeholder="Total Amount" step="any" id="itemTotalAmount" ng-model="itemTotalAmount" min="0" ng-disabled="true">
                         </div>
                     </div>
-                    <div class="col-2">
-                        <div class="purchase-add-item">
-                            <button class="btn btn-primary" type="submit">Add Item</button>
-                            <button type="submit" class="btn btn-danger"  onClick="function test(){ document.getElementById('itemName').value = ''; $('#itemName').keyup();} test(); return false;">Clear</button>
-                        </div>
+                    <div class="col-12" style="text-align: center;">
+                        <button class="btn btn-primary" type="submit">Add Item</button>
+                        <button type="submit" class="btn btn-danger"  onClick="function test(){ document.getElementById('itemName').value = ''; $('#itemName').keyup();} test(); return false;">Clear</button>
                     </div>
                 </div>
             </form>

@@ -2,14 +2,21 @@ var app = angular.module("company", ["ngCookies", "datatables"]);
 app.controller("companyCtrl", function ($scope, $http, $cookies, $route) {
   !$cookies.get("username") ? (window.location.href = "index.html") : "";
 
-  $scope.company = "";
-  $scope.show = false;
   $http
     .get("./server/company/getCompanyDetails.php")
     .then((res) => {
       if (res.data.records.length) {
-        $scope.company = res.data.records;
-        $scope.show = true;
+        let company = res.data.records[0];
+
+        $scope.companyName = company.company_name;
+        $scope.mob = company.mob;
+        $scope.landPhone = company.land_phone;
+        $scope.email = company.email;
+        $scope.gst = company.gst_no;
+        $scope.address1 = company.address1;
+        $scope.address2 = company.address2;
+        $scope.place = company.place;
+        $scope.pin = company.pin;
       }
     })
     .catch((error) => {
@@ -31,15 +38,20 @@ app.controller("companyCtrl", function ($scope, $http, $cookies, $route) {
     }
 
     let formData = {
-      companyName: $scope.companyName,
-      mob: $scope.mob,
-      landPhone: $scope.landPhone,
+      companyName:
+        $scope.companyName.charAt(0).toUpperCase() +
+        $scope.companyName.slice(1),
+      mob: $scope.mob ? $scope.mob : "",
+      landPhone: $scope.landPhone ? $scope.landPhone : "",
+      email: $scope.email ? $scope.email : "",
       gst: $scope.gst,
-      address1: $scope.address1,
-      address2: $scope.address2,
+      address1: $scope.address1 ? $scope.address1 : "",
+      address2: $scope.address2 ? $scope.address2 : "",
       place: $scope.place,
-      pin: $scope.pin,
+      pin: $scope.pin ? $scope.pin : "",
     };
+
+    console.log(formData);
 
     let postData = "myData=" + JSON.stringify(formData);
 
@@ -55,10 +67,10 @@ app.controller("companyCtrl", function ($scope, $http, $cookies, $route) {
           $route.reload();
         } else {
           alert("Failed, try again!!");
-          $route.reload();
         }
       })
       .catch((error) => {
+        console.log(error);
         alert("Something went wrong");
       });
   };

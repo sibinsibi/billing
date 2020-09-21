@@ -190,10 +190,10 @@ app.controller("itemCtrl", function (
       return;
     }
 
-    if ($scope.updatedItem.unit && !$scope.updatedUnitPrice) {
-      alert("Enter unit price");
-      return;
-    }
+    // if ($scope.updatedItem.unit && !$scope.updatedUnitPrice) {
+    //   alert("Enter unit price");
+    //   return;
+    // }
 
     $("#updateItem").modal("hide");
     if (confirm("Are you sure!")) {
@@ -208,6 +208,7 @@ app.controller("itemCtrl", function (
         unit: $scope.updatedItem.unit,
       };
       if ($scope.updatedItem.unit) {
+        $scope.updatedUnitPrice = 0;
         formData.unitPrice = parseFloat($scope.updatedUnitPrice).toFixed(2);
       }
       let postData = "myData=" + JSON.stringify(formData);

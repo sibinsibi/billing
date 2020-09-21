@@ -168,7 +168,8 @@ app.controller("newPurchaseCtrl", function (
     obj.item = $scope.item;
     obj.brand = $scope.brand;
     obj.unit = $scope.unit;
-    obj.unitPrice = $scope.unitPrice;
+    // obj.unitPrice = $scope.unitPrice;
+    obj.unitPrice = 0;
     obj.sellingPrice = $scope.sellingPrice;
     obj.purchaseRate = $scope.purchaseRate;
     obj.gst = parseFloat($scope.gst);
@@ -298,6 +299,8 @@ app.controller("newPurchaseCtrl", function (
       return;
     }
 
+    $rootScope.loader = true;
+
     $scope.cashCredit
       ? ($scope.cashCredit = "cash")
       : ($scope.cashCredit = "credit");
@@ -342,6 +345,7 @@ app.controller("newPurchaseCtrl", function (
       })
       .catch((error) => {
         alert("Something went wrong");
+        $rootScope.loader = false;
       });
   };
 });

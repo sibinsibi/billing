@@ -9,7 +9,7 @@ $outp = '';
 if(mysqli_num_rows($result) !== 0){
   
   $rs = $result->fetch_array(MYSQLI_ASSOC);
-  $outp .= '{"name":"'  . $rs["company_name"] . '",';
+  $outp .= '{"company_name":"'  . $rs["company_name"] . '",';
   $outp .= '"mob":"'  . $rs["mob"] . '",';
   $outp .= '"land_phone":"'  . $rs["land_phone"] . '",';
   $outp .= '"email":"'  . $rs["email"] . '",';
@@ -17,9 +17,7 @@ if(mysqli_num_rows($result) !== 0){
   $outp .= '"address1":"'  . $rs["address1"] . '",';
   $outp .= '"address2":"'  . $rs["address2"] . '",';
   $outp .= '"place":"'  . $rs["place"] . '",';
-  $outp .= '"pin":"'  . $rs["pin"] . '",';
-  $outp .= '"brand_name":"'  . $rs[""] . '"}';
-  
+  $outp .= '"pin":"'  . $rs["pin"] . '"}';  
 }
 
 $outp ='{"records":['.$outp.']}';

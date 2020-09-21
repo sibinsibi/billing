@@ -41,12 +41,12 @@
                       </select>
                   </div>
                 </div>
-                <div class="col-3" ng-if="unit">
+                <!-- <div class="col-3" ng-if="unit">
                   <div class="form-group">
                       <label for="unitPrice" class="form-label">Unit Price (for selling)</label>
                       <input type="number" class="form-control" placeholder="Unit Price" step="any" id="unitPrice" ng-model="unitPrice" min="0">
                     </div>
-                </div>
+                </div> -->
                 <div class="col-3">
                   <div class="form-group">
                       <label for="sellingPrice" class="form-label">Selling Price <span ng-if="unit">Per Unit</span></label>
@@ -135,10 +135,10 @@
                       <option ng-repeat="unit in allUnits track by $index" value="{{unit}}" ng-selected="unit === updatedItem.unit">{{unit}}</option>
                     </select>
                   </div>
-                  <div class="form-group" ng-if="updatedItem.unit">
+                  <!-- <div class="form-group" ng-if="updatedItem.unit">
                     <label for="updatedUnitPrice" class="form-label">Unit Price</label>
                     <input type="number" class="form-control" placeholder="Unit Price" id="updatedUnitPrice" step="any" ng-model="updatedItem.unit_price" min="0">
-                  </div>
+                  </div> -->
                 </div>
             </div>
         </div>

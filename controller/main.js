@@ -13,6 +13,7 @@ var app = angular
     "allPurchase",
     "allStock",
     "company",
+    "newSales",
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -63,11 +64,26 @@ var app = angular
       .when("/company", {
         templateUrl: "pages/company.html",
         controller: "companyCtrl",
+      })
+      .when("/newSale", {
+        templateUrl: "pages/newSales.html",
+        controller: "newSalesCtrl",
       });
   });
-app.run(function ($rootScope, $cookies, $window, $route) {
+app.run(function ($rootScope, $cookies, $window, $route, $http) {
   $rootScope.loginUser = $cookies.get("username");
   $rootScope.loader = false;
+
+  $http
+    .get("./server/company/getCompanyDetails.php")
+    .then((res) => {
+      if (res.data.records.length) {
+        $rootScope.company = res.data.records[0];
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 
   $rootScope.d = moment().format("DD/MM/YYYY");
   $rootScope.t = moment().format("h:mm:ss a");
