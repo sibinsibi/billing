@@ -1,0 +1,271 @@
+<div class="invoice-box" id="invoice">
+  <table cellpadding="0" cellspacing="0">
+    <tr class="top">
+      <td colspan="2">
+        <table>
+          <tr>
+            <td class="title">
+              <span>{{company.company_name}}</span>
+            </td>
+
+            <td>
+              Invoice #: 123<br />
+              Created: January 1, 2015<br />
+              Cash Bill
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr class="information">
+      <td colspan="2">
+        <table>
+          <tr>
+            <td>
+              Customer: Sparksuite, Inc.<br />
+              Mob: 9898989898<br />
+            </td>
+            <td>
+              Mob: {{company.mob}}<br />
+              GST: {{company.gst_no}}<br />
+              Place: {{company.place}}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <table class="table items">
+    <thead>
+      <tr class="th-row">
+        <th>
+          <b class="font">Item</b>
+        </th>
+        <th>
+          <b>Brand</b>
+        </th>
+        <th>
+          <b>Price</b>
+        </th>
+        <th>
+          <b>Qty</b>
+        </th>
+        <th>
+          <b>GST</b>
+        </th>
+        <th>
+          <b>Tax</b>
+        </th>
+        <th>
+          <b>Discount</b>
+        </th>
+        <th>
+          <b>Total</b>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="no-border">
+        <td class="no-border">Samsung Galaxy</td>
+        <td class="no-border">Samsung Galaxy</td>
+        <td class="no-border">Samsung Galaxy</td>
+        <td class="no-border">Samsung Galaxy</td>
+        <td class="no-border">Samsung Galaxy</td>
+        <td class="no-border">Samsung Galaxy</td>
+        <td class="no-border">Samsung Galaxy</td>
+        <td class="no-border">Samsung Galaxy</td>
+      </tr>
+      <tr class="no-border">
+        <td class="no-border">Samsung Galaxy</td>
+        <td class="no-border">Samsung Galaxy</td>
+        <td class="no-border">Samsung Galaxy</td>
+        <td class="no-border">Samsung Galaxy</td>
+        <td class="no-border">Samsung Galaxy</td>
+        <td class="no-border">Samsung Galaxy</td>
+        <td class="no-border">Samsung Galaxy</td>
+        <td class="no-border">Samsung Galaxy</td>
+      </tr>
+      <tr>
+        <td class="text-right">
+          <p><strong>Taxable:</strong></p>
+          <p><strong>Paid:</strong></p>
+          <p><strong>Balance:</strong></p>
+          <!-- <p><strong>two thousand five hundred </strong></p> -->
+        </td>
+        <td>
+          <p>
+            <strong> 500 </strong>
+          </p>
+          <p>
+            <strong> 82,900</strong>
+          </p>
+          <p>
+            <strong> 3,000 </strong>
+          </p>
+        </td>
+        <td></td>
+        <td></td>
+        <td class="text-right" colspan="3">
+          <p><strong>Net Amount:</strong></p>
+          <p><strong>Discount: </strong></p>
+          <p><strong>Grand Total: </strong></p>
+          <p><strong>Round Off: </strong></p>
+        </td>
+        <td>
+          <p>
+            <strong> 500 </strong>
+          </p>
+          <p>
+            <strong> 82,900</strong>
+          </p>
+          <p>
+            <strong> 3,000 </strong>
+          </p>
+          <p>
+            <strong> 79,900</strong>
+          </p>
+        </td>
+      </tr>
+      <tr style="color: #f81d2d">
+        <td colspan="4"><strong>two thousand five hundred </strong></td>
+        <td></td>
+        <td></td>
+        <td class="text-right">
+          <h4><strong>Total:</strong></h4>
+        </td>
+        <td class="text-left">
+          <h4>
+            <strong> 79,900 </strong>
+          </h4>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="row">
+    <button class="print" onclick="generatePDF()">Download as PDF</button>
+  </div>
+</div>
+
+<style>
+  .print {
+    margin: auto !important;
+    display: block !important;
+  }
+  .items,
+  .th-row {
+    border: 1px solid #d6caca;
+  }
+  .no-border {
+    border: 0px !important;
+  }
+  th {
+    font-size: 15px !important;
+    border: 0px !important;
+  }
+  .items td {
+    font-size: 12px !important;
+  }
+  .items b {
+    font-size: 12px !important;
+  }
+  .invoice-box {
+    max-width: 1000px;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #eee;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    font-size: 16px;
+    line-height: 24px;
+    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+    color: #555;
+  }
+
+  .invoice-box table {
+    width: 100%;
+    line-height: inherit;
+    text-align: left;
+  }
+
+  .invoice-box table td {
+    vertical-align: top;
+  }
+
+  .invoice-box table tr td:nth-child(2) {
+    text-align: right;
+  }
+
+  .invoice-box table tr.top table td {
+    padding-bottom: 20px;
+  }
+
+  .invoice-box table tr.top table td.title {
+    font-size: 45px;
+    line-height: 45px;
+    color: #333;
+  }
+
+  .invoice-box table tr.information table td {
+    padding-bottom: 40px;
+  }
+
+  .invoice-box table tr.heading td {
+    background: #eee;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+  }
+
+  .invoice-box table tr.details td {
+    padding-bottom: 20px;
+  }
+
+  .invoice-box table tr.item td {
+    border-bottom: 1px solid #eee;
+  }
+
+  .invoice-box table tr.item.last td {
+    border-bottom: none;
+  }
+
+  .invoice-box table tr.total td:nth-child(2) {
+    border-top: 2px solid #eee;
+    font-weight: bold;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .invoice-box table tr.top table td {
+      width: 100%;
+      display: block;
+      text-align: center;
+    }
+
+    .invoice-box table tr.information table td {
+      width: 100%;
+      display: block;
+      text-align: center;
+    }
+  }
+
+  /** RTL **/
+  .rtl {
+    direction: rtl;
+    font-family: Tahoma, "Helvetica Neue", "Helvetica", Helvetica, Arial,
+      sans-serif;
+  }
+
+  .rtl table {
+    text-align: right;
+  }
+
+  .rtl table tr td:nth-child(2) {
+    text-align: left;
+  }
+</style>
+<script>
+  function generatePDF() {
+    // Choose the element that our invoice is rendered in.
+    const element = document.getElementById("invoice");
+    // Choose the element and save the PDF for our user.
+    html2pdf().from(element).save();
+  }
+</script>

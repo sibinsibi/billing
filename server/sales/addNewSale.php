@@ -12,7 +12,7 @@ $cId = $myData->cId;
 $cName = ucwords($myData->cName);
 $mob = $myData->mob;
 
-if($cId == ""){
+if($cId == "" && $mob != ""){
 
     $sql3 = "SELECT * from customer_master ORDER BY id DESC LIMIT 1";
     $result = $conn->query($sql3);
