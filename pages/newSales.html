@@ -1,237 +1,433 @@
 <style>
-    .ui-autocomplete {
-z-index: 100;
-}
+  .ui-autocomplete {
+    z-index: 100;
+  }
 </style>
 <div class="container-fluid">
+  <br />
 
-    <br>
-
-    <div class="card">
-        <div class="card-header">
-            <i class="fas fa-table mr-1"></i>
-            New Sale
-        </div>
-        <div class="card-body">
-            <form>
-                <div class="row">
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label for="invoiceNo" class="form-label">Invoice No</label>
-                            <input type="text" class="form-control" placeholder="Invoice No" id="invoiceNo" ng-model="invoiceNo" ng-disabled="true">
-                        </div>
-                    </div> 
-                    <div class="col-2">
-                        <div class="form-group">
-                            <label for="invoiceDate" class="form-label">Date</label>
-                            <input type="date" class="form-control" placeholder="Date" id="invoiceDate" ng-model="invoiceDate">
-                        </div>
-                    </div> 
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label for="cName" class="form-label">Customer Name</label>
-                            <input type="text" class="form-control" placeholder="Customer" id="cName" ng-model="cName">
-                        </div>
-                    </div> 
-                    <div class="col-2">
-                        <div class="form-group">
-                            <label for="mob" class="form-label">Mobile No</label>
-                            <input type="text" class="form-control" placeholder="Mob" id="mob" ng-model="mob">
-                          </div>
-                    </div>
-                    <div class="col-2">
-                        <div class="form-group">
-                            <label for="" class="form-label">Cash / Credit</label>
-                            <div class="button-switch">
-                                <input type="checkbox" id="switch-blue" class="switch" ng-checked="true"  ng-model="cashCredit" />
-                                <label for="switch-blue" class="lbl-off">credit</label>
-                                <label for="switch-blue" class="lbl-on">cash</label>
-                            </div>
-                        </div>
-                    </div>     
-                </div>
-            </form>
-        </div>
+  <div class="card">
+    <div class="card-header">
+      <i class="fas fa-table mr-1"></i>
+      New Sale
     </div>
-
-    <br>
-
-    <div class="card">
-        <div class="card-header">
-            <i class="fas fa-table mr-1"></i>
-            Add Items
-        </div>
-        <div class="card-body">
-            <form ng-submit="addItem()" id="item-form">
-                <div class="row">
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label for="item" class="form-label">Item Name</label>
-                            <input type="text" class="form-control" placeholder="Item" id="itemName" ng-model="item" autocomplete="off">
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label for="brand" class="form-label">Brand</label>
-                            <input type="text" class="form-control" placeholder="Brand" id="brand" ng-model="brand" autocomplete="off" ng-disabled="true">
-                          </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label for="sellingPrice" class="form-label">Selling Price <span ng-if="unit">Per Unit</span></label>
-                            <input type="number" class="form-control" placeholder="Selling Price" id="sellingPrice" step="any" ng-model="sellingPrice" min="0">
-                    </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label for="qty" class="form-label">Qty</span></label>
-                            <input type="number" class="form-control" placeholder="Qty" id="qty" ng-model="qty" min="0" ng-change="calculateItem()">
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label for="gst" class="form-label">GST</label>
-                            <select class="form-control" id="sel1" ng-model="gst" ng-change="calculateItem()">
-                                <option ng-selected="true" ng-disabled="true" value="">Select GST</option>
-                                <option ng-repeat="gst in allGst track by $index"  value="{{gst.percentage}}">{{gst.percentage}} %</option>
-                              </select>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label for="taxAmount" class="form-label">Tax Amount</label>
-                            <input type="number" class="form-control" placeholder="Tax Amount" step="any" id="taxAmount" ng-model="taxAmount" min="0"  ng-disabled="true">
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label for="discount" class="form-label">Discount</label>
-                            <input type="number" class="form-control" placeholder="discount" step="any" id="discount" ng-model="discount" ng-change="calculateItem()" min="0">
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label for="itemTotalAmount" class="form-label">Total Amount</label>
-                            <input type="number" class="form-control" placeholder="Total Amount" step="any" id="itemTotalAmount" ng-model="itemTotalAmount" min="0" ng-disabled="true">
-                        </div>
-                    </div>
-                    <div class="col-12" style="text-align: center;">
-                        <button class="btn btn-primary" type="submit">Add Item</button>
-                        <button type="submit" class="btn btn-danger"  onClick="function test(){ document.getElementById('itemName').value = ''; $('#itemName').keyup();} test(); return false;">Clear</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <br>
-
-    <div class="card mb-4">
-        <div class="card-header">
-            <i class="fas fa-table mr-1"></i>
-            All Items
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered bordered table-striped table-condensed datatable"  datatable="ng" dt-options="vm.dtOptions">
-                    <thead>
-                        <tr>
-                            <th class="table-th-font">Item</th>
-                            <th class="table-th-font">Brand</th>
-                            <th class="table-th-font">Unit</th>
-                            <th class="table-th-font">Selling Price</th>
-                            <th class="table-th-font">Purchase Rate</th>
-                            <th class="table-th-font">GST</th>
-                            <th class="table-th-font">Qty</th>
-                            <th class="table-th-font">Tax Amount</th>
-                            <th class="table-th-font">Discount</th>
-                            <th class="table-th-font">Total</th>
-                            <th class="table-th-font">Delete</th>
-                        </tr>
-                    </thead>
-                  
-                    <tbody>
-                        <tr ng-repeat="item in addedItems track by $index">
-                            <td>{{item.item}}</td>
-                            <td>{{item.brand}}</td>
-                            <td>{{item.unit}}</td>
-                            <td>{{item.sellingPrice}}</td>
-                            <td>{{item.purchaseRate}}</td>
-                            <td>{{item.gst}}</td>
-                            <td>{{item.qty}}</td>
-                            <td>{{item.taxAmount}}</td>
-                            <td>{{item.discount}}</td>
-                            <td>{{item.itemTotalAmount}}</td>
-                            <td style="text-align: center;" class="poiner" ng-click="deleteItem($index)"><i class="fa fa-trash" aria-hidden="true"></i></td>                  
-                        </tr>
-                    </tbody>
-                </table>
+    <div class="card-body">
+      <form>
+        <div class="row">
+          <div class="col-3">
+            <div class="form-group">
+              <label for="invoiceNo" class="form-label">Invoice No</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Invoice No"
+                id="invoiceNo"
+                ng-model="invoiceNo"
+                ng-disabled="true"
+              />
             </div>
-        </div>
-    </div>
-
-    <br>
-
-    <div class="card mb-4">
-        <div class="card-body">
-
-            <div class="row">
-                <div class="col-6">
-                    <div class="row">
-                        <div class="col-3">Total Tax:</div>
-                        <div class="col-6"><input type="number" step="any" class="form-control" ng-model="totalTaxAmount" ng-disabled="true"></div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-3">Paid:</div>
-                        <div class="col-6"><input type="number" step="any" class="form-control" placeholder="Paid Amount" ng-model="paid" ng-change="changeInPaid()"></div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-3">Balance:</div>
-                        <div class="col-6"><input type="number" step="any" class="form-control" placeholder="Balance" ng-disabled="true" ng-model="balance"></div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-3">Remarks:</div>
-                        <div class="col-6">  <textarea class="form-control" rows="1" ng-model="remarks"></textarea></div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="row">
-                        <div class="col-6 right-align-coloumn">Net Amount:</div>
-                        <div class="col-4"><input type="number" class="form-control" step="any"  ng-model="netAmount" min="0" ng-disabled="true"></div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-6 right-align-coloumn">Discount:</div>
-                        <div class="col-4"><input type="number" class="form-control" step="any"  ng-model="totalDiscount" min="0" ng-change="changeInDiscount()"></div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-6 right-align-coloumn grand-total-label">Grant Total:</div>
-                        <div class="col-4"><input type="number" class="form-control grand-total-box" placeholder="Grant Total" step="any"  ng-model="grandTotal" min="0" ng-disabled="true"></div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-6 right-align-coloumn">Round off:</div>
-                        <div class="col-4"><input type="number" class="form-control" step="any"  ng-model="roundOf" min="0"></div>
-                    </div>
-                </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="invoiceDate" class="form-label">Date</label>
+              <input
+                type="date"
+                class="form-control"
+                placeholder="Date"
+                id="invoiceDate"
+                ng-model="invoiceDate"
+              />
             </div>
-
-            <br><br>
-
-            <div class="row">
-                <div class="col-12" style="text-align: center;">
-                    <button type="submit" class="btn btn-danger" ng-click="refresh()">Cancel</button>
-                    <button class="btn btn-primary" type="button" ng-click="submitPurchase()">Submit</button>
-
-                </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="cName" class="form-label">Customer Name</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Customer"
+                id="cName"
+                ng-model="cName"
+              />
             </div>
-
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="mob" class="form-label">Mobile No</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Mob"
+                id="mob"
+                ng-model="mob"
+              />
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="form-label">Cash / Credit</label>
+              <div class="button-switch">
+                <input
+                  type="checkbox"
+                  id="switch-blue"
+                  class="switch"
+                  ng-checked="true"
+                  ng-model="cashCredit"
+                />
+                <label for="switch-blue" class="lbl-off">credit</label>
+                <label for="switch-blue" class="lbl-on">cash</label>
+              </div>
+            </div>
+          </div>
         </div>
+      </form>
     </div>
+  </div>
 
+  <br />
+
+  <div class="card">
+    <div class="card-header">
+      <i class="fas fa-table mr-1"></i>
+      Add Items
+    </div>
+    <div class="card-body">
+      <form ng-submit="addItem()" id="item-form">
+        <div class="row">
+          <div class="col-3">
+            <div class="form-group">
+              <label for="item" class="form-label">Item Name</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Item"
+                id="itemName"
+                ng-model="item"
+                autocomplete="off"
+              />
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="brand" class="form-label">Brand</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Brand"
+                id="brand"
+                ng-model="brand"
+                autocomplete="off"
+                ng-disabled="true"
+              />
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="sellingPrice" class="form-label"
+                >Selling Price <span ng-if="unit">Per {{unit}}</span></label
+              >
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Selling Price"
+                id="sellingPrice"
+                step="any"
+                ng-model="sellingPrice"
+                min="0"
+                ng-change="calculateItem()"
+              />
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="qty" class="form-label"
+                >Qty<span ng-if="stock">
+                  &nbsp;<b>({{stock}} in stock)</b></span
+                ></label
+              >
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Qty"
+                id="qty"
+                ng-model="qty"
+                min="0"
+                ng-change="calculateItem()"
+              />
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="gst" class="form-label">GST</label>
+              <select
+                class="form-control"
+                id="sel1"
+                ng-model="gst"
+                ng-change="calculateItem()"
+              >
+                <option ng-selected="true" ng-disabled="true" value="">
+                  Select GST
+                </option>
+                <option
+                  ng-repeat="gst in allGst track by $index"
+                  value="{{gst.percentage}}"
+                >
+                  {{gst.percentage}} %
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="taxAmount" class="form-label">Tax Amount</label>
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Tax Amount"
+                step="any"
+                id="taxAmount"
+                ng-model="taxAmount"
+                min="0"
+                ng-disabled="true"
+              />
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="discount" class="form-label">Discount</label>
+              <input
+                type="number"
+                class="form-control"
+                placeholder="discount"
+                step="any"
+                id="discount"
+                ng-model="discount"
+                ng-change="calculateItem()"
+                min="0"
+              />
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="itemTotalAmount" class="form-label"
+                >Total Amount</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Total Amount"
+                step="any"
+                id="itemTotalAmount"
+                ng-model="itemTotalAmount"
+                min="0"
+                ng-disabled="true"
+              />
+            </div>
+          </div>
+          <div class="col-12" style="text-align: center">
+            <button class="btn btn-primary" type="submit">Add Item</button>
+            <button
+              type="submit"
+              class="btn btn-danger"
+              onClick="function test(){ document.getElementById('itemName').value = ''; $('#itemName').keyup();} test(); return false;"
+            >
+              Clear
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="card mb-4">
+    <div class="card-header">
+      <i class="fas fa-table mr-1"></i>
+      All Items
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table
+          class="table table-bordered bordered table-striped table-condensed datatable"
+          datatable="ng"
+          dt-options="vm.dtOptions"
+        >
+          <thead>
+            <tr>
+              <th class="table-th-font">Item</th>
+              <th class="table-th-font">Brand</th>
+              <th class="table-th-font">Unit</th>
+              <th class="table-th-font">Selling Price</th>
+              <th class="table-th-font">GST</th>
+              <th class="table-th-font">Qty</th>
+              <th class="table-th-font">Tax Amount</th>
+              <th class="table-th-font">Discount</th>
+              <th class="table-th-font">Total</th>
+              <th class="table-th-font">Delete</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr ng-repeat="item in addedItems track by $index">
+              <td>{{item.item}}</td>
+              <td>{{item.brand}}</td>
+              <td>{{item.unit}}</td>
+              <td>{{item.sellingPrice}}</td>
+              <td>{{item.gst}}</td>
+              <td>{{item.qty}}</td>
+              <td>{{item.taxAmount}}</td>
+              <td>{{item.discount}}</td>
+              <td>{{item.itemTotalAmount}}</td>
+              <td
+                style="text-align: center"
+                class="poiner"
+                ng-click="deleteItem($index)"
+              >
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-6">
+          <div class="row">
+            <div class="col-3">Total Tax:</div>
+            <div class="col-6">
+              <input
+                type="number"
+                step="any"
+                class="form-control"
+                ng-model="totalTaxAmount"
+                ng-disabled="true"
+              />
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-3">Paid:</div>
+            <div class="col-6">
+              <input
+                type="number"
+                step="any"
+                class="form-control"
+                placeholder="Paid Amount"
+                ng-model="paid"
+                ng-change="changeInPaid()"
+              />
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-3">Balance:</div>
+            <div class="col-6">
+              <input
+                type="number"
+                step="any"
+                class="form-control"
+                placeholder="Balance"
+                ng-disabled="true"
+                ng-model="balance"
+              />
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-3">Remarks:</div>
+            <div class="col-6">
+              <textarea
+                class="form-control"
+                rows="1"
+                ng-model="remarks"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="row">
+            <div class="col-6 right-align-coloumn">Net Amount:</div>
+            <div class="col-4">
+              <input
+                type="number"
+                class="form-control"
+                step="any"
+                ng-model="netAmount"
+                min="0"
+                ng-disabled="true"
+              />
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-6 right-align-coloumn">Discount:</div>
+            <div class="col-4">
+              <input
+                type="number"
+                class="form-control"
+                step="any"
+                ng-model="totalDiscount"
+                min="0"
+                ng-change="changeInDiscount()"
+              />
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-6 right-align-coloumn grand-total-label">
+              Grant Total:
+            </div>
+            <div class="col-4">
+              <input
+                type="number"
+                class="form-control grand-total-box"
+                placeholder="Grant Total"
+                step="any"
+                ng-model="grandTotal"
+                min="0"
+                ng-disabled="true"
+              />
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-6 right-align-coloumn">Round off:</div>
+            <div class="col-4">
+              <input
+                type="number"
+                class="form-control"
+                step="any"
+                ng-model="roundOf"
+                min="0"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br /><br />
+
+      <div class="row">
+        <div class="col-12" style="text-align: center">
+          <button type="submit" class="btn btn-danger" ng-click="refresh()">
+            Cancel
+          </button>
+          <button
+            class="btn btn-primary"
+            type="button"
+            ng-click="submitInvoice()"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
- 

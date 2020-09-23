@@ -10,7 +10,7 @@ $cName = $myData->cName;
 $mob = $myData->mob;
 $address = $myData->address;
 
-$sql = "INSERT INTO customer_master VALUES ('$cId', '$cName', '$mob', '$address')";
+$sql = "INSERT INTO customer_master (c_id, c_name, mob, address) VALUES ('$cId', '$cName', '$mob', '$address')";
 
 $flag = FALSE;
 if ($conn->query($sql) === TRUE) {
