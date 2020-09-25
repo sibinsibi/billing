@@ -29,7 +29,7 @@
     <script src="js/angular-datatables.js"></script>
     <script src="js/jquery.dataTables.min.js"></script>
     <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"
+      src="js/html2pdf.bundle.min.js"
       integrity="sha512-pdCVFUWsxl1A4g0uV6fyJ3nrnTGeWnZN2Tl/56j45UvZ1OMdm9CIbctuIHj+yBIRTUUyv6I9+OivXj4i0LPEYA=="
       crossorigin="anonymous"
     ></script>
@@ -134,7 +134,8 @@
               >
                 <nav class="sb-sidenav-menu-nested nav">
                   <a class="nav-link" href="#!newSale">New Sales</a>
-                  <a class="nav-link" href="#!allSales">All Sales</a>
+                  <a class="nav-link" href="#!allSales">All Sales</a
+                  ><a class="nav-link" href="#!reprint">Print Invoice</a>
                 </nav>
               </div>
 
@@ -290,5 +291,7 @@
     <script src="controller/company.js"></script>
     <script src="controller/newSales.js"></script>
     <script src="controller/invoice.js"></script>
+    <script src="controller/reprint.js"></script>
+    <script src="controller/allSales.js"></script>
   </body>
 </html>

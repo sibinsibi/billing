@@ -4,7 +4,8 @@ app.controller("newSalesCtrl", function (
   $http,
   $cookies,
   $route,
-  $rootScope
+  $rootScope,
+  $location
 ) {
   !$cookies.get("username") ? (window.location.href = "index.html") : "";
 
@@ -322,8 +323,8 @@ app.controller("newSalesCtrl", function (
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
     })
       .then((res) => {
-        alert("Added Successfully");
-        window.location.reload();
+        $rootScope.loader = false;
+        $location.url("/invoice/" + $scope.invoiceNo);
       })
       .catch((error) => {
         alert("Something went wrong");

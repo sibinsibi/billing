@@ -1,5 +1,5 @@
-var app = angular.module("allPurchase", ["ngCookies", "datatables"]);
-app.controller("allPurchaseCtrl", function (
+var app = angular.module("allSales", ["ngCookies", "datatables"]);
+app.controller("allSalesCtrl", function (
   $scope,
   $http,
   $cookies,
@@ -8,13 +8,13 @@ app.controller("allPurchaseCtrl", function (
 ) {
   !$cookies.get("username") ? (window.location.href = "index.html") : "";
 
-  $scope.allPurchases = [];
+  $scope.allSales = [];
 
-  $("#sName").autocomplete({
-    source: "./server/purchase/getAllSupplier.php",
+  $("#cName").autocomplete({
+    source: "./server/sales/getAllCustomer.php",
     select: function (event, data) {
-      let sId = data.item.id;
-      getAllPurchase(sId, "supplier");
+      let cId = data.item.id;
+      getAllPurchase(cId, "customer");
     },
   });
 
@@ -27,8 +27,8 @@ app.controller("allPurchaseCtrl", function (
   const getAllPurchase = (id, flag, startDate, endDate) => {
     let formData, postData;
 
-    if (flag == "supplier") {
-      formData = { sId: id, flag: flag };
+    if (flag == "customer") {
+      formData = { cId: id, flag: flag };
       postData = "myData=" + JSON.stringify(formData);
     }
     if (flag == "Date") {
@@ -39,41 +39,41 @@ app.controller("allPurchaseCtrl", function (
     $rootScope.loader = true;
     $http({
       method: "POST",
-      url: "./server/purchase/getAllPurchase.php",
+      url: "./server/sales/getAllSales.php",
       data: postData,
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
     })
       .then((res) => {
         if (res.data.length) {
-          $scope.allPurchases = res.data;
+          $scope.allSales = res.data;
         } else {
           alert("Not Found");
-          $scope.allPurchases = [];
+          $scope.allSales = [];
         }
         $rootScope.loader = false;
       })
       .catch((error) => {
         alert("Something went wrong");
         $rootScope.loader = false;
-        $scope.allPurchases = [];
+        $scope.allSales = [];
       });
   };
 
-  $scope.openModalShowItems = (vNo) => {
-    let formData = { vNo: vNo };
+  $scope.openModalShowItems = (iNo) => {
+    let formData = { iNo: iNo };
     let postData = "myData=" + JSON.stringify(formData);
-    $scope.allPurchasesItems = [];
+    $scope.allSalesItems = [];
 
     $rootScope.loader = true;
     $http({
       method: "POST",
-      url: "./server/purchase/getPurchaseItems.php",
+      url: "./server/sales/getSalesItems.php",
       data: postData,
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
     })
       .then((res) => {
         if (res.data.length) {
-          $scope.allPurchasesItems = res.data;
+          $scope.allSalesItems = res.data;
           $("#items").modal();
         } else {
           alert("Not Found");

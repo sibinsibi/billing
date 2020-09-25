@@ -9,9 +9,9 @@
             </td>
 
             <td>
-              Invoice #: 123<br />
-              Created: January 1, 2015<br />
-              Cash Bill
+              Invoice #: {{bill.invoice_no}}<br />
+              Created: {{bill.invoice_date}}<br />
+              {{bill.cash_credit | uppercase }} &nbsp; Bill
             </td>
           </tr>
         </table>
@@ -23,8 +23,8 @@
         <table>
           <tr>
             <td>
-              Customer: Sparksuite, Inc.<br />
-              Mob: 9898989898<br />
+              Customer: {{bill.c_name}}<br />
+              Mob: {{bill.mob}}<br />
             </td>
             <td>
               Mob: {{company.mob}}<br />
@@ -39,6 +39,9 @@
   <table class="table items">
     <thead>
       <tr class="th-row">
+        <th>
+          <b class="font">No</b>
+        </th>
         <th>
           <b class="font">Item</b>
         </th>
@@ -66,25 +69,16 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="no-border">
-        <td class="no-border">Samsung Galaxy</td>
-        <td class="no-border">Samsung Galaxy</td>
-        <td class="no-border">Samsung Galaxy</td>
-        <td class="no-border">Samsung Galaxy</td>
-        <td class="no-border">Samsung Galaxy</td>
-        <td class="no-border">Samsung Galaxy</td>
-        <td class="no-border">Samsung Galaxy</td>
-        <td class="no-border">Samsung Galaxy</td>
-      </tr>
-      <tr class="no-border">
-        <td class="no-border">Samsung Galaxy</td>
-        <td class="no-border">Samsung Galaxy</td>
-        <td class="no-border">Samsung Galaxy</td>
-        <td class="no-border">Samsung Galaxy</td>
-        <td class="no-border">Samsung Galaxy</td>
-        <td class="no-border">Samsung Galaxy</td>
-        <td class="no-border">Samsung Galaxy</td>
-        <td class="no-border">Samsung Galaxy</td>
+      <tr class="no-border" ng-repeat="item in items track by $index">
+        <td class="no-border">{{$index + 1}}</td>
+        <td class="no-border" style="text-align: left">{{item.item}}</td>
+        <td class="no-border">{{item.brand}}</td>
+        <td class="no-border">{{item.selling_price}}</td>
+        <td class="no-border">{{item.qty}}</td>
+        <td class="no-border">{{item.gst}}</td>
+        <td class="no-border">{{item.tax_amount}}</td>
+        <td class="no-border">{{item.discount}}</td>
+        <td class="no-border">{{item.total}}</td>
       </tr>
       <tr>
         <td class="text-right">
@@ -95,18 +89,18 @@
         </td>
         <td>
           <p>
-            <strong> 500 </strong>
+            <strong> {{bill.total_tax}} </strong>
           </p>
           <p>
-            <strong> 82,900</strong>
+            <strong> {{bill.paid}} </strong>
           </p>
           <p>
-            <strong> 3,000 </strong>
+            <strong> {{bill.balance}} </strong>
           </p>
         </td>
         <td></td>
         <td></td>
-        <td class="text-right" colspan="3">
+        <td class="text-right" colspan="4">
           <p><strong>Net Amount:</strong></p>
           <p><strong>Discount: </strong></p>
           <p><strong>Grand Total: </strong></p>
@@ -114,21 +108,21 @@
         </td>
         <td>
           <p>
-            <strong> 500 </strong>
+            <strong> {{bill.net_amount}} </strong>
           </p>
           <p>
-            <strong> 82,900</strong>
+            <strong> {{bill.discount}} </strong>
           </p>
           <p>
-            <strong> 3,000 </strong>
+            <strong> {{bill.grand_total}} </strong>
           </p>
           <p>
-            <strong> 79,900</strong>
+            <strong> {{bill.round_off}} </strong>
           </p>
         </td>
       </tr>
       <tr style="color: #f81d2d">
-        <td colspan="4"><strong>two thousand five hundred </strong></td>
+        <td colspan="5"><strong> Sign:</strong></td>
         <td></td>
         <td></td>
         <td class="text-right">
@@ -136,17 +130,25 @@
         </td>
         <td class="text-left">
           <h4>
-            <strong> 79,900 </strong>
+            <strong> {{bill.round_off}} </strong>
           </h4>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="9" style="text-align: center; border: 0px">
+          <strong> Thank You </strong>
         </td>
       </tr>
     </tbody>
   </table>
+</div>
+<div class="container">
   <div class="row">
-    <button class="print" onclick="generatePDF()">Download as PDF</button>
+    <button class="btn btn-primary print" onclick="generatePDF()">
+      <i class="fa fa-print" aria-hidden="true"></i>
+    </button>
   </div>
 </div>
-
 <style>
   .print {
     margin: auto !important;
@@ -202,7 +204,8 @@
   .invoice-box table tr.top table td.title {
     font-size: 45px;
     line-height: 45px;
-    color: #333;
+    text-transform: uppercase;
+    font-family: "Poppins", sans-serif;
   }
 
   .invoice-box table tr.information table td {

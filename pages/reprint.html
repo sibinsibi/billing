@@ -1,0 +1,25 @@
+<div class="container-fluid">
+  <h1 class="mt-4">Print Invoice</h1>
+  <div class="card">
+    <div class="card-body">
+      <form ng-submit="getInvoice()">
+        <div class="row">
+          <div class="col-4">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                ng-model="invoiceNo"
+                placeholder="Invoice No"
+                 style="text-transform:uppercase"
+              />
+            </div>
+          </div>
+          <div class="col-6">
+            <button type="submit" class="btn btn-primary">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

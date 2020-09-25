@@ -15,6 +15,8 @@ var app = angular
     "company",
     "newSales",
     "invoice",
+    "reprint",
+    "allSales",
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -73,6 +75,14 @@ var app = angular
       .when("/invoice/:id", {
         templateUrl: "pages/invoice.html",
         controller: "invoiceCtrl",
+      })
+      .when("/reprint", {
+        templateUrl: "pages/reprint.html",
+        controller: "reprintCtrl",
+      })
+      .when("/allSales", {
+        templateUrl: "pages/allSales.html",
+        controller: "allSalesCtrl",
       });
   });
 app.run(function ($rootScope, $cookies, $window, $route, $http) {

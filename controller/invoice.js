@@ -1,18 +1,39 @@
 var app = angular.module("invoice", ["ngCookies", "datatables"]);
-app.controller("invoiceCtrl", function ($scope, $http, $cookies, $route) {
+app.controller("invoiceCtrl", function (
+  $scope,
+  $http,
+  $cookies,
+  $route,
+  $routeParams,
+  $rootScope
+) {
   !$cookies.get("username") ? (window.location.href = "index.html") : "";
-  console.log("dd");
-  $http
-    .get("./server/brand/getAllBrand.php")
+
+  let invoice = $routeParams.id;
+  $rootScope.loader = true;
+
+  var formData = { invoiceNo: invoice };
+  var postData = "myData=" + JSON.stringify(formData);
+  $http({
+    method: "POST",
+    url: "./server/invoice/getInvoice.php",
+    data: postData,
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  })
     .then((res) => {
       if (res.data.records.length) {
-        $scope.allBrands = res.data.records;
-        let lastBrand = $scope.allBrands[$scope.allBrands.length - 1].brand_id;
-        lastBrandId = parseInt(lastBrand.match(/\d+/g)[0]);
-        lastBrandId++;
+        $scope.bill = res.data.records[0][0];
+        $scope.bill.invoice_date = moment($scope.bill.invoice_date).format(
+          "DD-MM-YYYY"
+        );
+        $scope.items = res.data.records[1];
+      } else {
+        alert("Details not available");
       }
+      $rootScope.loader = false;
     })
     .catch((error) => {
-      console.log(error);
+      $rootScope.loader = false;
+      alert("Something went wrong");
     });
 });
