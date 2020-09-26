@@ -19,8 +19,17 @@ app.controller("allStockCtrl", function ($scope, $http, $cookies, $route) {
       $scope.selectedItem = data.item;
     },
   });
+  $("#itemName").on("change keyup copy paste cut", () => {
+    if (!$("#itemName").val()) {
+      $scope.selectedItem = "";
+    }
+  });
 
   $scope.addNewStock = () => {
+    if (!$scope.selectedItem) {
+      alert("Select item from list");
+      return;
+    }
     if (!$scope.itemName) {
       alert("Enter item");
       return;
@@ -65,7 +74,7 @@ app.controller("allStockCtrl", function ($scope, $http, $cookies, $route) {
   };
 
   $scope.updateStock = () => {
-    if (!$scope.updatedStock.stock) {
+    if (!$scope.updatedStock.stock1) {
       alert("Enter Stock");
       return;
     }
@@ -73,7 +82,7 @@ app.controller("allStockCtrl", function ($scope, $http, $cookies, $route) {
     if (confirm("Are you sure!")) {
       let formData = {
         itemId: $scope.updatedStock.item_id,
-        stock: $scope.updatedStock.stock,
+        stock: $scope.updatedStock.stock1,
       };
       let postData = "myData=" + JSON.stringify(formData);
       $http({

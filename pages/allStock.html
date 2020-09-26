@@ -65,12 +65,12 @@
           <tbody>
             <tr
               ng-repeat="stock in allStock track by $index"
-              ng-style="stock.stock < 5 ? {'background': 'red'} : ''"
+              ng-style="stock.stock < 5 ? {'background': 'yellow'} : (stock.stock = 0 ? {'background': 'red'} : '')"
             >
               <td>{{stock.item_id}}</td>
               <td>{{stock.item_name}}</td>
               <td>{{stock.brand}}</td>
-              <td>{{stock.stock}}</td>
+              <td>{{stock.stock1}}</td>
               <td
                 style="text-align: center"
                 class="poiner"
@@ -103,7 +103,7 @@
               <input
                 type="text"
                 class="form-control"
-                ng-model="updatedStock.stock"
+                ng-model="updatedStock.stock1"
                 placeholder="Stock"
               />
             </div>

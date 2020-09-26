@@ -12,7 +12,8 @@ while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
   $outp .= '{"item_id":"'  . $rs["item_id"] . '",';
   $outp .= '"item_name":"'  . $rs["item_name"] . '",';
   $outp .= '"brand":"'  . $rs["brand"] . '",';
-  $outp .= '"stock":"'  . $rs["stock"] . '"}';
+  $outp .= '"stock1":"'  . $rs["stock"] . '"}';
+
 }
 $outp ='{"records":['.$outp.']}';
 $conn->close();
