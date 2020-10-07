@@ -14,12 +14,26 @@ app.controller("itemCtrl", function (
   let lastItemId = "";
   $http
     .get("./server/item/getAllItem.php")
-    .then((res) => {
+    .then(async (res) => {
       if (res.data.records.length) {
         $scope.allItems = res.data.records;
         let lastItem = $scope.allItems[$scope.allItems.length - 1].item_id;
         lastItemId = parseInt(lastItem.match(/\d+/g)[0]);
         lastItemId++;
+
+        for (let i = 0; i < $scope.allItems.length; i++) {
+          let item = $scope.allItems[i];
+          let formData = { itemId: item.item_id };
+          let postData = "myData=" + JSON.stringify(formData);
+          const check = await $http({
+            method: "POST",
+            url: "./server/item/checkItemForDeleteEdit.php",
+            data: postData,
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          });
+          $scope.allItems[i].flag = check.data.flag;
+        }
+        console.log($scope.allItems);
       }
     })
     .catch((error) => {
@@ -147,7 +161,12 @@ app.controller("itemCtrl", function (
       });
   };
 
-  $scope.deleteItem = (id) => {
+  $scope.deleteItem = (item) => {
+    if (!item.flag) {
+      alert("You  Can't Delete");
+      return;
+    }
+    let id = item.item_id;
     if (confirm("Are you sure!")) {
       let formData = { itemId: id };
       let postData = "myData=" + JSON.stringify(formData);
@@ -174,6 +193,10 @@ app.controller("itemCtrl", function (
   };
 
   $scope.openModalUpdateItem = (item) => {
+    if (!item.flag) {
+      alert("Not editable");
+      return;
+    }
     $("#updateItem").modal();
     const items = item;
     items.unit_price = parseFloat(parseFloat(items.unit_price).toFixed(2));

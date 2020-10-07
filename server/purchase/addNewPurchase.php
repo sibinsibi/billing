@@ -65,8 +65,6 @@ foreach($items as $i){
     $discount = $i->discount;
     $itemTotalAmount = $i->itemTotalAmount;
 
-    $sql = "INSERT INTO purchase_details VALUES ('$voucherNo', '$item', '$brand', '$sellingPrice', '$purchaseRate', '$qty', '$gst', '$taxAmount', '$discount', '$itemTotalAmount')";
-    $conn->query($sql);
 
     $sql2 = "SELECT brand_name from brand_master where brand_name = '$brand'";
     $result = $conn->query($sql2);
@@ -114,6 +112,9 @@ foreach($items as $i){
             $id = $rs['item_id'];
         }
     }
+
+    $sql = "INSERT INTO purchase_details VALUES ('$voucherNo', '$id' ,'$item', '$brand', '$sellingPrice', '$purchaseRate', '$qty', '$gst', '$taxAmount', '$discount', '$itemTotalAmount')";
+    $conn->query($sql);
 
     $sql6 = "SELECT * from stock_master where item_id = '$id' ORDER BY id DESC LIMIT 1";
     $result = $conn->query($sql6);

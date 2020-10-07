@@ -1,154 +1,242 @@
-
 <div class="container-fluid">
   <div class="row">
     <div class="col-6">
       <h5 class="mt-4">Items</h5>
     </div>
     <div class="col-6 item-head">
-        <a class="mt-4" href="#!priceDetails"> GOTO Price Detalis</a>
+      <a class="mt-4" href="#!priceDetails"> GOTO Price Detalis</a>
     </div>
   </div>
-    <div class="card">
-        <div class="card-body">
-          <form ng-submit="addItem()">
-
-            <div class="row">
-
-                <div class="col-3">
-                    <div class="form-group">
-                    <input type="text" class="form-control" ng-model="newItem" placeholder="Item Name" id="newItem">
-                  </div>
-                </div>
-                <div class="col-3">
-                    <div class="form-group">
-                    <input type="text" class="form-control"  ng-model="brand" id="brands" placeholder="Brand"/>
-
-                  </div>
-                </div>
-                <div class="col-3">
-                  <div class="form-group">
-                    <select class="form-control" id="sel1" ng-model="gst">
-                      <option ng-selected="true" ng-disabled="true" value="">Select GST</option>
-                      <option ng-repeat="gst in allGst track by $index" value="{{gst.percentage}}">{{gst.percentage}} %</option>
-                    </select>
-                </div>
-              </div>
-                <div class="col-3">
-                    <div class="form-group">
-                      <select class="form-control" id="unit" ng-model="unit">
-                        <option ng-selected="true" value="">Nil</option>
-                        <option ng-repeat="unit in allUnits track by $index" value="{{unit}}">{{unit}}</option>
-                      </select>
-                  </div>
-                </div>
-                <!-- <div class="col-3" ng-if="unit">
+  <div class="card">
+    <div class="card-body">
+      <form ng-submit="addItem()">
+        <div class="row">
+          <div class="col-3">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                ng-model="newItem"
+                placeholder="Item Name"
+                id="newItem"
+              />
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                ng-model="brand"
+                id="brands"
+                placeholder="Brand"
+              />
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <select class="form-control" id="sel1" ng-model="gst">
+                <option ng-selected="true" ng-disabled="true" value="">
+                  Select GST
+                </option>
+                <option
+                  ng-repeat="gst in allGst track by $index"
+                  value="{{gst.percentage}}"
+                >
+                  {{gst.percentage}} %
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <select class="form-control" id="unit" ng-model="unit">
+                <option ng-selected="true" value="">Nil</option>
+                <option
+                  ng-repeat="unit in allUnits track by $index"
+                  value="{{unit}}"
+                >
+                  {{unit}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <!-- <div class="col-3" ng-if="unit">
                   <div class="form-group">
                       <label for="unitPrice" class="form-label">Unit Price (for selling)</label>
                       <input type="number" class="form-control" placeholder="Unit Price" step="any" id="unitPrice" ng-model="unitPrice" min="0">
                     </div>
                 </div> -->
-                <div class="col-3">
-                  <div class="form-group">
-                      <label for="sellingPrice" class="form-label">Selling Price <span ng-if="unit">Per Unit</span></label>
-                      <input type="number" class="form-control" placeholder="Selling Price" step="any" id="sellingPrice" ng-model="sellingPrice" min="0">
-                    </div>
-                </div>
-                <div class="col-3">
-                  <div class="form-group">
-                      <label for="purchaseRate" class="form-label">Purchase Rate <span ng-if="unit">Per Unit</span></label>
-                      <input type="number" class="form-control" placeholder="Purchase Rate" step="any" id="purchaseRate" ng-model="purchaseRate" min="0">
-                    </div>
-                </div>  
-                <div class="col-3">
-                  <div class="form-group">
-                      <label for="discount" class="form-label">Discount</label>
-                      <input type="number" class="form-control" placeholder="Discount" step="any" id="discount" ng-model="discount" min="0">
-                    </div>
-                </div>           
-                <div class="col-12 align-items-center text-center">
-                    <button type="submit" class="btn btn-primary">Add</button>
-                </div>
-              </div>
-            </form>
-
-        </div>
-      </div>
-   <br>
-    <div class="card mb-4">
-        <div class="card-header">
-            <i class="fas fa-table mr-1"></i>
-            All Items
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered bordered table-striped table-condensed datatable"  datatable="ng" dt-options="vm.dtOptions">
-                    <thead>
-                        <tr>
-                            <th>Item Code</th>
-                            <th>Item Name</th>
-                            <th>Brand</th>
-                            <th>Unit</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                  
-                    <tbody>
-                        <tr ng-repeat="item in allItems track by $index">
-                            <td>{{item.item_id}}</td>
-                            <td>{{item.item_name}}</td>
-                            <td>{{item.brand}}</td>
-                            <td>{{item.unit}}</td>
-                            <td  style="text-align: center;" class="poiner" ng-click="openModalUpdateItem(item)"><i class="fa fa-edit" aria-hidden="true"></i></td>                  
-                            <td style="text-align: center;" class="poiner" ng-click="deleteItem(item.item_id)"><i class="fa fa-trash" aria-hidden="true"></i></td>                  
-                        </tr>
-                    </tbody>
-                </table>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="sellingPrice" class="form-label"
+                >Selling Price <span ng-if="unit">Per Unit</span></label
+              >
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Selling Price"
+                step="any"
+                id="sellingPrice"
+                ng-model="sellingPrice"
+                min="0"
+              />
             </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="purchaseRate" class="form-label"
+                >Purchase Rate <span ng-if="unit">Per Unit</span></label
+              >
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Purchase Rate"
+                step="any"
+                id="purchaseRate"
+                ng-model="purchaseRate"
+                min="0"
+              />
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="discount" class="form-label">Discount Amount</label>
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Discount Amount"
+                step="any"
+                id="discount"
+                ng-model="discount"
+                min="0"
+              />
+            </div>
+          </div>
+          <div class="col-12 align-items-center text-center">
+            <button type="submit" class="btn btn-primary">Add</button>
+          </div>
         </div>
+      </form>
     </div>
-</div>
+  </div>
+  <br />
+  <div class="card mb-4">
+    <div class="card-header">
+      <i class="fas fa-table mr-1"></i>
+      All Items
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table
+          class="table table-bordered bordered table-striped table-condensed datatable"
+          datatable="ng"
+          dt-options="vm.dtOptions"
+        >
+          <thead>
+            <tr>
+              <th>Item Code</th>
+              <th>Item Name</th>
+              <th>Brand</th>
+              <th>Unit</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
 
-<div class="modal fade" id="updateItem">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Update Item : {{updatedItem.item_name}}</h4>
-          <button type="button" class="close" data-dismiss="modal">×</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-            <div class="row">
-                <div class="col-12">
-                    <div class="form-group">
-                    <input type="text" class="form-control" ng-model="updatedItem.item_name" placeholder="Item Name">
-                  </div>
-                  <div class="form-group">
-                    <input type="text" class="form-control" id="update-brand" ng-model="updatedItem.brand" ng-keyup="getBrands('update-brand')" placeholder="Brand Name">
-                  </div>
-                  <div class="form-group">
-                    <select class="form-control" id="update-unit"  ng-model="updatedItem.unit">
-                      <option ng-selected="true" value="">Nil</option>
-                      <option ng-repeat="unit in allUnits track by $index" value="{{unit}}" ng-selected="unit === updatedItem.unit">{{unit}}</option>
-                    </select>
-                  </div>
-                  <!-- <div class="form-group" ng-if="updatedItem.unit">
-                    <label for="updatedUnitPrice" class="form-label">Unit Price</label>
-                    <input type="number" class="form-control" placeholder="Unit Price" id="updatedUnitPrice" step="any" ng-model="updatedItem.unit_price" min="0">
-                  </div> -->
-                </div>
-            </div>
-        </div>
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" ng-click="updateItem()">Save</button>
-        </div>
-        
+          <tbody>
+            <tr ng-repeat="item in allItems track by $index">
+              <td>{{item.item_id}}</td>
+              <td>{{item.item_name}}</td>
+              <td>{{item.brand}}</td>
+              <td>{{item.unit}}</td>
+              <td
+                style="text-align: center"
+                class="poiner"
+                ng-click="openModalUpdateItem(item)"
+                ng-style="item.flag == false ? {'background': 'red'} : ''"
+              >
+                <a class="fa fa-edit" aria-hidden="true"></a>
+              </td>
+              <td
+                style="text-align: center"
+                class="poiner"
+                ng-click="deleteItem(item)"
+                ng-style="item.flag == false ? {'background': 'red'} : ''"
+              >
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
-  
+</div>
+
+<div class="modal fade" id="updateItem">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Update Item : {{updatedItem.item_name}}</h4>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                ng-model="updatedItem.item_name"
+                placeholder="Item Name"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                id="update-brand"
+                ng-model="updatedItem.brand"
+                ng-keyup="getBrands('update-brand')"
+                placeholder="Brand Name"
+              />
+            </div>
+            <div class="form-group">
+              <select
+                class="form-control"
+                id="update-unit"
+                ng-model="updatedItem.unit"
+              >
+                <option ng-selected="true" value="">Nil</option>
+                <option
+                  ng-repeat="unit in allUnits track by $index"
+                  value="{{unit}}"
+                  ng-selected="unit === updatedItem.unit"
+                >
+                  {{unit}}
+                </option>
+              </select>
+            </div>
+            <!-- <div class="form-group" ng-if="updatedItem.unit">
+                    <label for="updatedUnitPrice" class="form-label">Unit Price</label>
+                    <input type="number" class="form-control" placeholder="Unit Price" id="updatedUnitPrice" step="any" ng-model="updatedItem.unit_price" min="0">
+                  </div> -->
+          </div>
+        </div>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-primary" ng-click="updateItem()">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
