@@ -114,7 +114,14 @@ app.run(function ($rootScope, $cookies, $window, $route, $http) {
     $window.location.href = "index.html";
   };
 
-  $rootScope.refresh = () => {
-    $route.reload();
+  $rootScope.backup = () => {
+    $http
+      .get("./server/backup/backup.php")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 });
