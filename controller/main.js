@@ -115,13 +115,15 @@ app.run(function ($rootScope, $cookies, $window, $route, $http) {
   };
 
   $rootScope.backup = () => {
+    $rootScope.loader = true;
     $http
       .get("./server/backup/backup.php")
       .then((res) => {
-        console.log(res);
+        alert('Success, Stored at "wamp/www/startup/server/backup"')
+        window.location.reload();
       })
       .catch((error) => {
-        console.log(error);
+        alert('Error, Try again')
       });
   };
 });
