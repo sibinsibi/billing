@@ -62,18 +62,49 @@
     
     </div>
   </div>
+  
   <div class="row">
     <div class="col-md-6">
+      <div class="weather-panel row" ng-if="weather">
+        <div class="col-md-6 city">
+          <h2>Thalassery<br><small>{{d1 | date : "fullDate"}}</small></h2>
+        </div>
+        <div class="col-md-6 text-left">
+          <div class="h3 temperature">
+            <span>{{weather.main.temp}}°</span>
+          </div>
+        </div>
       </div>
-        
+    </div>
   </div>
+      
+    
 
 </div>
 
 
 
 <style>
-  
+  .city { 
+        padding-left: 6em;
+  }
+  .main {
+  margin-top: 50px;
+}
+.weather-panel {
+  color: #fff;
+}
+.weather-panel small {
+  color: inherit;
+  font-size: 50%;
+}
+.weather-panel ul.forecast > li {
+  border-top: 1px solid #fff;
+}
+.weather-panel .temperature > span {
+  font-size: 2em;
+}
+
 .clock {
   font-family: "Droid Serif", serif;
   display: inline-block;

@@ -210,6 +210,19 @@ function setClockHands(second, minute, hour){
     
 		before = new Date();
 	}, interval);
-}
+  }
+  
+const link = `https://api.openweathermap.org/data/2.5/weather?q=thalassery&units=metric&apikey=893d7bc682891485e567afd5f4e062f0`
+$scope.weather = ''
+  $http
+      .get(link)
+    .then((res) => {
+      $scope.weather = res.data;
+      })
+      .catch((error) => {
+        $scope.weather = ''
+      });
+
+
 
 })

@@ -101,6 +101,7 @@ app.run(function ($rootScope, $cookies, $window, $route, $http) {
     });
 
   $rootScope.d = moment().format("DD/MM/YYYY");
+  $rootScope.d1 = new Date()
   $rootScope.t = moment().format("h:mm:ss a");
 
   setInterval(() => {
