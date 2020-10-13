@@ -92,6 +92,7 @@ app.controller("newPurchaseCtrl", function (
       $scope.sellingPrice = parseFloat($scope.selectedItem.selling_price);
       $scope.unitPrice = parseFloat($scope.selectedItem.unit_price);
       $scope.gst = $scope.selectedItem.gst;
+
       $scope.discount = parseFloat($scope.selectedItem.discount);
 
       $scope.brand = $scope.selectedItem.brand;

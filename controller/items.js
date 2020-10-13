@@ -96,10 +96,10 @@ app.controller("itemCtrl", function (
       alert("Enter all data");
       return;
     }
-    if (!$scope.gst || isNaN(parseInt($scope.gst))) {
-      alert("Select GST");
-      return;
-    }
+    // if (!$scope.gst || isNaN(parseInt($scope.gst))) {
+    //   alert("Select GST");
+    //   return;
+    // }
 
     $scope.newItem.trim();
     $scope.newItem =
@@ -121,12 +121,16 @@ app.controller("itemCtrl", function (
     $scope.discount
       ? ($scope.discount = $scope.discount)
       : ($scope.discount = 0);
+    
+    $scope.gst
+      ? ($scope.gst = parseFloat($scope.gst))
+      : ($scope.discount = null);
 
     let formData = {
       newItem: $scope.newItem,
       brand: $scope.brand,
       unit: $scope.unit,
-      gst: parseFloat($scope.gst),
+      gst: $scope.gst,
       unitPrice: parseFloat($scope.unitPrice).toFixed(2),
       purchaseRate: parseFloat($scope.purchaseRate).toFixed(2),
       sellingPrice: parseFloat($scope.sellingPrice).toFixed(2),

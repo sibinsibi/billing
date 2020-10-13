@@ -52,6 +52,9 @@ if(mysqli_num_rows($result) == 0){
 
 }
 
+$sql7 = "INSERT INTO stock_master (item_id, item_name, brand, stock) VALUES ('$itemId', '$newItem', '$brand', 0)";
+$result = $conn->query($sql7);
+
 $res = array('flag' => $flag && $flag1);
 $conn->close();
 echo json_encode($res);

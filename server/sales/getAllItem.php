@@ -5,7 +5,12 @@ include("../config.php");
 
 $searchTerm = $_GET['term']; 
 
-$sql = "SELECT * FROM item_master INNER JOIN item_price_details ON item_master.item_id = item_price_details.item_id INNER JOIN stock_master ON item_price_details.item_id = stock_master.item_id";
+// $sql = "SELECT * FROM item_master INNER JOIN item_price_details ON item_master.item_id = item_price_details.item_id INNER JOIN stock_master ON item_price_details.item_id = stock_master.item_id";
+
+// $sql = "SELECT * FROM item_master,item_price_details,stock_master WHERE item_name LIKE '%".$searchTerm."%' AND item_master.item_id = item_price_details.item_id AND item_master.item_id = stock_master.item_id";
+// $sql = "SELECT * FROM item_master,item_price_details,stock_master WHERE item_master.item_name LIKE '%".$searchTerm."%' AND item_master.item_id=item_price_details.item_id=stock_master.item_id AND item_master.item_name=item_price_details.name=stock_master.item_name";
+$sql = "SELECT * FROM item_master,item_price_details,stock_master WHERE item_master.item_name LIKE '%".$searchTerm."%' AND item_master.item_id=item_price_details.item_id AND item_master.item_id=stock_master.item_id";
+
 $result = $conn->query($sql);
 
 $allData = array(); 
