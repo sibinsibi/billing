@@ -10,7 +10,7 @@ $sName = $myData->sName;
 $mob = $myData->mob;
 $gstNo = $myData->gstNo;
 
-$sql = "INSERT INTO supplier_master VALUES ('$sId', '$sName', '$mob', '$gstNo')";
+$sql = "INSERT INTO supplier_master (s_id, s_name, mob, gst_no) VALUES ('$sId', '$sName', '$mob', '$gstNo')";
 
 $flag = FALSE;
 if ($conn->query($sql) === TRUE) {
