@@ -17,6 +17,9 @@ var app = angular
     "invoice",
     "reprint",
     "allSales",
+    'allCreditBillsPurchase',
+    'pendingCreditBillsPurchase',
+    'pendingCreditBillPurchase'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -83,6 +86,18 @@ var app = angular
       .when("/allSales", {
         templateUrl: "pages/allSales.html",
         controller: "allSalesCtrl",
+      })
+      .when("/allCreditBillsPurchase", {
+        templateUrl: "pages/allCreditBillsPurchase.html",
+        controller: "allCreditBillsPurchaseCtrl",
+      })
+      .when("/pendingCreditBillsPurchase", {
+        templateUrl: "pages/pendingCreditBillsPurchase.html",
+        controller: "pendingCreditBillsPurchaseCtrl",
+      })
+      .when("/pendingCreditBillPurchase/:id", {
+        templateUrl: "pages/pendingCreditBillPurchase.html",
+        controller: "pendingCreditBillPurchaseCtrl",
       });
   });
 app.run(function ($rootScope, $cookies, $window, $route, $http) {

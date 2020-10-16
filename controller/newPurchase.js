@@ -300,6 +300,16 @@ app.controller("newPurchaseCtrl", function (
       return;
     }
 
+    if ($scope.balance != 0 && $scope.cashCredit) {
+      alert('Select Credit when balance non zero');
+      return;
+    }
+
+    if (!$scope.cashCredit && $scope.balance == 0) {
+      alert('Balance should be greater than zero for credit bills');
+      return;
+    }
+
     $rootScope.loader = true;
 
     $scope.cashCredit

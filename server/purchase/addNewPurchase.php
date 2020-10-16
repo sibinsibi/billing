@@ -49,6 +49,11 @@ $transactionCompleted = $myData->transactionCompleted;
 $sql = "INSERT INTO purchase_master (voucher_no, voucher_date, invoice_no, invoice_date, s_id, s_name, cash_credit, net_amount, total_tax, discount, grand_total, round_off, paid, balance, remarks, transaction_completed) VALUES ('$voucherNo', '$voucherDate', '$invoiceNo', '$invoiceDate', '$sId', '$sName', '$cashCredit', '$netAmount', '$totalTaxAmount', '$totalDiscount', '$grandTotal', '$roundOf', '$paid', '$balance', '$remarks', '$transactionCompleted')";
 $conn->query($sql);
 
+if($balance != 0) {
+    $sql = "INSERT INTO pruchase_credit_master (invoice_no, invoice_date, s_id, s_name, total_amount, paid, balance, status) VALUES ('$invoiceNo', '$invoiceDate', '$sId', '$sName', '$grandTotal', '$paid', '$balance', 'pending')";
+    $conn->query($sql);
+}
+
 $items = $myData->items;
 
 foreach($items as $i){

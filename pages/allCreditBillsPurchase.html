@@ -1,0 +1,127 @@
+<div class="container-fluid">
+  <h1 class="mt-4">All Credit Bills (Purchase)</h1>
+  <div class="row">
+    <div class="col-3">
+      <div class="card">
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="sName" class="form-label">Supplier Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="sName"
+                    ng-model="sName"
+                    placeholder="Supplier Name"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="card">
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-5">
+                    <div class="form-group">
+                      <label for="startDate" class="form-label"
+                        >Start Date</label
+                      >
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="startDate"
+                        ng-model="startDate"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-5">
+                    <div class="form-group">
+                      <label for="endDate" class="form-label">End Date</label>
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="endDate"
+                        ng-model="endDate"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-group">
+                      <button
+                        type="button"
+                        class="btn btn-primary button-margin-top-purchase"
+                        ng-click="getPurchaseByDate()"
+                      >
+                        Get
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <div class="card mb-4">
+    <div class="card-header">
+      <i class="fas fa-table mr-1"></i>
+      Bill Details
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table
+          class="table table-bordered bordered table-striped table-condensed datatable"
+          datatable="ng"
+          dt-options="vm.dtOptions"
+        >
+          <thead>
+            <tr>
+              <th>Invoice No</th>
+              <th>Invoice Date</th>
+              <th>Supplier</th>
+              <th>Total Amount</th>
+              <th>Paid</th>
+              <th>Balance</th>
+              <th>Status</th>
+              <th>Edit</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr ng-repeat="purchase in allPurchases track by $index" ng-style="purchase.status == 'pending' ? {'background': 'red', 'color': 'white'} : ''">
+              <td>{{purchase.invoice_no}}</td>
+              <td>{{purchase.invoice_date}}</td>
+              <td>{{purchase.s_name}}</td>
+              <td>{{purchase.total_amount}}</td>
+              <td>{{purchase.paid}}</td>
+              <td>{{purchase.balance}}</td>
+              <td>{{purchase.status}}</td>
+              <td
+                style="text-align: center"
+                class="poiner"
+                ng-click="openModalShowItems(purchase.invoice_no)"
+              >
+                <i class="fa fa-edit" aria-hidden="true"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
