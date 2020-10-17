@@ -4,7 +4,8 @@ app.controller("allCreditBillsPurchaseCtrl", function (
   $http,
   $cookies,
   $route,
-  $rootScope
+  $rootScope,
+  $window
 ) {
   !$cookies.get("username") ? (window.location.href = "index.html") : "";
 
@@ -58,4 +59,7 @@ app.controller("allCreditBillsPurchaseCtrl", function (
         $scope.allPurchases = [];
       });
   };
+   $scope.open = (id) => {
+      $window.open('#!pendingCreditBillPurchase/' + id, '_blank');
+  }
 });

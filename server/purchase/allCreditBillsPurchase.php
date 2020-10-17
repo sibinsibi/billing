@@ -10,18 +10,19 @@ $flag  = $myData->flag;
 $sql = '';
 if($flag == 'supplier'){
     $sId = $myData->sId;
-    $sql = "SELECT * FROM pruchase_credit_master WHERE s_id = '$sId'";
+    $sql = "SELECT * FROM purchase_credit_master WHERE s_id = '$sId'";
 }
 if($flag == 'Date'){
     $startDate = $myData->startDate;
     $endDate = $myData->endDate;
-    $sql = "SELECT * FROM pruchase_credit_master WHERE invoice_date BETWEEN '$startDate' AND '$endDate'";
+    $sql = "SELECT * FROM purchase_credit_master WHERE invoice_date BETWEEN '$startDate' AND '$endDate'";
 }
 
 $result = $conn->query($sql);
 
 $allData = array(); 
 while($row = $result->fetch_assoc()){ 
+    $data['voucher_no'] = $row['voucher_no'];
     $data['invoice_no'] = $row['invoice_no'];
     $data['invoice_date'] = $row['invoice_date'];
     $data['s_id'] = $row['s_id'];

@@ -90,6 +90,7 @@
         >
           <thead>
             <tr>
+              <th>Voucher No</th>
               <th>Invoice No</th>
               <th>Invoice Date</th>
               <th>Supplier</th>
@@ -103,6 +104,7 @@
 
           <tbody>
             <tr ng-repeat="purchase in allPurchases track by $index" ng-style="purchase.status == 'pending' ? {'background': 'red', 'color': 'white'} : ''">
+              <td>{{purchase.voucher_no}}</td>
               <td>{{purchase.invoice_no}}</td>
               <td>{{purchase.invoice_date}}</td>
               <td>{{purchase.s_name}}</td>
@@ -113,7 +115,7 @@
               <td
                 style="text-align: center"
                 class="poiner"
-                ng-click="openModalShowItems(purchase.invoice_no)"
+                ng-click="open(purchase.voucher_no)"
               >
                 <i class="fa fa-edit" aria-hidden="true"></i>
               </td>

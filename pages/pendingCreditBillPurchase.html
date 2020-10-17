@@ -1,0 +1,62 @@
+<div class="container-fluid">
+    <h1 class="mt-4">Update Amount</h1> 
+    <small> <b>(Voucher No: {{voucher_no}}) </b></small>&nbsp;<small><b>(Invoice No: {{allCredits[0].invoice_no}})</b></small><br><br>
+    <div class="card">
+        <div class="card-body">
+            <form>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <input type="number" class="form-control" ng-model="amount" id="amount"
+                                placeholder="Amount" />
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <button type="button" class="btn btn-primary" ng-click="addCreditAmount()">
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br />
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+            Transactions
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered bordered table-striped table-condensed datatable" datatable="ng"
+                    dt-options="vm.dtOptions">
+                    <thead>
+                        <tr>
+                            <th>Voucher No</th>
+                            <th>Invoice No</th>
+                            <th>Date</th>
+                            <th>Total Amount</th>
+                            <th>Paid</th>
+                            <th>Balance</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr ng-repeat="credit in allCredits track by $index">
+                            <td>{{credit.voucher_no}}</td>
+                            <td>{{credit.invoice_no}}</td>
+                            <td>{{credit.credit_date}}</td>
+                            <td>{{credit.total_amount}}</td>
+                            <td>{{credit.paid}}</td>
+                            <td>{{credit.balance}}</td>
+                            <td style="text-align: center" class="poiner" ng-click="openModalUpdateStock(stock)">
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

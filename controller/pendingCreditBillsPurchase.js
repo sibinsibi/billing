@@ -21,8 +21,8 @@ app.controller("pendingCreditBillsPurchaseCtrl", function (
         console.log(error)
         $rootScope.loader = false;
       });
+  
   $scope.open = (id) => {
-          $window.open('#!pendingCreditBillPurchase/' + id, '_blank');
-
+      $window.open('#!pendingCreditBillPurchase/' + id, '_blank');
   }
 });
