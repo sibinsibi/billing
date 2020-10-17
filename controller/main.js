@@ -141,5 +141,5 @@ app.run(function ($rootScope, $cookies, $window, $route, $http) {
       .catch((error) => {
         alert('Error, Try again')
       });
-  };
+  };  
 });

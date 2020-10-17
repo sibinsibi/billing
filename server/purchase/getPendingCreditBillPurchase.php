@@ -7,7 +7,7 @@ $myData = json_decode($_POST["myData"]);
 
 $voucherNo  = $myData->voucherNo;
 
-$sql = "SELECT * FROM purchase_credit_operations WHERE voucher_no = '$voucherNo'";
+$sql = "SELECT * FROM purchase_credit_operations WHERE voucher_no = '$voucherNo' ORDER BY credit_order ASC ";
 $result = $conn->query($sql);
 
 $allData = array(); 
