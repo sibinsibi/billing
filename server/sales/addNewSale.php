@@ -14,15 +14,21 @@ $mob = $myData->mob;
 
 if($cId == "" && $mob != ""){
 
+    $id = "";
     $sql3 = "SELECT * from customer_master ORDER BY id DESC LIMIT 1";
     $result = $conn->query($sql3);
-    while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
-        $id = $rs['c_id'];
-    }
-    preg_match_all('/([\d]+)/', $id, $match);
-    $id = (double)$match[0][0];
-    $id = $id + 1;
-    $id = 'CTR'.$id;
+            if(mysqli_num_rows($result) == 0){
+                $id = "CTR1";
+                
+            }else{
+                while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
+                    $id = $rs['c_id'];
+                }
+                preg_match_all('/([\d]+)/', $id, $match);
+                $id = (double)$match[0][0];
+                $id = $id + 1;
+                $id = 'CTR'.$id;
+            }
 
     $cId = $id;
 

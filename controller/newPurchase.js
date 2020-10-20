@@ -127,9 +127,14 @@ app.controller("newPurchaseCtrl", function (
   });
 
   $scope.calculateItem = () => {
-    if ($scope.qty && $scope.purchaseRate && $scope.gst) {
-      $scope.taxAmount =
+    if ($scope.qty && $scope.purchaseRate) {
+      if ($scope.gst) {
+         $scope.taxAmount =
         $scope.purchaseRate * $scope.qty * (parseFloat($scope.gst) / 100);
+      } else {
+        $scope.taxAmount = 0;
+      }
+     
       $scope.taxAmount = parseFloat($scope.taxAmount.toFixed(2));
       $scope.itemTotalAmount =
         $scope.purchaseRate * $scope.qty + $scope.taxAmount - $scope.discount;
@@ -155,10 +160,10 @@ app.controller("newPurchaseCtrl", function (
       alert("Enter Purchase Rate");
       return;
     }
-    if (!$scope.gst) {
-      alert("Select GST");
-      return;
-    }
+    // if (!$scope.gst) {
+    //   alert("Select GST");
+    //   return;
+    // }
     if (!$scope.qty || $scope.qty == 0) {
       alert("Enter Qty");
       return;
@@ -168,12 +173,16 @@ app.controller("newPurchaseCtrl", function (
 
     obj.item = $scope.item;
     obj.brand = $scope.brand;
-    obj.unit = $scope.unit;
+    obj.unit = $scope.unit ? $scope.unit = $scope.unit : $scope.unit = '';
     // obj.unitPrice = $scope.unitPrice;
     obj.unitPrice = 0;
     obj.sellingPrice = $scope.sellingPrice;
     obj.purchaseRate = $scope.purchaseRate;
-    obj.gst = parseFloat($scope.gst);
+    obj.gst = '';
+    if ($scope.gst) {
+      obj.gst = parseFloat($scope.gst);
+    }
+    
     obj.qty = $scope.qty;
     obj.taxAmount = $scope.taxAmount;
     obj.discount = $scope.discount;

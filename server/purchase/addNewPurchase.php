@@ -17,16 +17,21 @@ $mob = $myData->mob;
 
 if($sId == ""){
 
+    $id= "";
     $sql3 = "SELECT * from supplier_master ORDER BY id DESC LIMIT 1";
     $result = $conn->query($sql3);
-    while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
-        $id = $rs['s_id'];
-    }
-    preg_match_all('/([\d]+)/', $id, $match);
-    $id = (double)$match[0][0];
-    $id = $id + 1;
-    $id = 'SPR'.$id;
-
+        if(mysqli_num_rows($result) == 0){
+            $id = "SPR1";
+        }else{
+             while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
+                $id = $rs['s_id'];
+            }
+             preg_match_all('/([\d]+)/', $id, $match);
+            $id = (double)$match[0][0];
+            $id = $id + 1;
+            $id = 'SPR'.$id;
+        }
+   
     $sId = $id;
 
     $sql4 = "INSERT INTO supplier_master (s_id, s_name, mob, gst_no) VALUES ('$sId', '$sName', '$mob', '$gstNo')";
@@ -78,18 +83,24 @@ foreach($items as $i){
     $result = $conn->query($sql2);
 
     if(mysqli_num_rows($result) == 0){
-        $sql3 = "SELECT *from brand_master ORDER BY id DESC LIMIT 1";
-        $result = $conn->query($sql3);
-        while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
-            $id = $rs['brand_id'];
+         $sql3 = "SELECT * from brand_master ORDER BY id DESC LIMIT 1";
+    $result = $conn->query($sql3);
+    $id = '';
+
+    if(mysqli_num_rows($result) == 0){
+        $id = 'BRD1'; 
+    }else{
+         while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
+        $id = $rs['brand_id'];
         }
-        preg_match_all('/([\d]+)/', $id, $match);
-        $id = (double)$match[0][0];
-        $id = $id + 1;
-        $id = 'BRD'.$id;
-        
-        $sql4 = "INSERT INTO brand_master (brand_id, brand_name) VALUES ('$id', '$brand')";
-        $conn->query($sql4);
+            preg_match_all('/([\d]+)/', $id, $match);
+            $id = (double)$match[0][0];
+            $id = $id + 1;
+            $id = 'BRD'.$id;
+    }
+    
+    $sql4 = "INSERT INTO brand_master (brand_id, brand_name) VALUES ('$id', '$brand')";
+    $conn->query($sql4);
     }
 
     $sql2 = "SELECT * from item_price_details where name = '$item' AND brand = '$brand' AND selling_price = '$sellingPrice'";

@@ -101,12 +101,18 @@ app.controller("newSalesCtrl", function (
   });
 
   $scope.calculateItem = () => {
-    if ($scope.qty && $scope.sellingPrice && $scope.gst) {
-      $scope.taxAmount =
+    if ($scope.qty && $scope.sellingPrice) {
+      if ($scope.gst) {
+         $scope.taxAmount =
         $scope.sellingPrice * $scope.qty * (parseFloat($scope.gst) / 100);
+      }
+      else {
+        $scope.taxAmount = 0;
+      }
+     
       $scope.taxAmount = parseFloat($scope.taxAmount.toFixed(2));
       $scope.itemTotalAmount =
-        $scope.sellingPrice * $scope.qty + $scope.taxAmount - $scope.discount;
+        ($scope.sellingPrice * $scope.qty) + $scope.taxAmount - $scope.discount;
       $scope.itemTotalAmount = parseFloat($scope.itemTotalAmount.toFixed(2));
     }
   };
@@ -137,10 +143,10 @@ app.controller("newSalesCtrl", function (
       alert("Enter Selling Price");
       return;
     }
-    if (!$scope.gst) {
-      alert("Select GST");
-      return;
-    }
+    // if (!$scope.gst) {
+    //   alert("Select GST");
+    //   return;
+    // }
     if (!$scope.qty || $scope.qty == 0) {
       alert("Enter Qty");
       return;
@@ -151,7 +157,7 @@ app.controller("newSalesCtrl", function (
     obj.item = $scope.item;
     obj.itemId = $scope.selectedItem.id;
     obj.brand = $scope.brand;
-    obj.unit = $scope.unit;
+    obj.unit = $scope.unit ? $scope.unit = $scope.unit : $scope.unit = '';
     // obj.unitPrice = $scope.unitPrice;
     obj.unitPrice = 0;
     obj.sellingPrice = $scope.sellingPrice;
@@ -213,6 +219,7 @@ app.controller("newSalesCtrl", function (
   $scope.remarks = "";
 
   $scope.calculateTotalPrice = () => {
+    console.log($scope.addedItems)
     $scope.totalTaxAmount = 0;
     $scope.totalDiscount = 0;
     $scope.netAmount = 0;
@@ -230,7 +237,7 @@ app.controller("newSalesCtrl", function (
           ($scope.totalDiscount + item.discount).toFixed(2)
         );
         $scope.netAmount = parseFloat(
-          ($scope.netAmount + item.sellingPrice).toFixed(2)
+          ($scope.netAmount + item.itemTotalAmount).toFixed(2)
         );
         $scope.grandTotal = parseFloat(
           (
