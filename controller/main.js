@@ -142,4 +142,23 @@ app.run(function ($rootScope, $cookies, $window, $route, $http) {
         alert('Error, Try again')
       });
   };  
+
+  $rootScope.clearData = () => {
+    let code = prompt("Only for admins. Enter code to proceed!");
+    if (code == 'admin123') {
+        $rootScope.loader = true;
+    $http
+      .get("./server/backup/clear.php")
+      .then((res) => {
+        window.location.reload();
+      })
+      .catch((error) => {
+        alert('Error, Try again')
+         window.location.reload();
+      });
+
+    }else{
+      alert('Wrong code')
+    }
+  }
 });
