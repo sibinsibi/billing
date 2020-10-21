@@ -30,11 +30,14 @@
     <link rel="stylesheet" href="css/jquery.dataTables.min.css" />
     <script src="js/angular-datatables.js"></script>
     <script src="js/jquery.dataTables.min.js"></script>
+
     <script
       src="js/html2pdf.bundle.min.js"
       integrity="sha512-pdCVFUWsxl1A4g0uV6fyJ3nrnTGeWnZN2Tl/56j45UvZ1OMdm9CIbctuIHj+yBIRTUUyv6I9+OivXj4i0LPEYA=="
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
   </head>
   <body class="sb-nav-fixed sb-sidenav-toggled" ng-app="myApp">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -65,7 +68,7 @@
           style="cursor: pointer"
           ng-click="clearData()"
         >
-          <i class="fa fa-thermometer-empty" aria-hidden="true"></i>
+          <i class="fa fa-thermometer-empty backup-icon" aria-hidden="true"></i>
         </div>
       </form>
       <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">

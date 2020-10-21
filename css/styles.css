@@ -10823,21 +10823,23 @@ body {
 .button-margin-top-purchase {
   margin-top: 30px;
 }
-.company-form{
+.company-form {
   margin-left: 25%;
-    margin-right: 25%;
-    width: 50%;
+  margin-right: 25%;
+  width: 50%;
 }
 
 .dashboard {
-  background: url("../img/lake.jpg")no-repeat center center fixed;
+  background: url("../img/lake.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   height: 100vh;
-
 }
-.logo-main{ 
-  width: 4%
+.logo-main {
+  width: 4%;
+}
+.backup-icon {
+  color: #b3aaaa;
 }
