@@ -3,7 +3,6 @@ app.controller("newSalesCtrl", function (
   $scope,
   $http,
   $cookies,
-  $route,
   $rootScope,
   $location
 ) {
@@ -12,6 +11,7 @@ app.controller("newSalesCtrl", function (
   $scope.qty = 1;
   $scope.discount = 0;
   $scope.cId = "";
+  $scope.billedBy = $rootScope.loginUser
 
   $http
     .get("./server/sales/getSid.php")
@@ -161,7 +161,10 @@ app.controller("newSalesCtrl", function (
     // obj.unitPrice = $scope.unitPrice;
     obj.unitPrice = 0;
     obj.sellingPrice = $scope.sellingPrice;
-    obj.gst = parseFloat($scope.gst);
+    obj.gst = '';
+    if ($scope.gst) {
+      obj.gst = parseFloat($scope.gst);
+    }
     obj.qty = $scope.qty;
     obj.taxAmount = $scope.taxAmount;
     obj.discount = $scope.discount;
@@ -219,7 +222,6 @@ app.controller("newSalesCtrl", function (
   $scope.remarks = "";
 
   $scope.calculateTotalPrice = () => {
-    console.log($scope.addedItems)
     $scope.totalTaxAmount = 0;
     $scope.totalDiscount = 0;
     $scope.netAmount = 0;
@@ -319,6 +321,7 @@ app.controller("newSalesCtrl", function (
         : ($scope.remarks = ""),
       transactionCompleted: $scope.balance == 0 ? true : false,
       items: $scope.addedItems,
+      billedBy: $scope.billedBy ? $scope.billedBy = $scope.billedBy : $scope.billedBy = ''
     };
 
     let postData = "myData=" + JSON.stringify(formData);

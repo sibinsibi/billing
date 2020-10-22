@@ -50,8 +50,9 @@ $paid = $myData->paid;
 $balance = $myData->balance;
 $remarks = $myData->remarks;
 $transactionCompleted = $myData->transactionCompleted;
+$billedBy = $myData->billedBy;
 
-$sql = "INSERT INTO purchase_master (voucher_no, voucher_date, invoice_no, invoice_date, s_id, s_name, cash_credit, net_amount, total_tax, discount, grand_total, round_off, paid, balance, remarks, transaction_completed) VALUES ('$voucherNo', '$voucherDate', '$invoiceNo', '$invoiceDate', '$sId', '$sName', '$cashCredit', '$netAmount', '$totalTaxAmount', '$totalDiscount', '$grandTotal', '$roundOf', '$paid', '$balance', '$remarks', '$transactionCompleted')";
+$sql = "INSERT INTO purchase_master (voucher_no, voucher_date, invoice_no, invoice_date, s_id, s_name, cash_credit, net_amount, total_tax, discount, grand_total, round_off, paid, balance, remarks, transaction_completed, billedby) VALUES ('$voucherNo', '$voucherDate', '$invoiceNo', '$invoiceDate', '$sId', '$sName', '$cashCredit', '$netAmount', '$totalTaxAmount', '$totalDiscount', '$grandTotal', '$roundOf', '$paid', '$balance', '$remarks', '$transactionCompleted', '$billedBy')";
 $conn->query($sql);
 
 if($balance != 0) {
@@ -83,42 +84,49 @@ foreach($items as $i){
     $result = $conn->query($sql2);
 
     if(mysqli_num_rows($result) == 0){
-         $sql3 = "SELECT * from brand_master ORDER BY id DESC LIMIT 1";
-    $result = $conn->query($sql3);
-    $id = '';
+        $sql3 = "SELECT * from brand_master ORDER BY id DESC LIMIT 1";
+        $result = $conn->query($sql3);
+        $id = '';
 
-    if(mysqli_num_rows($result) == 0){
-        $id = 'BRD1'; 
-    }else{
-         while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
-        $id = $rs['brand_id'];
-        }
+        if(mysqli_num_rows($result) == 0){
+            $id = 'BRD1'; 
+        }else{
+            while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
+                $id = $rs['brand_id'];
+            }
             preg_match_all('/([\d]+)/', $id, $match);
             $id = (double)$match[0][0];
             $id = $id + 1;
             $id = 'BRD'.$id;
-    }
+        }
+        
+        $sql4 = "INSERT INTO brand_master (brand_id, brand_name) VALUES ('$id', '$brand')";
+        $conn->query($sql4);
     
-    $sql4 = "INSERT INTO brand_master (brand_id, brand_name) VALUES ('$id', '$brand')";
-    $conn->query($sql4);
     }
 
     $sql2 = "SELECT * from item_price_details where name = '$item' AND brand = '$brand' AND selling_price = '$sellingPrice'";
     $result = $conn->query($sql2);
 
-    $id = '';
-
+    $id = ''; //item id
     if(mysqli_num_rows($result) == 0){
 
         $sql3 = "SELECT * from item_master ORDER BY id DESC LIMIT 1";
         $result = $conn->query($sql3);
-        while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
-            $id = $rs['item_id'];
+
+        if(mysqli_num_rows($result) == 0){
+             $id = 'ITM1';
         }
-        preg_match_all('/([\d]+)/', $id, $match);
-        $id = (double)$match[0][0];
-        $id = $id + 1;
-        $id = 'ITM'.$id;
+        else{
+            while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
+                $id = $rs['item_id'];
+            }
+            preg_match_all('/([\d]+)/', $id, $match);
+            $id = (double)$match[0][0];
+            $id = $id + 1;
+            $id = 'ITM'.$id;
+        }
+       
         
         $sql4 = "INSERT INTO item_master (item_id, item_name, brand, unit, unit_price) VALUES ('$id', '$item', '$brand', '$unit', '$unitPrice')";
         $conn->query($sql4);
@@ -145,12 +153,12 @@ foreach($items as $i){
     }
     else{
             
-            $rs = $result->fetch_array(MYSQLI_ASSOC);
-            $stock = $rs['stock'];
-            $stock = $stock + $qty;
+        $rs = $result->fetch_array(MYSQLI_ASSOC);
+        $stock = $rs['stock'];
+        $stock = $stock + $qty;
 
-            $sql8 = "UPDATE stock_master SET stock = '$stock' WHERE item_id = '$id'";
-            $result = $conn->query($sql8);
+        $sql8 = "UPDATE stock_master SET stock = '$stock' WHERE item_id = '$id'";
+        $result = $conn->query($sql8);
     }
 
 }

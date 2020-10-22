@@ -101,12 +101,38 @@ app.controller("pendingCreditBillPurchaseCtrl", function (
           window.location.reload();            
         }
         else{
-            alert('Failed, try again!!')
-            window.location.reload();
+          alert('Failed, try again!!')
+          window.location.reload();
         }
     }).catch((error) => {
         alert('Something went wrong')
-    });
-      
+    });      
   }
+
+    $scope.deleteTransaction = (index, amount) => {
+      if (confirm("Are you sure!")) {
+
+        let formData = { deleteIndex:  index, amount:  amount, voucherNo: $scope.voucher_no };
+            let postData = 'myData='+JSON.stringify(formData);
+            $http({
+                method : 'POST',
+                url : './server/purchase/updateTransaction.php',
+                data: postData,
+                headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then((res) => {
+                if(res.data.flag){
+                    alert('Updated Successfully');
+                    window.location.reload();
+                }
+                else{
+                    alert('Failed, try again!!')
+                    window.location.reload();
+                }
+            }).catch((error) => {
+                alert('Something went wrong' + error)
+                $route.reload();
+            });
+
+      }
+    }
 });

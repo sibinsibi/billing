@@ -12,6 +12,8 @@ app.controller("newPurchaseCtrl", function (
 
   $scope.qty = 1;
   $scope.discount = 0;
+  $scope.billedBy = $rootScope.loginUser
+
 
   $http
     .get("./server/purchase/getPid.php")
@@ -143,7 +145,7 @@ app.controller("newPurchaseCtrl", function (
   };
 
   $scope.addedItems = [];
-  $scope.addItem = () => {
+  $scope.addItem = async () => {
     if (!$scope.item) {
       alert("Enter Item");
       return;
@@ -190,7 +192,7 @@ app.controller("newPurchaseCtrl", function (
 
     $scope.addedItems.push(obj);
 
-    $scope.$applyAsync(() => {
+    $scope.$applyAsync(async () => {
       $scope.item = "";
       $scope.brand = "";
       $scope.unit = "";
@@ -205,16 +207,18 @@ app.controller("newPurchaseCtrl", function (
       $scope.selectedItem = "";
       $("#itemName").focus();
 
-      setTimeout(() => {
-        $scope.calculateTotalPrice();
-      }, 100);
+      // setTimeout(() => {
+      //   $scope.calculateTotalPrice();
+      // }, 100);
+        
+      await $scope.calculateTotalPrice();
     });
   };
 
-  $scope.deleteItem = (index) => {
+  $scope.deleteItem = async (index) => {
     if (confirm("Are you sure!")) {
       $scope.addedItems.splice(index, 1);
-      $scope.calculateTotalPrice();
+      await $scope.calculateTotalPrice();
     }
   };
 
@@ -227,7 +231,7 @@ app.controller("newPurchaseCtrl", function (
   $scope.balance = 0;
   $scope.remarks = "";
 
-  $scope.calculateTotalPrice = () => {
+  $scope.calculateTotalPrice = async () => {
     $scope.totalTaxAmount = 0;
     $scope.totalDiscount = 0;
     $scope.netAmount = 0;
@@ -245,7 +249,7 @@ app.controller("newPurchaseCtrl", function (
           ($scope.totalDiscount + item.discount).toFixed(2)
         );
         $scope.netAmount = parseFloat(
-          ($scope.netAmount + item.purchaseRate).toFixed(2)
+          ($scope.netAmount + (item.purchaseRate * item.qty)).toFixed(2)
         );
         $scope.grandTotal = parseFloat(
           (
@@ -349,6 +353,8 @@ app.controller("newPurchaseCtrl", function (
         : ($scope.remarks = ""),
       transactionCompleted: $scope.balance == 0 ? true : false,
       items: $scope.addedItems,
+      billedBy: $scope.billedBy ? $scope.billedBy = $scope.billedBy : $scope.billedBy = ''
+
     };
 
     let postData = "myData=" + JSON.stringify(formData);

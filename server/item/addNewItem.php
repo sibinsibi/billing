@@ -44,13 +44,13 @@ if(mysqli_num_rows($result) == 0){
     if(mysqli_num_rows($result) == 0){
         $id = 'BRD1'; 
     }else{
-         while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
-        $id = $rs['brand_id'];
+        while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
+            $id = $rs['brand_id'];
         }
-            preg_match_all('/([\d]+)/', $id, $match);
-            $id = (double)$match[0][0];
-            $id = $id + 1;
-            $id = 'BRD'.$id;
+        preg_match_all('/([\d]+)/', $id, $match);
+        $id = (double)$match[0][0];
+        $id = $id + 1;
+        $id = 'BRD'.$id;
     }
     
     $sql4 = "INSERT INTO brand_master (brand_id, brand_name) VALUES ('$id', '$brand')";

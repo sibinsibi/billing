@@ -122,8 +122,8 @@
           </p>
         </td>
       </tr>
-      <tr style="color: #f81d2d">
-        <td colspan="5"><strong> Sign:</strong></td>
+      <tr>
+        <td colspan="5"><strong> By: {{bill.billedby}}</strong></td>
         <td></td>
         <td></td>
         <td class="text-right">
@@ -145,7 +145,7 @@
 </div>
 <div class="container">
   <div class="row">
-    <button class="btn btn-primary print" onclick="generatePDF()">
+    <button class="btn btn-primary print" ng-click="generatePDF()">
       <i class="fa fa-print" aria-hidden="true"></i>
     </button>
   </div>
@@ -265,11 +265,4 @@
     text-align: left;
   }
 </style>
-<script>
-  function generatePDF() {
-    // Choose the element that our invoice is rendered in.
-    const element = document.getElementById("invoice");
-    // Choose the element and save the PDF for our user.
-    html2pdf().from(element).save();
-  }
-</script>
+

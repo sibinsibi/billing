@@ -48,15 +48,15 @@
                     </thead>
 
                     <tbody>
-                        <tr ng-repeat="credit in allCredits track by $index">
+                        <tr ng-repeat="credit in allCredits track by $index" >
                             <td>{{credit.voucher_no}}</td>
                             <td>{{credit.invoice_no}}</td>
                             <td>{{credit.credit_date}}</td>
                             <td>{{credit.total_amount}}</td>
                             <td>{{credit.paid}}</td>
                             <td>{{credit.balance}}</td>
-                            <td style="text-align: center" class="poiner" ng-click="openModalUpdateStock(stock)">
-                                <i class="fa fa-edit" aria-hidden="true"></i>
+                            <td style="text-align: center" class="poiner" ng-click="deleteTransaction(credit.credit_order, credit.paid)">
+                                <i class="fa fa-trash" aria-hidden="true" ng-show="credit.credit_order != 0"></i>
                             </td>
                         </tr>
                     </tbody>

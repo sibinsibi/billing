@@ -20,6 +20,9 @@ $conn->query($sql);
 if($completed){
     $sql = "UPDATE purchase_credit_master SET status = 'completed' WHERE voucher_no = '$voucherNo'";
     $conn->query($sql);
+
+    $sql = "UPDATE purchase_master SET transaction_completed = true WHERE voucher_no = '$voucherNo'";
+    $conn->query($sql);
 }
 $res = array('flag' => true);
 $conn->close();

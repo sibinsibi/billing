@@ -17,18 +17,18 @@ if($cId == "" && $mob != ""){
     $id = "";
     $sql3 = "SELECT * from customer_master ORDER BY id DESC LIMIT 1";
     $result = $conn->query($sql3);
-            if(mysqli_num_rows($result) == 0){
-                $id = "CTR1";
-                
-            }else{
-                while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
-                    $id = $rs['c_id'];
-                }
-                preg_match_all('/([\d]+)/', $id, $match);
-                $id = (double)$match[0][0];
-                $id = $id + 1;
-                $id = 'CTR'.$id;
-            }
+    if(mysqli_num_rows($result) == 0){
+        $id = "CTR1";
+        
+    }else{
+        while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
+            $id = $rs['c_id'];
+        }
+        preg_match_all('/([\d]+)/', $id, $match);
+        $id = (double)$match[0][0];
+        $id = $id + 1;
+        $id = 'CTR'.$id;
+    }
 
     $cId = $id;
 
@@ -48,8 +48,9 @@ $paid = $myData->paid;
 $balance = $myData->balance;
 $remarks = $myData->remarks;
 $transactionCompleted = $myData->transactionCompleted;
+$billedBy = $myData->billedBy;
 
-$sql = "INSERT INTO sales_master (invoice_no, invoice_date, c_id, c_name, cash_credit, net_amount, total_tax, discount, grand_total, round_off, paid, balance, remarks, transaction_completed) VALUES ('$invoiceNo', '$invoiceDate', '$cId', '$cName', '$cashCredit', '$netAmount', '$totalTaxAmount', '$totalDiscount', '$grandTotal', '$roundOf', '$paid', '$balance', '$remarks', '$transactionCompleted')";
+$sql = "INSERT INTO sales_master (invoice_no, invoice_date, c_id, c_name, cash_credit, net_amount, total_tax, discount, grand_total, round_off, paid, balance, remarks, transaction_completed, billedby) VALUES ('$invoiceNo', '$invoiceDate', '$cId', '$cName', '$cashCredit', '$netAmount', '$totalTaxAmount', '$totalDiscount', '$grandTotal', '$roundOf', '$paid', '$balance', '$remarks', '$transactionCompleted', '$billedBy')";
 $conn->query($sql);
 
 $items = $myData->items;

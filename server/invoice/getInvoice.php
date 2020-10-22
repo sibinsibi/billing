@@ -25,6 +25,7 @@ while($row = $result->fetch_assoc()){
     $data['paid'] = $row['paid'];
     $data['balance'] = $row['balance'];
     $data['remarks'] = $row['remarks'];
+    $data['billedby'] = $row['billedby'];
     array_push($allData, $data);
 } 
 
