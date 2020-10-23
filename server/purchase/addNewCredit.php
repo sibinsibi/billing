@@ -5,7 +5,6 @@ include("../config.php");
 
 $myData = json_decode($_POST["myData"]);
 
-$creditOrder  = $myData->creditOrder;
 $voucherNo = $myData->voucherNo;
 $invoiceNo  = $myData->invoiceNo;
 $creditDate  = $myData->creditDate;
@@ -14,7 +13,14 @@ $paid  = $myData->paid;
 $balance  = $myData->balance;
 $completed  = $myData->completed;
 
-$sql = "INSERT INTO purchase_credit_operations (credit_order, credit_date, voucher_no, invoice_no, total_amount, paid, balance) VALUES ('$creditOrder', '$creditDate', '$voucherNo', '$invoiceNo', '$totalAmount', '$paid', '$balance')";
+$sql = "SELECT * FROM purchase_credit_operations WHERE voucher_no = '$voucherNo' ORDER BY credit_order DESC LIMIT 1";
+$result = $conn->query($sql);
+
+$rs = $result->fetch_array(MYSQLI_ASSOC);
+$credit_order = $rs['credit_order'];
+$credit_order = $credit_order + 1;
+
+$sql = "INSERT INTO purchase_credit_operations (credit_order, credit_date, voucher_no, invoice_no, total_amount, paid, balance) VALUES ('$credit_order', '$creditDate', '$voucherNo', '$invoiceNo', '$totalAmount', '$paid', '$balance')";
 $conn->query($sql);
 
 if($completed){

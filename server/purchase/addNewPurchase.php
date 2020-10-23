@@ -59,7 +59,7 @@ if($balance != 0) {
     $sql = "INSERT INTO purchase_credit_master (voucher_no, invoice_no, invoice_date, s_id, s_name, total_amount, paid, balance, status) VALUES ('$voucherNo', '$invoiceNo', '$invoiceDate', '$sId', '$sName', '$grandTotal', '$paid', '$balance', 'pending')";
     $conn->query($sql);
     
-    $sql = "INSERT INTO purchase_credit_operations (credit_order, credit_date, voucher_no, invoice_no, total_amount, paid, balance) VALUES (0, '$invoiceDate', '$voucherNo', '$invoiceNo', '$grandTotal', '$paid', '$balance')";
+    $sql = "INSERT INTO purchase_credit_operations (credit_order, credit_date, voucher_no, invoice_no, total_amount, paid, balance) VALUES (1, '$invoiceDate', '$voucherNo', '$invoiceNo', '$grandTotal', '$paid', '$balance')";
     $conn->query($sql);
 }
 

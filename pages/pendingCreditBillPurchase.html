@@ -55,8 +55,8 @@
                             <td>{{credit.total_amount}}</td>
                             <td>{{credit.paid}}</td>
                             <td>{{credit.balance}}</td>
-                            <td style="text-align: center" class="poiner" ng-click="deleteTransaction(credit.credit_order, credit.paid)">
-                                <i class="fa fa-trash" aria-hidden="true" ng-show="credit.credit_order != 0"></i>
+                            <td style="text-align: center" class="poiner" ng-click="deleteTransaction(credit.credit_order, credit.paid, credit.balance)">
+                                <i class="fa fa-trash" aria-hidden="true" ng-show="credit.credit_order != 1"></i>
                             </td>
                         </tr>
                     </tbody>

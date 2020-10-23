@@ -328,6 +328,7 @@ app.controller("newPurchaseCtrl", function (
     $scope.cashCredit
       ? ($scope.cashCredit = "cash")
       : ($scope.cashCredit = "credit");
+    
     $scope.voucherDate = moment($scope.voucherDate).format("YYYY-MM-DD");
     $scope.invoiceDate = moment($scope.invoiceDate).format("YYYY-MM-DD");
 

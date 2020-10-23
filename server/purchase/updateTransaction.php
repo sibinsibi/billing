@@ -8,6 +8,7 @@ $myData = json_decode($_POST["myData"]);
 $deleteIndex  = $myData->deleteIndex;
 $voucherNo = $myData->voucherNo;
 $add_amount = $myData->amount;
+$balance = $myData->balance;
 
 $sql = "DELETE FROM purchase_credit_operations WHERE voucher_no = '$voucherNo' AND credit_order = '$deleteIndex'";
 $conn->query($sql);
@@ -18,7 +19,7 @@ $result = $conn->query($sql);
 $rs = $result->fetch_array(MYSQLI_ASSOC);
 $credit_order = $rs['credit_order'];
 
-if($credit_order != 0){
+if($credit_order != 1 && $balance != 0){
     
     $amount = $rs['balance'];
     $amount = $amount + $add_amount;
@@ -27,11 +28,11 @@ if($credit_order != 0){
     $conn->query($sql);
 }
 
-    $sql = "UPDATE purchase_credit_master SET status = 'pending' WHERE voucher_no = '$voucherNo'";
-    $conn->query($sql);
+$sql = "UPDATE purchase_credit_master SET status = 'pending' WHERE voucher_no = '$voucherNo'";
+$conn->query($sql);
 
-    $sql = "UPDATE purchase_master SET transaction_completed = false WHERE voucher_no = '$voucherNo'";
-    $conn->query($sql);
+$sql = "UPDATE purchase_master SET transaction_completed = false WHERE voucher_no = '$voucherNo'";
+$conn->query($sql);
 
 $res = array('flag' => true);
 $conn->close();

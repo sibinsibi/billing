@@ -291,13 +291,20 @@ app.controller("newSalesCtrl", function (
       return;
     }
 
+     if ($scope.balance != 0 && $scope.cashCredit) {
+      alert('Select Credit when balance non zero');
+      return;
+    }
+
+    if (!$scope.cashCredit && $scope.balance == 0) {
+      alert('Balance should be greater than zero for credit bills');
+      return;
+    }
+
     $scope.cashCredit
       ? ($scope.cashCredit = "cash")
       : ($scope.cashCredit = "credit");
-    if ($scope.cashCredit == "credit" && $scope.balance == 0) {
-      alert("If bill is credit, enter balance amount");
-      return;
-    }
+
     $rootScope.loader = true;
 
     $scope.invoiceDate = moment($scope.invoiceDate).format("YYYY-MM-DD");

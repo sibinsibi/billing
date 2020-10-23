@@ -53,6 +53,14 @@ $billedBy = $myData->billedBy;
 $sql = "INSERT INTO sales_master (invoice_no, invoice_date, c_id, c_name, cash_credit, net_amount, total_tax, discount, grand_total, round_off, paid, balance, remarks, transaction_completed, billedby) VALUES ('$invoiceNo', '$invoiceDate', '$cId', '$cName', '$cashCredit', '$netAmount', '$totalTaxAmount', '$totalDiscount', '$grandTotal', '$roundOf', '$paid', '$balance', '$remarks', '$transactionCompleted', '$billedBy')";
 $conn->query($sql);
 
+if($balance != 0) {
+    $sql = "INSERT INTO sales_credit_master (invoice_no, invoice_date, c_id, c_name, total_amount, paid, balance, status) VALUES ('$invoiceNo', '$invoiceDate', '$cId', '$cName', '$grandTotal', '$paid', '$balance', 'pending')";
+    $conn->query($sql);
+    
+    $sql = "INSERT INTO sales_credit_operations (credit_order, credit_date, invoice_no, total_amount, paid, balance) VALUES (1, '$invoiceDate', '$invoiceNo', '$grandTotal', '$paid', '$balance')";
+    $conn->query($sql);
+}
+
 $items = $myData->items;
 
 foreach($items as $i){

@@ -84,7 +84,6 @@ app.controller("pendingCreditBillPurchaseCtrl", function (
       paid: $scope.amount,
       balance: balance,
       completed: completed,
-      creditOrder: $scope.allCredits.length
     }
 
     let formData = obj;
@@ -109,10 +108,10 @@ app.controller("pendingCreditBillPurchaseCtrl", function (
     });      
   }
 
-    $scope.deleteTransaction = (index, amount) => {
+    $scope.deleteTransaction = (index, amount, balance) => {
       if (confirm("Are you sure!")) {
 
-        let formData = { deleteIndex:  index, amount:  amount, voucherNo: $scope.voucher_no };
+        let formData = { deleteIndex:  index, amount:  amount, voucherNo: $scope.voucher_no, balance: balance};
             let postData = 'myData='+JSON.stringify(formData);
             $http({
                 method : 'POST',
