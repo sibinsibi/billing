@@ -8,7 +8,11 @@ $myData = json_decode($_POST["myData"]);
 $itemId = $myData->itemId;
 
 $sql = "DELETE FROM item_master WHERE item_id = '$itemId'";
+
 $sql1 = "DELETE FROM item_price_details WHERE item_id = '$itemId'";
+
+$sql2 = "DELETE FROM stock_master WHERE item_id = '$itemId'";
+$conn->query($sql2);
 
 $flag = FALSE;
 if ($conn->query($sql) === TRUE) {

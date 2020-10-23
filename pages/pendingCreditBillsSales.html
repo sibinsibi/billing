@@ -3,7 +3,7 @@
   <div class="card mb-4">
     <div class="card-header">
       <i class="fas fa-table mr-1"></i>
-      Pending Credit Bills (Purchase)
+      Pending Credit Bills (Sales) 
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -14,7 +14,6 @@
         >
           <thead>
             <tr>
-              <th>Voucher No</th>
               <th>Invoice No</th>
               <th>Invoice Date</th>
               <th>Supplier</th>
@@ -28,10 +27,9 @@
 
           <tbody>
             <tr ng-repeat="purchase in allPurchases track by $index">
-              <td>{{purchase.voucher_no}}</td>
               <td>{{purchase.invoice_no}}</td>
               <td>{{purchase.invoice_date}}</td>
-              <td>{{purchase.s_name}}</td>
+              <td>{{purchase.c_name}}</td>
               <td>{{purchase.total_amount}}</td>
               <td>{{purchase.paid}}</td>
               <td>{{purchase.balance}}</td>
@@ -39,7 +37,7 @@
               <td
                 style="text-align: center"
                 class="poiner"
-                ng-click="open(purchase.voucher_no)"
+                ng-click="open(purchase.invoice_no)"
               >
                 <i class="fa fa-edit" aria-hidden="true"></i>
               </td>
@@ -50,3 +48,4 @@
     </div>
   </div>
 </div>
+

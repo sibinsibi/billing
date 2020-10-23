@@ -65,7 +65,7 @@
           <tbody>
             <tr
               ng-repeat="stock in allStock track by $index"
-              ng-style="stock.stock1 == 0 ? {'background': 'red'} : (stock.stock1 < 10 ? {'background': 'yellow'} : '')"
+              ng-style="stock.stock1 == 0 ? {'background': 'red', 'color': 'white'} : (stock.stock1 < 10 ? {'background': 'yellow'} : '')"
             >
               <td>{{stock.item_id}}</td>
               <td>{{stock.item_name}}</td>

@@ -37,10 +37,10 @@ app.controller("priceDetailsCtrl", function ($scope, $http, $cookies, $route) {
   };
 
   $scope.updateItem = () => {
-    if (!$scope.updatedItem.gst || isNaN(parseInt($scope.updatedItem.gst))) {
-      alert("Select GST");
-      return;
-    }
+    // if (!$scope.updatedItem.gst || isNaN(parseInt($scope.updatedItem.gst))) {
+    //   alert("Select GST");
+    //   return;
+    // }
 
     $("#updateItem").modal("hide");
     if (confirm("Are you sure!")) {
@@ -50,7 +50,7 @@ app.controller("priceDetailsCtrl", function ($scope, $http, $cookies, $route) {
         purchaseRate: parseFloat($scope.updatedItem.purchase_rate).toFixed(2),
         sellingPrice: parseFloat($scope.updatedItem.selling_price).toFixed(2),
         discount: parseFloat($scope.updatedItem.discount).toFixed(2),
-        gst: parseFloat($scope.updatedItem.gst),
+        gst: $scope.updatedItem.gst ? $scope.updatedItem.gst = parseFloat($scope.updatedItem.gst) : $scope.updatedItem.gst = '',
       };
       let postData = "myData=" + JSON.stringify(formData);
       $http({

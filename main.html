@@ -268,6 +268,22 @@
                   <a class="nav-link" href="#!customer">Customer</a>
                 </nav>
               </div>
+                <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#return" aria-expanded="false"
+                  aria-controls="collapseLayouts">
+                  <div class="sb-nav-link-icon">
+                    <i class="fa fa-retweet" aria-hidden="true"></i>
+                  </div>
+                  Returns
+                  <div class="sb-sidenav-collapse-arrow">
+                    <i class="fas fa-angle-down"></i>
+                  </div>
+                </a>
+                <div class="collapse" id="return" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                  <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" href="#!purchaseReturn">Purchase Return</a>
+                    <a class="nav-link" href="#!salesReturn">Sales Return</a>
+                  </nav>
+                </div>
             </div>
           </div>
         </nav>
@@ -314,5 +330,9 @@
     <script src="controller/allCreditBillsPurchase.js"></script>
     <script src="controller/pendingCreditBillsPurchase.js"></script>
     <script src="controller/pendingCreditBillPurchase.js"></script>
+    <script src="controller/allCreditBillsSales.js"></script>
+    <script src="controller/pendingCreditBillsSales.js"></script>
+    <script src="controller/pendingCreditBillSales.js"></script>
+    <script src="controller/purchaseReturn.js"></script>
   </body>
 </html>

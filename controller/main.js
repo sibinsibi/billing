@@ -19,7 +19,11 @@ var app = angular
     "allSales",
     'allCreditBillsPurchase',
     'pendingCreditBillsPurchase',
-    'pendingCreditBillPurchase'
+    'pendingCreditBillPurchase',
+    'allCreditBillsSales',
+    'pendingCreditBillsSales',
+    'pendingCreditBillSales',
+    'purchaseReturn'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -98,7 +102,23 @@ var app = angular
       .when("/pendingCreditBillPurchase/:id", {
         templateUrl: "pages/pendingCreditBillPurchase.html",
         controller: "pendingCreditBillPurchaseCtrl",
-      });
+      })
+     .when("/allCreditBillsSales", {
+        templateUrl: "pages/allCreditBillsSales.html",
+        controller: "allCreditBillsSalesCtrl",
+     })
+    .when("/pendingCreditBillsSales", {
+        templateUrl: "pages/pendingCreditBillsSales.html",
+        controller: "pendingCreditBillsSalesCtrl",
+    })
+    .when("/pendingCreditBillSales/:id", {
+        templateUrl: "pages/pendingCreditBillSales.html",
+        controller: "pendingCreditBillSalesCtrl",
+    })
+    .when("/purchaseReturn", {
+        templateUrl: "pages/purchaseReturn.html",
+        controller: "purchaseReturnCtrl",
+    })
   });
 app.run(function ($rootScope, $cookies, $window, $route, $http) {
   $rootScope.loginUser = $cookies.get("username");
