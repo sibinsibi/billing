@@ -22,7 +22,6 @@ app.controller("purchaseReturnCtrl", function (
       return;
     }
 
-    // $scope.invoiceNo = $scope.invoiceNo.toUpperCase();
     $scope.voucherNo = $scope.voucherNo.toUpperCase();
     var formData = { invoiceNo: $scope.invoiceNo, voucherNo: $scope.voucherNo };
     var postData = "myData=" + JSON.stringify(formData);
@@ -45,5 +44,27 @@ app.controller("purchaseReturnCtrl", function (
         alert("Something went wrong");
       });
   };
+
+  $scope.delete = () => {
+    if (confirm("Are you sure! Data permanantly delete")) {
+      $rootScope.loader = true;
+      var formData = { invoiceNo: $scope.invoiceNo, voucherNo: $scope.voucherNo };
+      var postData = "myData=" + JSON.stringify(formData);
+      $http({
+        method: "POST",
+        url: "./server/return/deletePurchase.php",
+        data: postData,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      })
+        .then((res) => {
+          alert('Deleted Successfully')
+          window.location.reload()
+        })
+        .catch((error) => {
+          $rootScope.loader = false;
+          alert("Something went wrong");
+        });
+    }
+  }
 
 });

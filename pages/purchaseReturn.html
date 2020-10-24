@@ -23,48 +23,45 @@
     </div>
   </div>
 </div>
-<div class="container-fluid">
-  <h5 class="mt-4">Purchase Details</h5>
-  <div class="card">
-    <div class="card-body">
-        <div class="row">
-          <div class="col-md-6">
-            
-            <div class="row">
-              <div class="col-md-6">
-            ss
-              </div>
-              <div class="col-md-6">
-              ss
-              </div>
-              <div class="col-md-6">
-                ss
-              </div>
-              <div class="col-md-6">
-                ss
-              </div>
-            </div>
 
-          </div>
+<br />
+<div class="card mb-4">
+  <div class="card-header">
+    <i class="fas fa-table mr-1"></i>
+    Purchase Details
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered bordered table-striped table-condensed datatable" datatable="ng"
+        dt-options="vm.dtOptions">
+        <thead>
+          <tr>
+            <th>Voucher No</th>
+            <th>Invoice No</th>
+            <th>Invoice Date</th>
+            <th>Cash / Credit</th>
+            <th>Grand Total</th>
+            <th>Delete</th>
+            <th>Return</th>
+          </tr>
+        </thead>
 
-          <div class="col-md-6">
-            <div class="row">
-              <div class="col-md-6">
-                ss
-              </div>
-              <div class="col-md-6">
-                ss
-              </div>
-              <div class="col-md-6">
-                ss
-              </div>
-              <div class="col-md-6">
-                ss
-              </div>
-            </div>
-          
-          </div>
-        </div>
+        <tbody>
+          <tr ng-repeat="purchase in selected track by $index">
+            <td>{{purchase.voucher_no}}</td>
+            <td>{{purchase.invoice_no}}</td>
+            <td>{{purchase.invoice_date}}</td>
+            <td>{{purchase.cash_credit}}</td>
+            <td>{{purchase.grand_total}}</td>
+            <td style="text-align: center" class="poiner" ng-click="delete()">
+              <i class="fa fa-trash" aria-hidden="true"></i>
+            </td>
+            <td style="text-align: center" class="poiner">
+              <i class="fa fa-retweet" aria-hidden="true"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
