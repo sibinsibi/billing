@@ -5,26 +5,13 @@ include("../config.php");
 
 $myData = json_decode($_POST["myData"]);
 
-$flag  = $myData->flag;
-$startDate = $myData->startDate;
-$endDate = $myData->endDate;
+$invoiceNo = $myData->invoiceNo;
 
-$sql = '';
-if($flag == 's'){
-    $sId = $myData->sId;
-    $sql = "SELECT * FROM purchase_master WHERE invoice_date BETWEEN '$startDate' AND '$endDate' AND s_id = '$sId'";
-
-}
-if($flag == 'd'){
-    $sql = "SELECT * FROM purchase_master WHERE invoice_date BETWEEN '$startDate' AND '$endDate'";
-}
-
+$sql = "SELECT * FROM sales_master where invoice_no = '$invoiceNo'";
 $result = $conn->query($sql);
 
 $allData = array(); 
 while($row = $result->fetch_assoc()){ 
-    $data['voucher_no'] = $row['voucher_no'];
-    $data['voucher_date'] = $row['voucher_date'];
     $data['invoice_no'] = $row['invoice_no'];
     $data['invoice_date'] = $row['invoice_date'];
     $data['cash_credit'] = $row['cash_credit'];
@@ -41,5 +28,4 @@ while($row = $result->fetch_assoc()){
 } 
 
 echo json_encode($allData); 
-
 ?>

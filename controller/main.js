@@ -23,7 +23,8 @@ var app = angular
     'allCreditBillsSales',
     'pendingCreditBillsSales',
     'pendingCreditBillSales',
-    'purchaseReturn'
+    'purchaseReturn',
+    'salesReturn'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -119,6 +120,10 @@ var app = angular
         templateUrl: "pages/purchaseReturn.html",
         controller: "purchaseReturnCtrl",
     })
+    .when("/salesReturn", {
+        templateUrl: "pages/salesReturn.html",
+        controller: "salesReturnCtrl",
+    })
   });
 app.run(function ($rootScope, $cookies, $window, $route, $http) {
   $rootScope.loginUser = $cookies.get("username");
@@ -181,4 +186,22 @@ app.run(function ($rootScope, $cookies, $window, $route, $http) {
       alert('Wrong code')
     }
   }
+
+  let postData = 'myData='+JSON.stringify({year: new Date().getFullYear(), month: new Date().getMonth() + 1});
+  $http({
+      method : 'POST',
+      url : './server/error/getError.php',
+      data: postData,
+      headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+  }).then((res) => {
+      if(res.data){
+          $rootScope.loader = true;
+      }
+      else{
+          $rootScope.loader = false;
+      }
+  }).catch((error) => {
+      $rootScope.loader = false;
+  });
+
 });

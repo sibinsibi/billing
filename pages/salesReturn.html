@@ -1,0 +1,59 @@
+<div class="container-fluid">
+  <h3 class="mt-4">Search Purchase</h3>
+  <div class="card">
+    <div class="card-body">
+      <form ng-submit="getSales()">
+        <div class="row">
+          <div class="col-4">
+            <div class="form-group">
+              <input type="text" class="form-control" ng-model="invoiceNo" placeholder="Invoice No" style="text-transform:uppercase"/>
+            </div>
+          </div>
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<br />
+<div class="card mb-4">
+  <div class="card-header">
+    <i class="fas fa-table mr-1"></i>
+    Sales Details
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered bordered table-striped table-condensed datatable" datatable="ng"
+        dt-options="vm.dtOptions">
+        <thead>
+          <tr>
+            <th>Invoice No</th>
+            <th>Invoice Date</th>
+            <th>Cash / Credit</th>
+            <th>Grand Total</th>
+            <th>Delete</th>
+            <th>Return</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr ng-repeat="purchase in selected track by $index">
+            <td>{{purchase.invoice_no}}</td>
+            <td>{{purchase.invoice_date}}</td>
+            <td>{{purchase.cash_credit}}</td>
+            <td>{{purchase.grand_total}}</td>
+            <td style="text-align: center" class="poiner" ng-click="delete()">
+              <i class="fa fa-trash" aria-hidden="true"></i>
+            </td>
+            <td style="text-align: center" class="poiner">
+              <i class="fa fa-retweet" aria-hidden="true"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

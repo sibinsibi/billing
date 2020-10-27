@@ -9,29 +9,48 @@ app.controller("allSalesCtrl", function (
   !$cookies.get("username") ? (window.location.href = "index.html") : "";
 
   $scope.allSales = [];
-
+  let cId = ''
   $("#cName").autocomplete({
     source: "./server/sales/getAllCustomer.php",
     select: function (event, data) {
-      let cId = data.item.id;
-      getAllPurchase(cId, "customer");
+       cId = data.item.id;
+      //getAllPurchase(cId, "customer");
     },
   });
 
   $scope.getPurchaseByDate = () => {
+
+     if (!$scope.startDate || !$scope.endDate) {
+      alert('Select start and end date')
+      return
+    }
+
     let startDate = moment($scope.startDate).format("YYYY-MM-DD");
     let endDate = moment($scope.endDate).format("YYYY-MM-DD");
-    getAllPurchase("", "Date", startDate, endDate);
+
+     if (cId) {
+          getAllPurchase(cId, "c", startDate, endDate);
+    }
+    else if($scope.cName && !cId){
+          getAllPurchase("", "c", startDate, endDate);
+    }
+    else {
+          getAllPurchase("", "d", startDate, endDate);
+    }
   };
 
   const getAllPurchase = (id, flag, startDate, endDate) => {
     let formData, postData;
 
-    if (flag == "customer") {
-      formData = { cId: id, flag: flag };
+    $scope.allSales = [];
+    cId = '';
+
+    
+    if (flag == "c") {
+      formData = { startDate: startDate, endDate: endDate, flag: flag, cId: id };
       postData = "myData=" + JSON.stringify(formData);
     }
-    if (flag == "Date") {
+    if (flag == "d") {
       formData = { startDate: startDate, endDate: endDate, flag: flag };
       postData = "myData=" + JSON.stringify(formData);
     }
@@ -46,11 +65,11 @@ app.controller("allSalesCtrl", function (
       .then((res) => {
         if (res.data.length) {
           $scope.allSales = res.data;
+          $rootScope.loader = false;
         } else {
           alert("Not Found");
-          $scope.allSales = [];
+          window.location.reload()
         }
-        $rootScope.loader = false;
       })
       .catch((error) => {
         alert("Something went wrong");

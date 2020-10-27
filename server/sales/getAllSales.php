@@ -6,15 +6,17 @@ include("../config.php");
 $myData = json_decode($_POST["myData"]);
 
 $flag  = $myData->flag;
+$startDate = $myData->startDate;
+$endDate = $myData->endDate;
 
 $sql = '';
-if($flag == 'customer'){
+
+if($flag == 'c'){
     $cId = $myData->cId;
-    $sql = "SELECT * FROM sales_master WHERE c_id = '$cId'";
+    $sql = "SELECT * FROM sales_master WHERE invoice_date BETWEEN '$startDate' AND '$endDate' AND c_id = '$cId'";
+
 }
-if($flag == 'Date'){
-    $startDate = $myData->startDate;
-    $endDate = $myData->endDate;
+if($flag == 'd'){
     $sql = "SELECT * FROM sales_master WHERE invoice_date BETWEEN '$startDate' AND '$endDate'";
 }
 

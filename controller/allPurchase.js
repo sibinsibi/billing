@@ -9,29 +9,46 @@ app.controller("allPurchaseCtrl", function (
   !$cookies.get("username") ? (window.location.href = "index.html") : "";
 
   $scope.allPurchases = [];
+  let sId = '';
 
   $("#sName").autocomplete({
     source: "./server/purchase/getAllSupplier.php",
     select: function (event, data) {
-      let sId = data.item.id;
-      getAllPurchase(sId, "supplier");
+       sId = data.item.id;
+      //getAllPurchase(sId, "supplier");
     },
   });
 
   $scope.getPurchaseByDate = () => {
+
+    if (!$scope.startDate || !$scope.endDate) {
+      alert('Select start and end date')
+      return
+    }
     let startDate = moment($scope.startDate).format("YYYY-MM-DD");
     let endDate = moment($scope.endDate).format("YYYY-MM-DD");
-    getAllPurchase("", "Date", startDate, endDate);
+    if (sId) {
+          getAllPurchase(sId, "s", startDate, endDate);
+    }
+    else if($scope.sName && !sId){
+          getAllPurchase("", "s", startDate, endDate);
+    }
+    else {
+          getAllPurchase("", "d", startDate, endDate);
+    }
   };
 
   const getAllPurchase = (id, flag, startDate, endDate) => {
     let formData, postData;
 
-    if (flag == "supplier") {
-      formData = { sId: id, flag: flag };
+    $scope.allPurchases = [];
+    sId = ''
+
+    if (flag == "s") {
+      formData = { startDate: startDate, endDate: endDate, flag: flag, sId: id };
       postData = "myData=" + JSON.stringify(formData);
     }
-    if (flag == "Date") {
+    if (flag == "d") {
       formData = { startDate: startDate, endDate: endDate, flag: flag };
       postData = "myData=" + JSON.stringify(formData);
     }
@@ -46,11 +63,11 @@ app.controller("allPurchaseCtrl", function (
       .then((res) => {
         if (res.data.length) {
           $scope.allPurchases = res.data;
+          $rootScope.loader = false;
         } else {
           alert("Not Found");
-          $scope.allPurchases = [];
+          window.location.reload()          
         }
-        $rootScope.loader = false;
       })
       .catch((error) => {
         alert("Something went wrong");
