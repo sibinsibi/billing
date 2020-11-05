@@ -93,7 +93,8 @@
         <table
           class="table table-bordered bordered table-striped table-condensed datatable"
           datatable="ng"
-          dt-options="vm.dtOptions"
+          dt-options="dtOptions"
+          id="example"
         >
           <thead>
             <tr>
@@ -106,7 +107,7 @@
               <th>Tax</th>
               <th>Dis</th>
               <th>G.Total</th>
-              <th>R.Off</th>
+              <!-- <th>R.Off</th> -->
               <th>Paid</th>
               <th>Balance</th>
               <th>Remarks</th>
@@ -126,7 +127,7 @@
               <td>{{purchase.total_tax}}</td>
               <td>{{purchase.discount}}</td>
               <td>{{purchase.grand_total}}</td>
-              <td>{{purchase.round_off}}</td>
+              <!-- <td>{{purchase.round_off}}</td> -->
               <td>{{purchase.paid}}</td>
               <td>{{purchase.balance}}</td>
               <td>{{purchase.remarks}}</td>

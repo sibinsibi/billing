@@ -1,12 +1,20 @@
-var app = angular.module("allSales", ["ngCookies", "datatables"]);
+var app = angular.module("allSales", ["ngCookies", "datatables", "datatables.buttons"]);
 app.controller("allSalesCtrl", function (
   $scope,
   $http,
   $cookies,
   $route,
-  $rootScope
+  $rootScope,
+  DTOptionsBuilder
 ) {
   !$cookies.get("username") ? (window.location.href = "index.html") : "";
+
+    $scope.dtOptions = DTOptionsBuilder.newOptions()
+            .withButtons([
+                'pdf',
+                'excel'
+            ])
+            .withDOM('<"html5buttons"B>lTtipr');
 
   $scope.allSales = [];
   let cId = ''

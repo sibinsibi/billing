@@ -1,12 +1,20 @@
-var app = angular.module("allPurchase", ["ngCookies", "datatables"]);
+var app = angular.module("allPurchase", ["ngCookies", "datatables", "datatables.buttons"]);
 app.controller("allPurchaseCtrl", function (
   $scope,
   $http,
   $cookies,
   $route,
-  $rootScope
+  $rootScope,
+  DTOptionsBuilder
 ) {
   !$cookies.get("username") ? (window.location.href = "index.html") : "";
+
+   $scope.dtOptions = DTOptionsBuilder.newOptions()
+            .withButtons([
+                'pdf',
+                'excel'
+            ])
+            .withDOM('<"html5buttons"B>lTtipr');
 
   $scope.allPurchases = [];
   let sId = '';
@@ -102,4 +110,5 @@ app.controller("allPurchaseCtrl", function (
         $rootScope.loader = false;
       });
   };
+
 });

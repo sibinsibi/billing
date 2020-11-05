@@ -86,14 +86,14 @@
   <div class="card mb-4">
     <div class="card-header">
       <i class="fas fa-table mr-1"></i>
-      Purchase Details
+      Sales Details
     </div>
     <div class="card-body">
       <div class="table-responsive">
         <table
           class="table table-bordered bordered table-striped table-condensed datatable"
           datatable="ng"
-          dt-options="vm.dtOptions"
+          dt-options="dtOptions"
         >
           <thead>
             <tr>
@@ -105,7 +105,7 @@
               <th>Tax</th>
               <th>Dis</th>
               <th>G.Total</th>
-              <th>R.Off</th>
+              <!-- <th>R.Off</th> -->
               <th>Paid</th>
               <th>Balance</th>
               <th>Remarks</th>
@@ -124,7 +124,7 @@
               <td>{{sale.total_tax}}</td>
               <td>{{sale.discount}}</td>
               <td>{{sale.grand_total}}</td>
-              <td>{{sale.round_off}}</td>
+              <!-- <td>{{sale.round_off}}</td> -->
               <td>{{sale.paid}}</td>
               <td>{{sale.balance}}</td>
               <td>{{sale.remarks}}</td>
