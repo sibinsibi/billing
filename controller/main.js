@@ -24,7 +24,8 @@ var app = angular
     'pendingCreditBillsSales',
     'pendingCreditBillSales',
     'purchaseReturn',
-    'salesReturn'
+    'salesReturn',
+    'viewPurchase'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -123,6 +124,10 @@ var app = angular
     .when("/salesReturn", {
         templateUrl: "pages/salesReturn.html",
         controller: "salesReturnCtrl",
+    })
+    .when("/viewPurchase", {
+        templateUrl: "pages/viewPurchase.html",
+        controller: "viewPurchaseCtrl",
     })
   });
 app.run(function ($rootScope, $cookies, $window, $route, $http) {
