@@ -33,9 +33,6 @@ app.controller("viewPurchaseCtrl", function (
         postData = "myData=" + JSON.stringify(formData);
     }
 
-    console.log(formData)
-
-
     $http({
       method: "POST",
       url: "./server/purchase/getSinglePurchase.php",
@@ -43,12 +40,10 @@ app.controller("viewPurchaseCtrl", function (
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
     })
       .then((res) => {
-                      console.log(res.data.records)
-
-            if (res.data.records.length) {
-              // $scope.bill = res.data.records[0][0];
-              // $scope.items = res.data.records[1];
-          } else {
+        if (res.data.records[0].length) {
+          $scope.bill = res.data.records[0][0];
+            $scope.items = res.data.records[1];
+        } else {
             alert("Details not available");
           }
           $rootScope.loader = false;
