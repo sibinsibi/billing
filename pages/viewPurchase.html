@@ -34,7 +34,7 @@
   </div>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid" ng-show="bill">
   <h5 class="mt-4">Purchase Details</h5>
   <div class="card">
     <div class="card-body">
@@ -65,44 +65,42 @@
   </div>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid" ng-show="bill">
   <h5 class="mt-4">Item Details</h5>
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive">
+        <table class="table table-bordered bordered table-striped table-condensed datatable" datatable="ng"
+          dt-options="vm.dtOptions">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Brand</th>
+              <th>Selling Price</th>
+              <th>Purchase Rate</th>
+              <th>Qty</th>
+              <th>GST</th>
+              <th>Tax</th>
+              <th>Discount</th>
+              <th>Total</th>
+            </tr>
+          </thead>
 
-<div class="row">
-  <div class="col-12">
-    <div class="table-responsive">
-      <table class="table table-bordered bordered table-striped table-condensed datatable" datatable="ng"
-        dt-options="vm.dtOptions">
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Brand</th>
-            <th>Selling Price</th>
-            <th>Purchase Rate</th>
-            <th>Qty</th>
-            <th>GST</th>
-            <th>Tax</th>
-            <th>Discount</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr ng-repeat="item in items track by $index">
-            <td>{{item.item}}</td>
-            <td>{{item.brand}}</td>
-            <td>{{item.selling_price}}</td>
-            <td>{{item.purchase_rate}}</td>
-            <td>{{item.qty}}</td>
-            <td>{{item.gst}}</td>
-            <td>{{item.tax_amount}}</td>
-            <td>{{item.discount}}</td>
-            <td>{{item.total}}</td>
-          </tr>
-        </tbody>
-      </table>
+          <tbody>
+            <tr ng-repeat="item in items track by $index">
+              <td>{{item.item}}</td>
+              <td>{{item.brand}}</td>
+              <td>{{item.selling_price}}</td>
+              <td>{{item.purchase_rate}}</td>
+              <td>{{item.qty}}</td>
+              <td>{{item.gst}}</td>
+              <td>{{item.tax_amount}}</td>
+              <td>{{item.discount}}</td>
+              <td>{{item.total}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-</div>
-
 </div>

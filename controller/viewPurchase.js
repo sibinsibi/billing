@@ -14,6 +14,7 @@ app.controller("viewPurchaseCtrl", function (
       return;
     }
 
+    $rootScope.loader = true;
     var formData, postData = ''
 
     if ($scope.invoiceNo && !$scope.voucherNo) {
